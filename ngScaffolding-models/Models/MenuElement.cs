@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ngScaffolding.models.Models;
 
 namespace ngScaffolding.database.Models
@@ -33,5 +35,6 @@ namespace ngScaffolding.database.Models
         public string Style { get; set; }
         [StringLength(200)]
         public string StyleClass { get; set; }
+
     }
 }

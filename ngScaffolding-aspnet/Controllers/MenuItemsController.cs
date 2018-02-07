@@ -32,7 +32,23 @@ namespace ngScaffolding.Controllers
 
         private void AddMenuItem(ICollection<MenuItem> menuItems, MenuItem newMenuItem)
         {
-
+            if (!newMenuItem.ParentMenuItemId.HasValue)
+            {
+                menuItems.Add(newMenuItem);
+                return;
+            }
+            foreach (var loopMenu in menuItems)
+            {
+                if (loopMenu.Id == newMenuItem.ParentMenuItemId)
+                {
+                    loopMenu.Items.Add(newMenuItem);
+                    return;
+                }
+                if (loopMenu.Items.Any())
+                {
+                    AddMenuItem(loopMenu.Items, newMenuItem);
+                }
+            }
         }
 
         // GET: api/MenuItems
@@ -41,7 +57,7 @@ namespace ngScaffolding.Controllers
         {
             var returnMenuItems = new List<MenuItem>();
 
-            var menuItems = _menuItemRepository.GetAll();
+            var menuItems = _menuItemRepository.GetAll().OrderBy(o => o.ItemOrder);
 
             var user = await _userService.GetUser();
 
@@ -51,36 +67,13 @@ namespace ngScaffolding.Controllers
                 {
                     AddMenuItem(returnMenuItems, menuItem);
                 }
+                else if(user.IsInRoles(menuItem.Roles))
+                {
+                    AddMenuItem(returnMenuItems, menuItem);
+                }
             }
 
-            //var items = _context.MenuItems.ToLookup(c => c.ParentMenuItemId);
-
-            //foreach (var c in items)
-            //{
-            //    //c.items = items[c.].ToList();
-            //}
-
-
-            //         IEnumerable<MenuItem> nodes = items.RecursiveJoin(element => element.MenuItemId,
-            //element => element.ParentMenuItemId,
-            //(MenuItem element, IEnumerable<MenuItem> children) => new MenuItem(element)
-            //{
-            //    items = children
-            //});
-
-            //var topLevelItems = items.Where(i => i.ParentMenuItemId == null).OrderBy(i => i.ItemOrder).ToList();
-            //var childItems = items.Where(i => i.ParentMenuItemId != null).OrderBy(i => i.MenuItemId).ThenBy(i=> i.ItemOrder).ToList();
-
-            //foreach(var child in childItems)
-            //{
-            //    var parent = topLevelItems.FirstOrDefault(i => i.MenuItemId == child.ParentMenuItemId);
-            //    if(parent != null)
-            //    {
-            //        parent.items.Add(child);
-            //    }
-            //}
-
-            return null;// items[null].ToList();
+            return returnMenuItems;
         }
 
         // GET: api/MenuItems/5

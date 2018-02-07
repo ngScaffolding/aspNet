@@ -15,6 +15,25 @@ namespace ngScaffolding.Services
         public string FirstName { get; set; }
         public List<string> Roles { get; set; }
 
+        public bool IsInRoles(string roles)
+        {
+            if (string.IsNullOrWhiteSpace(roles))
+            {
+                return true;
+            }
+            else
+            {
+                var allowedRoles = roles.Split(',');
+                foreach (var allowedRole in allowedRoles)
+                {
+                    if (Roles.Contains(allowedRole.Trim(), StringComparer.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
     }
     public class UserService : IUserService
     {

@@ -18,7 +18,7 @@ namespace ngScaffolding.database.Models
 
         public MenuItem()
         {
-            //Items = new List<MenuItem>();
+            Items = new List<MenuItem>();
         }
 
         public MenuItem(MenuItem menu) : base()
@@ -36,10 +36,12 @@ namespace ngScaffolding.database.Models
             BadgeStyleClass = menu.BadgeStyleClass;
             Style = menu.Style;
             StyleClass = menu.StyleClass;
-        }
-        // Following are copied from PrimeNG MenuItem
 
-        public bool Expanded { get; set; }
+        
+    }
+    // Following are copied from PrimeNG MenuItem
+
+    public bool Expanded { get; set; }
         public bool Disabled { get; set; }
         public bool Visible { get; set; }
 
@@ -78,6 +80,7 @@ namespace ngScaffolding.database.Models
         [ForeignKey("ParentMenuItemId")]
         public virtual MenuItem ParentMenuItem { get; set; }
 
-        //public IEnumerable<MenuItem> Items { get; set; }
+        [NotMapped]
+        public ICollection<MenuItem> Items { get; set; }
     }
 }
