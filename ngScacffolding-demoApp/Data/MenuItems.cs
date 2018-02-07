@@ -6,6 +6,7 @@ using ngScaffolding.ConfigHelpers;
 using ngScaffolding.database.Models;
 using ngScaffolding.Data;
 using ngScaffolding.Models;
+using ngScaffolding.Models.DataSourceModels;
 
 namespace ngScacffolding.demoApp.Data
 {
@@ -14,9 +15,9 @@ namespace ngScacffolding.demoApp.Data
         public static void Setup(ngScaffoldingContext demoCtx)
         {
             // Demo Folder
-          var demoFolder = MenuHelper.AddMenu(demoCtx, new MenuItem
+            var demoFolder = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                Badge="folder",
+                Badge = "folder",
                 Name = "Demo.Folder",
                 Label = "Demo Folder",
                 Type = MenuItem.Type_Folder
@@ -25,14 +26,32 @@ namespace ngScacffolding.demoApp.Data
             var gridView1 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Badge = "grid",
-                Name = "Demo.GridView",
-                Label = "Demo GridView",
+                Name = "Demo.Countries.Admin",
+                Label = "Countries Admin",
                 Type = MenuItem.Type_GridView,
                 ParentMenuItemId = demoFolder.Id,
                 MenuItemDetail = new GridViewDetailModel()
                 {
-                    PageSize = 50
-                }
+                    Title = "Countries",
+                    Columns = new List<ColumnModel>()
+                    {
+                        new ColumnModel() { Field = "Id" },
+                        new ColumnModel() {Field = "ContinentName"},
+                        new ColumnModel() {Field = "Name"}
+                    },
+                    SelectCommand = new BaseDataSource()
+                    {
+                        Connection = "demoDatabase",
+                        IsAudit = true,
+                        SqlCommand = "SELECT [Id],[ContinentId],[ContinentName],[Name] FROM [dbo].[Countries] ORDER by ContinentName, Name"
+                    },
+                    Filters = new List<InputDetail>()
+                    {
+                        new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select,Datasource = "Continents"}
+                    }
+                },
+
+
             });
         }
     }

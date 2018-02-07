@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ngScaffolding.database.Models;
+using ngScaffolding.Models.DataSourceModels;
 
 namespace ngScaffolding.Models
 {
@@ -27,10 +28,10 @@ namespace ngScaffolding.Models
 
         public ICollection<InputDetail> Filters { get; set; }
 
-        public DataSource SelectCommand { get; set; }
-        public DataSource DeleteCommand { get; set; }
-        public DataSource UpdateCommand { get; set; }
-        public DataSource InsertCommand { get; set; }
+        public BaseDataSource SelectCommand { get; set; }
+        public BaseDataSource DeleteCommand { get; set; }
+        public BaseDataSource UpdateCommand { get; set; }
+        public BaseDataSource InsertCommand { get; set; }
 
         public ICollection<ActionModel> Actions { get; set; }
     }
