@@ -14,6 +14,8 @@ namespace ngScaffolding_oauth
     {
         public static void Main(string[] args)
         {
+            Console.Title = "ngScaffolding OAuth";
+
             BuildWebHost(args).Run();
         }
 

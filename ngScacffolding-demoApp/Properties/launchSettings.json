@@ -18,12 +18,11 @@
     },
     "ngScacffolding_demoApp": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:57317/"
+      "applicationUrl": "http://localhost:50030"
     }
   }
 }
