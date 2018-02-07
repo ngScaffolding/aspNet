@@ -17,6 +17,7 @@ namespace ngScacffolding.demoApp
     {
         public static void Main(string[] args)
         {
+            Console.Title = "ngScaffolding Demo API";
             var host = BuildWebHost(args);
 
             using (var scope = host.Services.CreateScope())

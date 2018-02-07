@@ -111,7 +111,7 @@ namespace ngScaffolding_aspnet
 
 
             // Services
-            services.AddScoped(typeof(UserService), typeof(UserService));
+            services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped(typeof(IReferenceValuesService), typeof(ReferenceValuesService));
 
             // Register the Swagger generator, defining one or more Swagger documents

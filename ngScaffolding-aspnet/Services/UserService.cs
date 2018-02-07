@@ -16,7 +16,7 @@ namespace ngScaffolding.Services
         public List<string> Roles { get; set; }
 
     }
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAppSettingsService _appSettingsService;

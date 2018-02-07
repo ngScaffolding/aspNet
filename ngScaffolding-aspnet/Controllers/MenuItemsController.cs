@@ -9,6 +9,7 @@ using ngScaffolding.database;
 // following required for Async Methods
 using Microsoft.AspNetCore.Authorization;
 using ngScaffolding.Data;
+using ngScaffolding.Services;
 
 namespace ngScaffolding.Controllers
 {
@@ -18,19 +19,39 @@ namespace ngScaffolding.Controllers
     public class MenuItemsController : ngScaffoldingController
     {
         private readonly ngScaffoldingContext _context;
+        private readonly IUserService _userService;
+        private readonly IRepository<MenuItem> _menuItemRepository;
 
-        public MenuItemsController(ngScaffoldingContext context)
+        public MenuItemsController(ngScaffoldingContext context, IUserService userService,
+            IRepository<MenuItem> menuItemRepository)
         {
             _context = context;
+            _userService = userService;
+            _menuItemRepository = menuItemRepository;
+        }
+
+        private void AddMenuItem(ICollection<MenuItem> menuItems, MenuItem newMenuItem)
+        {
+
         }
 
         // GET: api/MenuItems
         [HttpGet]
-        public IEnumerable<MenuItem> GetMenuItems()
+        public async Task<IEnumerable<MenuItem>> GetMenuItems()
         {
-            var user = HttpContext.User;
+            var returnMenuItems = new List<MenuItem>();
 
-            var test = HttpContext.User.FindFirst("roles")?.Value;
+            var menuItems = _menuItemRepository.GetAll();
+
+            var user = await _userService.GetUser();
+
+            foreach (var menuItem in menuItems)
+            {
+                if (string.IsNullOrEmpty(menuItem.Roles))
+                {
+                    AddMenuItem(returnMenuItems, menuItem);
+                }
+            }
 
             //var items = _context.MenuItems.ToLookup(c => c.ParentMenuItemId);
 
