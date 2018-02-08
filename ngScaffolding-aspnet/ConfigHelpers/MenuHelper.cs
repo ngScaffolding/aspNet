@@ -35,7 +35,12 @@ namespace ngScaffolding.ConfigHelpers
             newMenu.BadgeStyleClass = menu.BadgeStyleClass;
             newMenu.Style = menu.Style;
             newMenu.StyleClass = menu.StyleClass;
-
+            newMenu.Label = menu.Label;
+            newMenu.Icon = menu.Icon;
+            newMenu.Description = menu.Description;
+            newMenu.Url = menu.Url;
+            newMenu.Separator = menu.Separator;
+            
             newMenu.Name = menu.Name;
             newMenu.Roles = menu.Roles;
             newMenu.ItemOrder = menu.ItemOrder;

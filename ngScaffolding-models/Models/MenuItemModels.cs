@@ -33,6 +33,7 @@ namespace ngScaffolding.database.Models
             Target = menu.Target;
             Separator = menu.Separator;
             Badge = menu.Badge;
+            Icon = menu.Icon;
             BadgeStyleClass = menu.BadgeStyleClass;
             Style = menu.Style;
             StyleClass = menu.StyleClass;

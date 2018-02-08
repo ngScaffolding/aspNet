@@ -17,7 +17,7 @@ namespace ngScacffolding.demoApp.Data
             // Demo Folder
             var demoFolder = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                Badge = "folder",
+                Icon = "folder",
                 Name = "Demo.Folder",
                 Label = "Demo Folder",
                 Roles = "User",
@@ -27,7 +27,7 @@ namespace ngScacffolding.demoApp.Data
             var gridView1 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Roles = "User",
-                Badge = "grid",
+                Icon = "grid",
                 Name = "Demo.Countries.Admin",
                 Label = "Countries Admin",
                 Type = MenuItem.Type_GridView,
