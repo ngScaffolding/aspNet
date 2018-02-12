@@ -14,9 +14,9 @@ namespace ngScaffolding.Controllers
     public class ReferenceValuesController : ngScaffoldingController
     {
         private readonly IReferenceValuesService _referenceValuesService;
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public ReferenceValuesController(IReferenceValuesService referenceValuesService, UserService userService)
+        public ReferenceValuesController(IReferenceValuesService referenceValuesService, IUserService userService)
         {
             _referenceValuesService = referenceValuesService;
             _userService = userService;
