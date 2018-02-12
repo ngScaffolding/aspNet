@@ -31,6 +31,7 @@ namespace ngScacffolding.demoApp.Data
                 Name = "Demo.Countries.Admin",
                 Label = "Countries Admin",
                 Type = MenuItem.Type_GridView,
+                RouterLink = $"['/gridview', 'Demo.Countries.Admin']",
                 ParentMenuItemId = demoFolder.Id,
                 MenuItemDetail = new GridViewDetailModel()
                 {
@@ -51,9 +52,38 @@ namespace ngScacffolding.demoApp.Data
                     {
                         new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select,Datasource = "Continents"}
                     }
-                },
+                }
+            });
 
-
+            var gridView2 = MenuHelper.AddMenu(demoCtx, new MenuItem
+            {
+                Roles = "User",
+                Icon = "grid",
+                Name = "Demo.Continents.Admin",
+                Label = "Continents Admin",
+                Type = MenuItem.Type_GridView,
+                RouterLink = $"['/gridview', 'Demo.Continents.Admin']",
+                ParentMenuItemId = demoFolder.Id,
+                MenuItemDetail = new GridViewDetailModel()
+                {
+                    Title = "Continents",
+                    Columns = new List<ColumnModel>()
+                    {
+                        new ColumnModel() { Field = "Id" },
+                        new ColumnModel() {Field = "ContinentName"},
+                        new ColumnModel() {Field = "Name"}
+                    },
+                    SelectCommand = new BaseDataSource()
+                    {
+                        Connection = "demoDatabase",
+                        IsAudit = true,
+                        SqlCommand = "SELECT [Id],[ContinentId],[ContinentName],[Name] FROM [dbo].[Continents] ORDER by ContinentName, Name"
+                    },
+                    Filters = new List<InputDetail>()
+                    {
+                        new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select,Datasource = "Continents"}
+                    }
+                }
             });
         }
     }
