@@ -48,9 +48,12 @@ namespace ngScacffolding.demoApp.Data
                         IsAudit = true,
                         SqlCommand = "SELECT [Id],[ContinentId],[ContinentName],[Name] FROM [dbo].[Countries] ORDER by ContinentName, Name"
                     },
-                    Filters = new List<InputDetail>()
+                    Filters = new InputBuilderDefinition()
+                    {
+                        InputDetails = new List<InputDetail>()
                     {
                         new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select,Datasource = "Continents"}
+                    }
                     }
                 }
             });
@@ -79,9 +82,12 @@ namespace ngScacffolding.demoApp.Data
                         IsAudit = true,
                         SqlCommand = "SELECT [Id],[ContinentId],[ContinentName],[Name] FROM [dbo].[Continents] ORDER by ContinentName, Name"
                     },
-                    Filters = new List<InputDetail>()
+                    Filters = new InputBuilderDefinition()
+                    {
+                        InputDetails = new List<InputDetail>()
                     {
                         new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select,Datasource = "Continents"}
+                    }
                     }
                 }
             });

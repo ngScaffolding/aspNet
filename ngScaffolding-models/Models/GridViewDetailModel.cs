@@ -26,7 +26,7 @@ namespace ngScaffolding.Models
 
         public string FiltersLocation { get; set; }
 
-        public ICollection<InputDetail> Filters { get; set; }
+        public InputBuilderDefinition Filters { get; set; }
 
         public BaseDataSource SelectCommand { get; set; }
         public BaseDataSource DeleteCommand { get; set; }

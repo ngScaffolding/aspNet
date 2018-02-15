@@ -23,12 +23,9 @@ namespace ngScaffolding.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [TypeFilter(typeof(AuditAttribute))]
         public IActionResult Get(string name, string seed = null, string group = null)
         {
-            var user = _userService.GetUser();
-
             ReferenceValue retVal = null;
 
             if (!StringChecker.IsNullOrEmpty(name) && !StringChecker.IsNullOrEmpty(seed))

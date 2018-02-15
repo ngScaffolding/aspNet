@@ -57,7 +57,7 @@ namespace ngScaffolding.Services
         public ReferenceValue GetDefinition(string name)
         {
             ReferenceValue retVal = null;
-            retVal = _referenceValues.GetAll().FirstOrDefault(r => r.Name == name);
+            retVal = _referenceValues.GetAll().FirstOrDefault(r => r.Name.ToLower() == name.ToLower());
 
             return retVal;
         }
