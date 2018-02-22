@@ -104,11 +104,10 @@ namespace ngScaffolding_aspnet
             services.AddScoped(typeof(IRepository<MenuItem>), typeof(Repository<MenuItem>));
             services.AddScoped(typeof(IRepository<ApplicationLog>), typeof(Repository<ApplicationLog>));
             services.AddScoped(typeof(IRepository<DataSource>), typeof(Repository<DataSource>));
+            services.AddScoped(typeof(IRepository<UserPreferenceDefinition>), typeof(Repository<UserPreferenceDefinition>));
+
 
             services.AddSingleton<ICacheService, CacheService>();
-            services.AddSingleton<IRepository<UserPreferenceDefinition>, Repository<UserPreferenceDefinition>>();
-            //services.AddSingleton<IRepository<ApplicationLog>, Repository<ApplicationLog>>();
-
 
             // Services
             services.AddScoped(typeof(IUserService), typeof(UserService));

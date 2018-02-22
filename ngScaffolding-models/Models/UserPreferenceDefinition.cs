@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ngScaffolding.models.Models
 {
-    public class UserPreferenceDefinition :BaseEntity
+    public class UserPreferenceDefinition : BaseRoleEntity
     {
         [StringLength(2000)]
         public string Value { get; set; }

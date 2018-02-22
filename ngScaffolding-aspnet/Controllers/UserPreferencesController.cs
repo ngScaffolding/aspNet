@@ -6,25 +6,33 @@ using ngScaffolding.Data;
 using ngScaffolding.ExtensionMethods;
 using ngScaffolding.models.Models;
 using ngScaffolding.Services;
+using ngScaffolding.Infrastructure;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ngScaffolding.Controllers
 {
     [Produces("application/json")]
-    [Route("api/UserPreferences")]
-    public class UserPreferenceDefinitionsController: ngScaffoldingController
+    [Route("api/UserPreferenceDefinitions")]
+    public class UserPreferenceDefinitionsController : ngScaffoldingController
     {
         private readonly IRepository<UserPreferenceDefinition> _userPreferenceRepository;
+        public IUserService _userService { get; }
 
-        public UserPreferenceDefinitionsController(IRepository<UserPreferenceDefinition> userPreferenceRepository)
+        public UserPreferenceDefinitionsController(IRepository<UserPreferenceDefinition> userPreferenceRepository, IUserService userService)
         {
             _userPreferenceRepository = userPreferenceRepository;
+            _userService = userService;
         }
 
-        // GET: api/ReferenceValues
         [HttpGet]
-        public IEnumerable<UserPreferenceDefinition> Get()
+        [Authorize]
+        [TypeFilter(typeof(AuditAttribute))]
+        public async Task<IEnumerable<UserPreferenceDefinition>> Get()
         {
-            return _userPreferenceRepository.GetAll();
+            var user = await _userService.GetUser();
+
+            return _userPreferenceRepository.GetAll().Where(d => user.IsInRoles(d.Roles));
         }
     }
 }
