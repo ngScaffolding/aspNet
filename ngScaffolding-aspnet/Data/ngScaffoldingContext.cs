@@ -17,7 +17,7 @@ namespace ngScaffolding.Data
         public DbSet<ReferenceValue> ReferenceValues { get; set; }
         public DbSet<ReferenceValueItem> ReferenceValueItems { get; set; }
 
-        public DbSet<UserPreference> UserPreferences { get; set; }
+        public DbSet<UserPreferenceDefinition> UserPreferences { get; set; }
         public DbSet<UserPreferenceValue> UserPreferenceValues { get; set; }
 
         public DbSet<ApplicationLog> ApplicationLogs { get; set; }

@@ -106,7 +106,7 @@ namespace ngScaffolding_aspnet
             services.AddScoped(typeof(IRepository<DataSource>), typeof(Repository<DataSource>));
 
             services.AddSingleton<ICacheService, CacheService>();
-            services.AddSingleton<IRepository<UserPreference>, Repository<UserPreference>>();
+            services.AddSingleton<IRepository<UserPreferenceDefinition>, Repository<UserPreferenceDefinition>>();
             //services.AddSingleton<IRepository<ApplicationLog>, Repository<ApplicationLog>>();
 
 

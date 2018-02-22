@@ -13,16 +13,16 @@ namespace ngScaffolding.Controllers
     [Route("api/UserPreferences")]
     public class UserPreferencesController: ngScaffoldingController
     {
-        private readonly IRepository<UserPreference> _userPreferenceRepository;
+        private readonly IRepository<UserPreferenceDefinition> _userPreferenceRepository;
 
-        public UserPreferencesController(IRepository<UserPreference> userPreferenceRepository)
+        public UserPreferencesController(IRepository<UserPreferenceDefinition> userPreferenceRepository)
         {
             _userPreferenceRepository = userPreferenceRepository;
         }
 
         // GET: api/ReferenceValues
         [HttpGet]
-        public IEnumerable<UserPreference> Get()
+        public IEnumerable<UserPreferenceDefinition> Get()
         {
             return _userPreferenceRepository.GetAll();
         }

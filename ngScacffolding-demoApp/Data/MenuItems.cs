@@ -31,7 +31,7 @@ namespace ngScacffolding.demoApp.Data
                 Name = "Demo.Countries.Admin",
                 Label = "Countries Admin",
                 Type = MenuItem.Type_GridView,
-                RouterLink = $"['/gridview', 'Demo.Countries.Admin']",
+                RouterLink = "datagrid,Demo.Countries.Admin",
                 ParentMenuItemId = demoFolder.Id,
                 MenuItemDetail = new GridViewDetailModel()
                 {
@@ -65,7 +65,7 @@ namespace ngScacffolding.demoApp.Data
                 Name = "Demo.Continents.Admin",
                 Label = "Continents Admin",
                 Type = MenuItem.Type_GridView,
-                RouterLink = $"['/gridview', 'Demo.Continents.Admin']",
+                RouterLink = "datagrid,Demo.Continents.Admin",
                 ParentMenuItemId = demoFolder.Id,
                 MenuItemDetail = new GridViewDetailModel()
                 {
