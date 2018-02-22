@@ -52,7 +52,7 @@ namespace ngScacffolding.demoApp.Data
                     {
                         InputDetails = new List<InputDetail>()
                     {
-                        new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select,Datasource = "Continents"}
+                        new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select, ReferenceValueName = "Continents"}
                     }
                     }
                 }
@@ -86,7 +86,7 @@ namespace ngScacffolding.demoApp.Data
                     {
                         InputDetails = new List<InputDetail>()
                     {
-                        new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select,Datasource = "Continents"}
+                        new InputDetailDropdown(){Name = "Continent", Label = "Continent", Type = InputDetail.Type_Select,ReferenceValueName = "Continents"}
                     }
                     }
                 }

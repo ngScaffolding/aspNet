@@ -13,6 +13,8 @@ namespace ngScacffolding.Data
         {
             scaffoldingContext.Database.EnsureCreated();
 
+            UserPreferencesConfig.Build(scaffoldingContext);
+
             // Look for any Countries.
             if (scaffoldingContext.ApplicationLogs.Any())
             {

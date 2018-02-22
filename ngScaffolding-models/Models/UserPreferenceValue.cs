@@ -9,7 +9,6 @@ namespace ngScaffolding.models.Models
         public string UserName { get; set; }
 
         [StringLength(2000)]
-
         public string Value { get; set; }
 
         public virtual UserPreferenceDefinition UserPreferenceDefinition { get; set; }

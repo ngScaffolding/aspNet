@@ -17,7 +17,7 @@ namespace ngScaffolding.Data
         public DbSet<ReferenceValue> ReferenceValues { get; set; }
         public DbSet<ReferenceValueItem> ReferenceValueItems { get; set; }
 
-        public DbSet<UserPreferenceDefinition> UserPreferences { get; set; }
+        public DbSet<UserPreferenceDefinition> UserPreferencesDefinitions { get; set; }
         public DbSet<UserPreferenceValue> UserPreferenceValues { get; set; }
 
         public DbSet<ApplicationLog> ApplicationLogs { get; set; }
@@ -26,10 +26,7 @@ namespace ngScaffolding.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<MenuItem>()
-            //    .HasOne(t => t.ParentMenuItem)
-            //    .WithOne(p => p.ParentMenuItem)
-            //    .OnDelete(DeleteBehavior.SetNull); //add this line code
+
         }
     }
 

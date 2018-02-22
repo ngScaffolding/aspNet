@@ -14,5 +14,7 @@ namespace ngScaffolding.models.Models
         public string Value { get; set; }
 
         public string InputDetails { get; set; }
+
+        public bool? Enabled { get; set; }
     }
 }

@@ -11,11 +11,11 @@ namespace ngScaffolding.Controllers
 {
     [Produces("application/json")]
     [Route("api/UserPreferences")]
-    public class UserPreferencesController: ngScaffoldingController
+    public class UserPreferenceDefinitionsController: ngScaffoldingController
     {
         private readonly IRepository<UserPreferenceDefinition> _userPreferenceRepository;
 
-        public UserPreferencesController(IRepository<UserPreferenceDefinition> userPreferenceRepository)
+        public UserPreferenceDefinitionsController(IRepository<UserPreferenceDefinition> userPreferenceRepository)
         {
             _userPreferenceRepository = userPreferenceRepository;
         }

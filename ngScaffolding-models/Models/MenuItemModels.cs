@@ -42,9 +42,9 @@ namespace ngScaffolding.database.Models
     }
     // Following are copied from PrimeNG MenuItem
 
-    public bool Expanded { get; set; }
-        public bool Disabled { get; set; }
-        public bool Visible { get; set; }
+    public bool? Expanded { get; set; }
+        public bool? Disabled { get; set; }
+        public bool? Visible { get; set; }
 
         [StringLength(100)]
         public string Type { get; set; }

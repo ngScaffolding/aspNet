@@ -63,16 +63,24 @@ namespace ngScaffolding.database.Models
     }
     public class InputDetailTextBox : InputDetail
     {
+        public InputDetailTextBox(): base()
+        {
+            this.Type = InputDetail.Type_Textbox;
+        }
         public string Mask { get; set; } // 999-999
     }
-    public class InputDetailDataSource : InputDetail
+    public class InputDetailReferenceValues : InputDetail
     {
-        public string Datasource { get; set; }  // Used for select items
-        public string DatasourceSeedName { get; set; }  // set to name, when changed use this value in search
-        public string DatasourceSeedDependency { get; set; }  // Name of control to use as seed for this DataSource... Used linked Dropdowns
+        public string ReferenceValueName { get; set; }  // Used for select items
+        public string ReferenceValueSeedName { get; set; }  // set to name, when changed use this value in search
+        public string ReferenceValueSeedDependency { get; set; }  // Name of control to use as seed for this DataSource... Used linked Dropdowns
     }
-    public class InputDetailDropdown : InputDetailDataSource
+    public class InputDetailDropdown : InputDetailReferenceValues
     {
+        public InputDetailDropdown(): base()
+        {
+            this.Type = InputDetail.Type_Dropdown;
+        }
         public bool SelectFilter { get; set; }  // Show Filter on Select Dropdown
         public string SelectFilterBy { get; set; }  // Fields to filter by on Select DropDown
         public string SelectFilterPlaceholder { get; set; }  // Placeholder for Filter input
@@ -80,11 +88,19 @@ namespace ngScaffolding.database.Models
 
     public class InputDetailToggleButton : InputDetail
     {
+        public InputDetailToggleButton(): base()
+        {
+            this.Type = InputDetail.Type_Togglebutton;
+        }
         public string OnLabel { get; set; }  // Labels for ToggleButton
         public string OffLabel { get; set; }  // Labels for ToggleButton
     }
     public class InputDetailTextArea : InputDetail
     {
+        public InputDetailTextArea(): base()
+        {
+            this.Type = InputDetail.Type_Textarea;
+        }
         public int Rows { get; set; }  // Rows for TextArea
     }
 }
