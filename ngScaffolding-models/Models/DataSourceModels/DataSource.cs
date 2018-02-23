@@ -18,9 +18,6 @@ namespace ngScaffolding.Models
         public const string TypesRestApi = "RestAPI";
 
         [StringLength(200)]
-        public string Name { get; set; }
-
-        [StringLength(200)]
         public string Type { get; set; }
 
         public string JsonContent { get; set; }

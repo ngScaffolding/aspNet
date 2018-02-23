@@ -17,7 +17,7 @@ namespace ngScaffolding.Controllers
     public class UserPreferenceDefinitionsController : ngScaffoldingController
     {
         private readonly IRepository<UserPreferenceDefinition> _userPreferenceRepository;
-        public IUserService _userService { get; }
+        private readonly IUserService _userService;
 
         public UserPreferenceDefinitionsController(IRepository<UserPreferenceDefinition> userPreferenceRepository, IUserService userService)
         {

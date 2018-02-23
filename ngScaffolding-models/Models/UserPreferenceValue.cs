@@ -6,7 +6,7 @@ namespace ngScaffolding.models.Models
     public class UserPreferenceValue : BaseEntity
     {
         [StringLength(200)]
-        public string UserName { get; set; }
+        public string UserId { get; set; }
 
         [StringLength(2000)]
         public string Value { get; set; }
