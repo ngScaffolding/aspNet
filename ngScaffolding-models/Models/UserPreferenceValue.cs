@@ -11,6 +11,8 @@ namespace ngScaffolding.models.Models
         [StringLength(2000)]
         public string Value { get; set; }
 
+        public int UserPreferenceDefinitionId { get; set; }
+        [ForeignKey("UserPreferenceDefinitionId")]
         public virtual UserPreferenceDefinition UserPreferenceDefinition { get; set; }
     }
 }

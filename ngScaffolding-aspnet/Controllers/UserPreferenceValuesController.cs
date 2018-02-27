@@ -58,7 +58,8 @@ namespace ngScaffolding.Controllers
                 {
                     Name = preferenceValue.Name,
                     UserId = user.Id,
-                    Value = preferenceValue.Value
+                    Value = preferenceValue.Value,
+                    UserPreferenceDefinitionId = preferenceValue.UserPreferenceDefinitionId
                 };
             }
             else
