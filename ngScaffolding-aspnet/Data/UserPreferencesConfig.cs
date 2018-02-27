@@ -23,13 +23,13 @@ namespace ngScaffolding.Data
                 Type = ReferenceValue.Types_List,
                 GroupName = "UserPrefs",
                 ReferenceValueItems = new List<ReferenceValueItem>() {
-                    new ReferenceValueItem(){ Value="HORIZONTAL", Display = "Horizontal" },
-                    new ReferenceValueItem(){ Value="STATIC", Display = "Side Static" },
-                    new ReferenceValueItem(){ Value="OVERLAY", Display = "Side Overlay" },
-                    new ReferenceValueItem(){ Value="SLIM", Display = "Side Slim" }
+                    new ReferenceValueItem(){ Value="0", Display = "Side Static" },
+                    new ReferenceValueItem(){ Value="1", Display = "Side Overlay" },
+                    new ReferenceValueItem(){ Value="2", Display = "Side Slim" },
+                    new ReferenceValueItem(){ Value="3", Display = "Horizontal" }
                 }
             });
-            
+
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
                 Name = "MenuOrientation",
