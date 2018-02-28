@@ -61,11 +61,18 @@ namespace ngScaffolding.Controllers
                     Value = preferenceValue.Value,
                     UserPreferenceDefinitionId = preferenceValue.UserPreferenceDefinitionId
                 };
+
+                _userPreferenceRepository.Insert(newPreference);
             }
             else
             {
                 // Update Existing
-
+                var pref = _userPreferenceRepository.Get(preferenceValue.Id);
+                if(pref != null)
+                {
+                    pref.Value = preferenceValue.Value;
+                    _userPreferenceRepository.Update(pref);
+                }
             }
 
             return Ok();

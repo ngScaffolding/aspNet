@@ -12,7 +12,10 @@ namespace ngScaffolding.Services
     public class UserModel
     {
         public string Id { get; set; }
+        public string Name { get; set; }
         public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string Email { get; set; }
         public List<string> Roles { get; set; }
 
         public bool IsInRoles(string roles)
@@ -63,8 +66,10 @@ namespace ngScaffolding.Services
 
                     retVal = new UserModel();
 
-                    retVal.Id = claims.First(c => c.Type == "name").Value;
-                    retVal.Roles = claims.Where(claim => claim.Type == "role").Select(claim => claim.Value).ToList();
+                    if(claims.Any(c => c.Type == "sub")) retVal.Id = claims.First(c => c.Type == "sub").Value;
+                    if(claims.Any(c => c.Type == "email")) retVal.Email = claims.First(c => c.Type == "email").Value;
+                    if (claims.Any(c => c.Type == "name")) retVal.Name = claims.First(c => c.Type == "name").Value;
+                    if (claims.Any(c => c.Type == "role")) retVal.Roles = claims.Where(claim => claim.Type == "role").Select(claim => claim.Value).ToList();
                 }
             }
 

@@ -48,6 +48,7 @@ namespace ngScaffolding.Data
             {
                 throw new ArgumentNullException("entity");
             }
+            context.Set<T>().Update(entity);
             context.SaveChanges();
         }
         public void Delete(T entity)
