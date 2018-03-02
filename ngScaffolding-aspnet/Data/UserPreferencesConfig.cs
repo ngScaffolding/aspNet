@@ -35,11 +35,11 @@ namespace ngScaffolding.Data
                 Name = "MenuOrientation",
                 InputDetails = JsonConvert.SerializeObject(new InputDetailDropdown()
                 {
-                    Name = "MenuOrientation",
-                    Label = "Menu Type",
-                    Help = "Select the type of menu for the application",
-                    ReferenceValueName = "UserPrefs_MenuOrientation",
-                    Value = "horizontal"
+                    name = "MenuOrientation",
+                    label = "Menu Type",
+                    help = "Select the type of menu for the application",
+                    referenceValueName = "UserPrefs_MenuOrientation",
+                    value = "horizontal"
                 })
             });
         }

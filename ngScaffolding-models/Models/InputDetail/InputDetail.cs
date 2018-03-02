@@ -6,35 +6,35 @@ namespace ngScaffolding.database.Models
     {
 
         //Shared
-        public string Name { get; set; }
-        public string Type { get; set; } //textbox, email, textarea, select, multiselect, date, datetime
-        public string Label { get; set; }
-        public string Placeholder { get; set; }
-        public string Help { get; set; }
+        public string name { get; set; }
+        public string type { get; set; } //textbox, email, textarea, select, multiselect, date, datetime
+        public string label { get; set; }
+        public string placeholder { get; set; }
+        public string help { get; set; }
 
-        public string Comparison { get; set; }
-        public bool Allowcomparisonchange { get; set; }
-        public bool Required { get; set; }
+        public string comparison { get; set; }
+        public bool allowcomparisonchange { get; set; }
+        public bool required { get; set; }
 
-        public string Classes { get; set; }
-        public string ContainerClass { get; set; }
-        public string Hidden { get; set; }
+        public string classes { get; set; }
+        public string containerClass { get; set; }
+        public string hidden { get; set; }
 
-        public string Value { get; set; }
+        public string value { get; set; }
 
-        public string ValidateRequired { get; set; } // Providing a message here infer Required
-        public string ValidateRequiredTrue { get; set; } // Providing a message here infer RequiredTrue
+        public string validateRequired { get; set; } // Providing a message here infer Required
+        public string validateRequiredTrue { get; set; } // Providing a message here infer RequiredTrue
 
-        public string ValidateEmail { get; set; } // Providing a message here infer RequiredEmail
+        public string validateEmail { get; set; } // Providing a message here infer RequiredEmail
 
-        public string ValidatePattern { get; set; }
-        public string ValidatePatternMessage { get; set; }
+        public string validatePattern { get; set; }
+        public string validatePatternMessage { get; set; }
 
-        public int ValidateMinLength { get; set; }
-        public string ValidateMinLengthMessage { get; set; }
+        public int validateMinLength { get; set; }
+        public string validateMinLengthMessage { get; set; }
 
-        public int ValidateMaxLength { get; set; }
-        public string ValidateMaxLengthMessage { get; set; }
+        public int validateMaxLength { get; set; }
+        public string validateMaxLengthMessage { get; set; }
 
         public const string Type_Textbox = "textbox";
         public const string Type_Email = "email";
@@ -65,42 +65,42 @@ namespace ngScaffolding.database.Models
     {
         public InputDetailTextBox(): base()
         {
-            this.Type = InputDetail.Type_Textbox;
+            this.type = InputDetail.Type_Textbox;
         }
         public string Mask { get; set; } // 999-999
     }
     public class InputDetailReferenceValues : InputDetail
     {
-        public string ReferenceValueName { get; set; }  // Used for select items
-        public string ReferenceValueSeedName { get; set; }  // set to name, when changed use this value in search
-        public string ReferenceValueSeedDependency { get; set; }  // Name of control to use as seed for this DataSource... Used linked Dropdowns
+        public string referenceValueName { get; set; }  // Used for select items
+        public string referenceValueSeedName { get; set; }  // set to name, when changed use this value in search
+        public string referenceValueSeedDependency { get; set; }  // Name of control to use as seed for this DataSource... Used linked Dropdowns
     }
     public class InputDetailDropdown : InputDetailReferenceValues
     {
         public InputDetailDropdown(): base()
         {
-            this.Type = InputDetail.Type_Dropdown;
+            this.type = InputDetail.Type_Dropdown;
         }
-        public bool SelectFilter { get; set; }  // Show Filter on Select Dropdown
-        public string SelectFilterBy { get; set; }  // Fields to filter by on Select DropDown
-        public string SelectFilterPlaceholder { get; set; }  // Placeholder for Filter input
+        public bool selectFilter { get; set; }  // Show Filter on Select Dropdown
+        public string selectFilterBy { get; set; }  // Fields to filter by on Select DropDown
+        public string selectFilterPlaceholder { get; set; }  // Placeholder for Filter input
     }
 
     public class InputDetailToggleButton : InputDetail
     {
         public InputDetailToggleButton(): base()
         {
-            this.Type = InputDetail.Type_Togglebutton;
+            this.type = InputDetail.Type_Togglebutton;
         }
-        public string OnLabel { get; set; }  // Labels for ToggleButton
-        public string OffLabel { get; set; }  // Labels for ToggleButton
+        public string onLabel { get; set; }  // Labels for ToggleButton
+        public string offLabel { get; set; }  // Labels for ToggleButton
     }
     public class InputDetailTextArea : InputDetail
     {
         public InputDetailTextArea(): base()
         {
-            this.Type = InputDetail.Type_Textarea;
+            this.type = InputDetail.Type_Textarea;
         }
-        public int Rows { get; set; }  // Rows for TextArea
+        public int rows { get; set; }  // Rows for TextArea
     }
 }

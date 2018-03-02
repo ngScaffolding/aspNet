@@ -104,10 +104,10 @@ namespace ngScaffolding.Helpers
                 {
                     foreach (var inputDetail in inputs)
                     {
-                        var searchKey = string.Format("@@{0}", inputDetail.Name);
+                        var searchKey = string.Format("@@{0}", inputDetail.name);
                         if (commandString.Contains(searchKey))
                         {
-                            commandString = commandString.Replace(searchKey, inputDetail.Value);
+                            commandString = commandString.Replace(searchKey, inputDetail.value);
                         }
                     }
                 }
@@ -174,12 +174,12 @@ namespace ngScaffolding.Helpers
                         if (command.Parameters != null)
                         {
                             var thisParam =
-                                command.Parameters.FirstOrDefault(p => p.Name.ToUpper() == inputDetail.Name.ToUpper());
+                                command.Parameters.FirstOrDefault(p => p.Name.ToUpper() == inputDetail.name.ToUpper());
 
                             if (thisParam == null)
                             {
                                 thisParam = new ParameterDetailModel();
-                                thisParam.Name = inputDetail.Name;
+                                thisParam.Name = inputDetail.name;
                                 command.Parameters.Add(thisParam);
                             }
 
@@ -189,7 +189,7 @@ namespace ngScaffolding.Helpers
                             //        ? inputDetail.sqltype
                             //        : "NVARCHAR(MAX)";
                             //}
-                            thisParam.Value = inputDetail.Value;
+                            thisParam.Value = inputDetail.value;
                         }
                     }
                 }
@@ -210,10 +210,10 @@ namespace ngScaffolding.Helpers
 
                     foreach (var inputDetail in inputs)
                     {
-                        if (string.IsNullOrEmpty(inputDetail.Value))// || alreadyProcessed.Contains(inputDetail.Name))
+                        if (string.IsNullOrEmpty(inputDetail.value))// || alreadyProcessed.Contains(inputDetail.name))
                             continue;
 
-                        switch (inputDetail.Type.ToUpper())
+                        switch (inputDetail.type.ToUpper())
                         {
                             //textbox, email, textarea, select, multiselect, date, datetime
                             case "TEXTBOX":
@@ -221,44 +221,44 @@ namespace ngScaffolding.Helpers
                             case "TEXTAREA":
                             case "SELECT":
                                 {
-                                    switch (inputDetail.Comparison)
+                                    switch (inputDetail.comparison)
                                     {
                                         case null:
                                         case "":
                                         case "=":
                                             {
                                                 commandString = string.Format("{0} AND {1} = @{1}", commandString,
-                                                    inputDetail.Name);
+                                                    inputDetail.name);
                                                 break;
                                             }
                                         case "!=":
                                             {
                                                 commandString = string.Format("{0} AND NOT {1} = @{1}", commandString,
-                                                    inputDetail.Name);
+                                                    inputDetail.name);
                                                 break;
                                             }
                                         case "starts":
                                             {
                                                 commandString = string.Format("{0} AND {1} LIKE @{1}", commandString,
-                                                    inputDetail.Name);
+                                                    inputDetail.name);
                                                 break;
                                             }
                                         case "contains":
                                             {
                                                 commandString = string.Format("{0} AND {1} LIKE @{1}", commandString,
-                                                    inputDetail.Name);
+                                                    inputDetail.name);
                                                 break;
                                             }
                                         case "lt":
                                             {
                                                 commandString = string.Format("{0} AND {1} < @{1}", commandString,
-                                                    inputDetail.Name);
+                                                    inputDetail.name);
                                                 break;
                                             }
                                         case "gt":
                                             {
                                                 commandString = string.Format("{0} AND {1} < @{1}", commandString,
-                                                    inputDetail.Name);
+                                                    inputDetail.name);
                                                 break;
                                             }
                                     }
@@ -266,8 +266,8 @@ namespace ngScaffolding.Helpers
                                 }
                             case "MULTISELECT":
                                 {
-                                    commandString = string.Format("{0} AND {1} IN ('{2}')", commandString, inputDetail.Name,
-                                        inputDetail.Value);
+                                    commandString = string.Format("{0} AND {1} IN ('{2}')", commandString, inputDetail.name,
+                                        inputDetail.value);
                                     break;
                                 }
                             case "DATE":
@@ -280,7 +280,7 @@ namespace ngScaffolding.Helpers
                                 }
                         }
 
-                        //alreadyProcessed.Add(inputDetail.Name);
+                        //alreadyProcessed.Add(inputDetail.name);
                     }
                     #endregion
                     try
