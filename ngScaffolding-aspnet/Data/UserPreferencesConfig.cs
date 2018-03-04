@@ -33,7 +33,7 @@ namespace ngScaffolding.Data
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
                 Name = "MenuOrientation",
-                InputDetails = JsonConvert.SerializeObject(new InputDetailDropdown()
+                InputDetails = JsonConvert.SerializeObject(new InputDetailSelect()
                 {
                     name = "MenuOrientation",
                     label = "Menu Type",

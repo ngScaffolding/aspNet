@@ -75,6 +75,13 @@ namespace ngScaffolding.database.Models
         public string referenceValueSeedName { get; set; }  // set to name, when changed use this value in search
         public string referenceValueSeedDependency { get; set; }  // Name of control to use as seed for this DataSource... Used linked Dropdowns
     }
+    public class InputDetailSelect: InputDetailDropdown
+    {
+        public InputDetailSelect(): base()
+        {
+            this.type = InputDetail.Type_Select;
+        }
+    }
     public class InputDetailDropdown : InputDetailReferenceValues
     {
         public InputDetailDropdown(): base()
