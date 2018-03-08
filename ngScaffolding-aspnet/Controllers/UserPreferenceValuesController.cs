@@ -62,27 +62,34 @@ namespace ngScaffolding.Controllers
             var savePreference = _userPreferenceRepository.GetAll().FirstOrDefault(p => p.UserId == user.Id && p.Name == preferenceValue.Name);
             var definition = _userPreferenceDefinitionRepository.GetAll().FirstOrDefault(p => p.Name == preferenceValue.Name);
 
-            if(savePreference == null)
+            if (definition != null)
             {
-                // New Value Here
-                var newPreference = new UserPreferenceValue()
+                if (savePreference == null)
                 {
-                    Name = preferenceValue.Name,
-                    UserId = user.Id,
-                    Value = preferenceValue.Value,
-                    UserPreferenceDefinitionId = definition.Id
-                };
+                    // New Value Here
+                    var newPreference = new UserPreferenceValue()
+                    {
+                        Name = preferenceValue.Name,
+                        UserId = user.Id,
+                        Value = preferenceValue.Value,
+                        UserPreferenceDefinitionId = definition.Id
+                    };
 
-                _userPreferenceRepository.Insert(newPreference);
+                    _userPreferenceRepository.Insert(newPreference);
+                }
+                else
+                {
+                    // Update Existing
+                    savePreference.Value = preferenceValue.Value;
+                    _userPreferenceRepository.Update(savePreference);
+                }
+
+                return Ok(savePreference);
             }
             else
             {
-                // Update Existing
-                    savePreference.Value = preferenceValue.Value;
-                    _userPreferenceRepository.Update(savePreference);
+                return NotFound();
             }
-
-            return Ok();
         }
 
     }

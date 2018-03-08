@@ -119,7 +119,7 @@ namespace ngScaffolding.Data
             // Dark Menu
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
-                Name = "Dark Menu",
+                Name = "DarkMenu",
                 InputDetails = JsonConvert.SerializeObject(new InputDetailSwitch()
                 {
                     name = "DarkMenu",
