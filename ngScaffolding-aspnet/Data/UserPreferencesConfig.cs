@@ -108,7 +108,7 @@ namespace ngScaffolding.Data
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
                 Name = "CompactMode",
-                InputDetails = JsonConvert.SerializeObject(new InputDetailToggleButton()
+                InputDetails = JsonConvert.SerializeObject(new InputDetailSwitch()
                 {
                     name = "CompactMode",
                     label = "Compact Mode",
@@ -120,7 +120,7 @@ namespace ngScaffolding.Data
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
                 Name = "Dark Menu",
-                InputDetails = JsonConvert.SerializeObject(new InputDetailToggleButton()
+                InputDetails = JsonConvert.SerializeObject(new InputDetailSwitch()
                 {
                     name = "DarkMenu",
                     label = "Dark/Light Menu",

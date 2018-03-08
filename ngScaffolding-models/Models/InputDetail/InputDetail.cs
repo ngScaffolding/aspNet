@@ -110,4 +110,12 @@ namespace ngScaffolding.database.Models
         }
         public int rows { get; set; }  // Rows for TextArea
     }
+
+    public class InputDetailSwitch : InputDetail
+    {
+        public InputDetailSwitch() : base()
+        {
+            this.type = InputDetail.Type_Switch;
+        }
+    }
 }

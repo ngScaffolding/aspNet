@@ -12,16 +12,26 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ngScaffolding.Controllers
 {
+    public class UserPreferenceValueHolder
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
+    }
+
     [Produces("application/json")]
     [Route("api/UserPreferenceValues")]
     public class UserPreferenceValuesController: ngScaffoldingController
     {
         private readonly IRepository<UserPreferenceValue> _userPreferenceRepository;
+        private readonly IRepository<UserPreferenceDefinition> _userPreferenceDefinitionRepository;
         private readonly IUserService _userService;
 
-        public UserPreferenceValuesController(IRepository<UserPreferenceValue> userPreferenceRepository, IUserService userService)
+        public UserPreferenceValuesController(IRepository<UserPreferenceValue> userPreferenceRepository,
+            IRepository<UserPreferenceDefinition> userPreferenceDefinitionRepository,
+            IUserService userService)
         {
             _userPreferenceRepository = userPreferenceRepository;
+            _userPreferenceDefinitionRepository = userPreferenceDefinitionRepository;
             _userService = userService;
         }
 
@@ -40,7 +50,7 @@ namespace ngScaffolding.Controllers
         [HttpPost]
         [Authorize]
         [TypeFilter(typeof(AuditAttribute))]
-        public async Task<IActionResult> Post([FromBody] UserPreferenceValue preferenceValue)
+        public async Task<IActionResult> Post([FromBody] UserPreferenceValueHolder preferenceValue)
         {
             if (!ModelState.IsValid)
             {
@@ -49,9 +59,10 @@ namespace ngScaffolding.Controllers
             
             var user = await _userService.GetUser();
 
-            UserPreferenceValue savePreference = null;
+            var savePreference = _userPreferenceRepository.GetAll().FirstOrDefault(p => p.UserId == user.Id && p.Name == preferenceValue.Name);
+            var definition = _userPreferenceDefinitionRepository.GetAll().FirstOrDefault(p => p.Name == preferenceValue.Name);
 
-            if(preferenceValue.Id == 0)
+            if(savePreference == null)
             {
                 // New Value Here
                 var newPreference = new UserPreferenceValue()
@@ -59,7 +70,7 @@ namespace ngScaffolding.Controllers
                     Name = preferenceValue.Name,
                     UserId = user.Id,
                     Value = preferenceValue.Value,
-                    UserPreferenceDefinitionId = preferenceValue.UserPreferenceDefinitionId
+                    UserPreferenceDefinitionId = definition.Id
                 };
 
                 _userPreferenceRepository.Insert(newPreference);
@@ -67,12 +78,8 @@ namespace ngScaffolding.Controllers
             else
             {
                 // Update Existing
-                var pref = _userPreferenceRepository.Get(preferenceValue.Id);
-                if(pref != null)
-                {
-                    pref.Value = preferenceValue.Value;
-                    _userPreferenceRepository.Update(pref);
-                }
+                    savePreference.Value = preferenceValue.Value;
+                    _userPreferenceRepository.Update(savePreference);
             }
 
             return Ok();
