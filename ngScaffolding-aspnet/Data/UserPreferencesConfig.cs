@@ -86,7 +86,7 @@ namespace ngScaffolding.Data
                     label = "Menu Type",
                     help = "Select the type of menu for the application",
                     referenceValueName = "UserPrefs_MenuOrientation",
-                    value = "horizontal"
+                    defaultValue = "horizontal"
                 })
             });
 
@@ -100,7 +100,7 @@ namespace ngScaffolding.Data
                     label = "Profile Mode",
                     help = "Select the position of the Profile Icon",
                     referenceValueName = "UserPrefs_ProfileMode",
-                    value = "inline"
+                    defaultValue = "inline"
                 })
             });
 

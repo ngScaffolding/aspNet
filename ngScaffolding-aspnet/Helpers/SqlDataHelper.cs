@@ -107,7 +107,7 @@ namespace ngScaffolding.Helpers
                         var searchKey = string.Format("@@{0}", inputDetail.name);
                         if (commandString.Contains(searchKey))
                         {
-                            commandString = commandString.Replace(searchKey, inputDetail.value);
+                            commandString = commandString.Replace(searchKey, inputDetail.defaultValue);
                         }
                     }
                 }
@@ -189,7 +189,7 @@ namespace ngScaffolding.Helpers
                             //        ? inputDetail.sqltype
                             //        : "NVARCHAR(MAX)";
                             //}
-                            thisParam.Value = inputDetail.value;
+                            thisParam.Value = inputDetail.defaultValue;
                         }
                     }
                 }
@@ -210,7 +210,7 @@ namespace ngScaffolding.Helpers
 
                     foreach (var inputDetail in inputs)
                     {
-                        if (string.IsNullOrEmpty(inputDetail.value))// || alreadyProcessed.Contains(inputDetail.name))
+                        if (string.IsNullOrEmpty(inputDetail.defaultValue))// || alreadyProcessed.Contains(inputDetail.name))
                             continue;
 
                         switch (inputDetail.type.ToUpper())
@@ -267,7 +267,7 @@ namespace ngScaffolding.Helpers
                             case "MULTISELECT":
                                 {
                                     commandString = string.Format("{0} AND {1} IN ('{2}')", commandString, inputDetail.name,
-                                        inputDetail.value);
+                                        inputDetail.defaultValue);
                                     break;
                                 }
                             case "DATE":

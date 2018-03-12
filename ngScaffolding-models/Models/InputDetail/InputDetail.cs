@@ -20,7 +20,7 @@ namespace ngScaffolding.database.Models
         public string containerClass { get; set; }
         public string hidden { get; set; }
 
-        public string value { get; set; }
+        public string defaultValue { get; set; }
 
         public string validateRequired { get; set; } // Providing a message here infer Required
         public string validateRequiredTrue { get; set; } // Providing a message here infer RequiredTrue
