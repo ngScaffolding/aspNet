@@ -45,7 +45,7 @@ namespace ngScaffolding.Controllers
             _dataSourceRepository = dataSourceRepository;
         }
 
-        // POST: api/GridData
+        // POST: api/DataSource
         [HttpPost]
         //[ServiceFilter(typeof(AuditAttribute))]
         public async Task<IActionResult> Post([FromBody] DataSourceRequest dataSourceRequest)
@@ -60,7 +60,7 @@ namespace ngScaffolding.Controllers
                 }
                 else
                 {
-                    _dataSourceRepository.GetAll().FirstOrDefault(n => n.Name.ToUpper() == dataSourceRequest.Name.ToUpper());
+                    dataSource = _dataSourceRepository.GetByName(dataSourceRequest.Name);
                 }
 
                 if (dataSource != null)
@@ -71,12 +71,12 @@ namespace ngScaffolding.Controllers
                     {
                         var results = await sqlHelper.RunCommand(sqlDatasource);
 
-                        //var retVal = new DataResults()
-                        //{
-                        //    rowCount = results.RowCount,
-                        //    jsonData = JsonConvert.SerializeObject(results.Data, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include })
-                        //};
-                        return Ok(results);
+                        var retVal = new DataResults()
+                        {
+                            rowCount = results.RowCount,
+                            jsonData = JsonConvert.SerializeObject(results.Results, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include })
+                        };
+                        return Ok(retVal);
                     }
                 }
             }

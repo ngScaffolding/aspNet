@@ -10,6 +10,7 @@ namespace ngScaffolding.Data
     {
         IEnumerable<T> GetAll();
         T Get(long id);
+        T GetByName(string name);
         void Insert(T entity);
         void Update(T entity);
         void Delete(T entity);
@@ -32,6 +33,10 @@ namespace ngScaffolding.Data
         public T Get(long id)
         {
             return entities.SingleOrDefault(s => s.Id == id);
+        }
+        public T GetByName(string name)
+        {
+            return entities.SingleOrDefault(s => s.Name.ToLower() == name.ToLower());
         }
         public void Insert(T entity)
         {
