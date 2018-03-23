@@ -7,6 +7,7 @@ using ngScaffolding.database.Models;
 using ngScaffolding.Data;
 using ngScaffolding.Models;
 using ngScaffolding.Models.DataSourceModels;
+using Newtonsoft.Json;
 
 namespace ngScacffolding.demoApp.Data
 {
@@ -23,6 +24,20 @@ namespace ngScacffolding.demoApp.Data
                 Roles = "User",
                 Type = MenuItem.Type_Folder
             });
+
+            
+            var dataSource1 = new DataSource()
+            {
+                Type = DataSource.TypesSql,
+                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                {
+                    Connection = "demoDatabase",
+                    IsAudit = true,
+                    SqlCommand = "SELECT [Id],[ContinentId],[ContinentName],[Name] FROM [dbo].[Countries] ORDER by ContinentName, Name"
+                })
+            };
+            demoCtx.DataSources.Add(dataSource1);
+            demoCtx.SaveChanges();
 
             var gridView1 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
@@ -42,21 +57,29 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    SelectCommand = new BaseDataSource()
-                    {
-                        Connection = "demoDatabase",
-                        IsAudit = true,
-                        SqlCommand = "SELECT [Id],[ContinentId],[ContinentName],[Name] FROM [dbo].[Countries] ORDER by ContinentName, Name"
-                    },
+                    SelectDataSource = dataSource1,
                     Filters = new InputBuilderDefinition()
                     {
                         InputDetails = new List<InputDetail>()
-                    {
-                        new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
-                    }
+                        {
+                            new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
+                        }
                     }
                 }
             });
+
+            var dataSource2 = new DataSource()
+            {
+                Type = DataSource.TypesSql,
+                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                {
+                    Connection = "demoDatabase",
+                    IsAudit = true,
+                    SqlCommand = "SELECT [Id],[ContinentId],[ContinentName],[Name] FROM [dbo].[Continents] ORDER by ContinentName, Name"
+                })
+            };
+            demoCtx.DataSources.Add(dataSource2);
+            demoCtx.SaveChanges();
 
             var gridView2 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
@@ -76,18 +99,13 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    SelectCommand = new BaseDataSource()
-                    {
-                        Connection = "demoDatabase",
-                        IsAudit = true,
-                        SqlCommand = "SELECT [Id],[ContinentId],[ContinentName],[Name] FROM [dbo].[Continents] ORDER by ContinentName, Name"
-                    },
+                    SelectDataSource = dataSource2,
                     Filters = new InputBuilderDefinition()
                     {
                         InputDetails = new List<InputDetail>()
-                    {
-                        new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
-                    }
+                        {
+                            new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
+                        }
                     }
                 }
             });

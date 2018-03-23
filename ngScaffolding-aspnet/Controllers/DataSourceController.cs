@@ -61,7 +61,8 @@ namespace ngScaffolding.Controllers
 
                 if (!string.IsNullOrEmpty(dataSourceRequest.MenuId))
                 {
-                    var menuItem = _me
+                    var menuItem = _menuItemRepository.GetByName(dataSourceRequest.MenuId);
+
                 }
                 else
                 {

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 using ngScaffolding.database.Models;
 using ngScaffolding.Models.DataSourceModels;
 
@@ -28,10 +30,29 @@ namespace ngScaffolding.Models
 
         public InputBuilderDefinition Filters { get; set; }
 
-        public BaseDataSource SelectCommand { get; set; }
-        public BaseDataSource DeleteCommand { get; set; }
-        public BaseDataSource UpdateCommand { get; set; }
-        public BaseDataSource InsertCommand { get; set; }
+        // Select DataSource
+        public int? SelectDataSourceId { get; set; }
+        [ForeignKey("SelectDataSourceId")]
+        [JsonIgnoreAttribute]
+        public virtual DataSource SelectDataSource { get; set; }
+
+        // Delete Datasource
+        public int? DeleteDataSourceId { get; set; }
+        [ForeignKey("DeleteDataSourceId")]
+        [JsonIgnoreAttribute]
+        public virtual DataSource DeleteDataSource { get; set; }
+
+        // Update DataSource
+        public int? UpdateDataSourceId { get; set; }
+        [ForeignKey("UpdateDataSourceId")]
+        [JsonIgnoreAttribute]
+        public virtual DataSource UpdateDataSource { get; set; }
+
+        // Insert DataSource
+        public int? InsertDataSourceId { get; set; }
+        [ForeignKey("InsertDataSourceId")]
+        [JsonIgnoreAttribute]
+        public virtual DataSource InsertDataSource { get; set; }
 
         public ICollection<ActionModel> Actions { get; set; }
     }
