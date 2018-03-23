@@ -12,6 +12,7 @@ using ngScaffolding.Models;
 using ngScaffolding.Models.DataSourceModels;
 using ngScaffolding.Services;
 using Newtonsoft.Json;
+using ngScaffolding.database.Models;
 
 namespace ngScaffolding.Controllers
 {
@@ -20,6 +21,8 @@ namespace ngScaffolding.Controllers
     {
         private readonly IConnectionStringsService _connectionStringsService;
         private readonly IRepository<DataSource> _dataSourceRepository;
+
+        public IRepository<MenuItem> _menuItemRepository { get; }
 
         public class DataSourceRequest
         {
@@ -39,9 +42,11 @@ namespace ngScaffolding.Controllers
         }
 
         public DataSourceController(IConnectionStringsService connectionStringsService,
+            IRepository<MenuItem> menuItemRepository,
             IRepository<DataSource> dataSourceRepository)
         {
             _connectionStringsService = connectionStringsService;
+            _menuItemRepository = menuItemRepository;
             _dataSourceRepository = dataSourceRepository;
         }
 
@@ -56,7 +61,7 @@ namespace ngScaffolding.Controllers
 
                 if (!string.IsNullOrEmpty(dataSourceRequest.MenuId))
                 {
-
+                    var menuItem = _me
                 }
                 else
                 {
