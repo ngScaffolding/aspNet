@@ -48,7 +48,7 @@ namespace ngScacffolding.demoApp.Data
                 Type = MenuItem.Type_GridView,
                 RouterLink = "datagrid,Demo.Countries.Admin",
                 ParentMenuItemId = demoFolder.Id,
-                MenuItemDetail = new GridViewDetailModel()
+                JsonSerialized = JsonConvert.SerializeObject( new GridViewDetailModel()
                 {
                     Title = "Countries",
                     Columns = new List<ColumnModel>()
@@ -57,7 +57,7 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    SelectDataSource = dataSource1,
+                    SelectDataSourceId = dataSource1.Id,
                     Filters = new InputBuilderDefinition()
                     {
                         InputDetails = new List<InputDetail>()
@@ -65,7 +65,7 @@ namespace ngScacffolding.demoApp.Data
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
                         }
                     }
-                }
+                })
             });
 
             var dataSource2 = new DataSource()
@@ -90,7 +90,7 @@ namespace ngScacffolding.demoApp.Data
                 Type = MenuItem.Type_GridView,
                 RouterLink = "datagrid,Demo.Continents.Admin",
                 ParentMenuItemId = demoFolder.Id,
-                MenuItemDetail = new GridViewDetailModel()
+                JsonSerialized = JsonConvert.SerializeObject( new GridViewDetailModel()
                 {
                     Title = "Continents",
                     Columns = new List<ColumnModel>()
@@ -99,7 +99,7 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    SelectDataSource = dataSource2,
+                    SelectDataSourceId = dataSource2.Id,
                     Filters = new InputBuilderDefinition()
                     {
                         InputDetails = new List<InputDetail>()
@@ -107,7 +107,7 @@ namespace ngScacffolding.demoApp.Data
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
                         }
                     }
-                }
+                })
             });
         }
     }
