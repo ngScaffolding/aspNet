@@ -371,7 +371,7 @@ namespace ngScaffolding.Helpers
                     }
                 }
             }
-            return null;
+            return retVal;
         }
 
         private static List<Dictionary<string, object>> PopulateResults(SqlDataReader reader)

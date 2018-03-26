@@ -26,8 +26,7 @@ namespace ngScaffolding.Controllers
 
         public class DataSourceRequest
         {
-            public string Name { get; set; }
-            public string MenuId { get; set; }
+            public int Id { get; set; }
             public string Seed { get; set; }
             public string RowData { get; set; }
             public string InputData { get; set; }
@@ -39,6 +38,7 @@ namespace ngScaffolding.Controllers
         {
             public int rowCount { get; set; }
             public string jsonData { get; set; }
+            public ICollection<ActionResult> results { get; set; }
         }
 
         public DataSourceController(IConnectionStringsService connectionStringsService,
@@ -57,17 +57,7 @@ namespace ngScaffolding.Controllers
         {
             if (dataSourceRequest != null)
             {
-                DataSource dataSource = null;
-
-                if (!string.IsNullOrEmpty(dataSourceRequest.MenuId))
-                {
-                    var menuItem = _menuItemRepository.GetByName(dataSourceRequest.MenuId);
-
-                }
-                else
-                {
-                    dataSource = _dataSourceRepository.GetByName(dataSourceRequest.Name);
-                }
+                var dataSource = _dataSourceRepository.Get(dataSourceRequest.Id);
 
                 if (dataSource != null)
                 {
@@ -75,13 +65,15 @@ namespace ngScaffolding.Controllers
                     var sqlDatasource = JsonConvert.DeserializeObject<SqlDataSource>(dataSource.JsonContent);
                     if (sqlDatasource != null)
                     {
-                        var results = await sqlHelper.RunCommand(sqlDatasource);
+                        var sqlResults = await sqlHelper.RunCommand(sqlDatasource);
 
                         var retVal = new DataResults()
                         {
-                            rowCount = results.RowCount,
-                            jsonData = JsonConvert.SerializeObject(results.Results, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include })
+                            rowCount = sqlResults.RowCount,
+                            jsonData = JsonConvert.SerializeObject(sqlResults.Results, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include }),
+                            results = sqlResults.ActionResults
                         };
+
                         return Ok(retVal);
                     }
                 }
