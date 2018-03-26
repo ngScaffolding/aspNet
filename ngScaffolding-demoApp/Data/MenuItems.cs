@@ -50,7 +50,7 @@ namespace ngScacffolding.demoApp.Data
                 ParentMenuItemId = demoFolder.Id,
                 JsonSerialized = JsonConvert.SerializeObject( new GridViewDetailModel()
                 {
-                    Title = "Countries",
+                    Title = "Countries Administration",
                     Columns = new List<ColumnModel>()
                     {
                         new ColumnModel() { Field = "Id" },
@@ -92,7 +92,7 @@ namespace ngScacffolding.demoApp.Data
                 ParentMenuItemId = demoFolder.Id,
                 JsonSerialized = JsonConvert.SerializeObject( new GridViewDetailModel()
                 {
-                    Title = "Continents",
+                    Title = "Continents Administration",
                     Columns = new List<ColumnModel>()
                     {
                         new ColumnModel() { Field = "Id" },
