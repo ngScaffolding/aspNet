@@ -6,19 +6,19 @@ namespace ngScaffolding.database.Models
 {
     public class InputBuilderDefinition
     {
-        public string Orientation { get; set; }
-        public int HorizontalColumnCount { get; set; }
+        public string orientation { get; set; }
+        public int horizontalColumnCount { get; set; }
 
-        public string OkButtonText { get; set; }
-        public string OkButtonIcon { get; set; }
+        public string okButtonText { get; set; }
+        public string okButtonIcon { get; set; }
 
-        public string CancelButtonText { get; set; }
-        public string CancelButtonIcon { get; set; }
+        public string cancelButtonText { get; set; }
+        public string cancelButtonIcon { get; set; }
 
-        public IEnumerable<InputDetail> InputDetails { get; set; }
+        public IEnumerable<InputDetail> inputDetails { get; set; }
 
-        public string CustomButtonText { get; set; }
-        public string CustomButtonIcon { get; set; }
+        public string customButtonText { get; set; }
+        public string customButtonIcon { get; set; }
 
     }
 }

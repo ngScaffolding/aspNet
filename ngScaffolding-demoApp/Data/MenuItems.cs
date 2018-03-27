@@ -60,7 +60,7 @@ namespace ngScacffolding.demoApp.Data
                     SelectDataSourceId = dataSource1.Id,
                     Filters = new InputBuilderDefinition()
                     {
-                        InputDetails = new List<InputDetail>()
+                        inputDetails = new List<InputDetail>()
                         {
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
                         }
@@ -102,7 +102,7 @@ namespace ngScacffolding.demoApp.Data
                     SelectDataSourceId = dataSource2.Id,
                     Filters = new InputBuilderDefinition()
                     {
-                        InputDetails = new List<InputDetail>()
+                        inputDetails = new List<InputDetail>()
                         {
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
                         }
