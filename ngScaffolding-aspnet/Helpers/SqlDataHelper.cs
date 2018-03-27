@@ -35,7 +35,7 @@ namespace ngScaffolding.Helpers
             _connectionStringsService = connectionStringsService;
         }
         public async Task<SqlDataResults> RunCommand(SqlDataSource command,
-            ICollection<ExpandoObject> inputs = null,
+            ExpandoObject inputs = null,
             ICollection<ExpandoObject> rows = null,
             int pageNumber = 0,
             int pageSize = 0, string sort = null, string sortDirection = null)

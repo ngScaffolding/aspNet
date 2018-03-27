@@ -33,7 +33,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "SELECT [Id],[Name] FROM [dbo].[Countries] ORDER by ContinentName, Name"
+                    SqlCommand = "SELECT [Id], [Name], [ContinentName] FROM [dbo].[Countries] where ContinentName Like ''%@@Continent%''  ORDER by ContinentName, Name"
                 })
             };
             demoCtx.DataSources.Add(dataSource1);
@@ -75,7 +75,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "SELECT [Id], [Name] FROM [dbo].[Continents] ORDER by ContinentName, Name"
+                    SqlCommand = "SELECT [Id], [Name] FROM [dbo].[Continents] ORDER by Name"
                 })
             };
             demoCtx.DataSources.Add(dataSource2);
