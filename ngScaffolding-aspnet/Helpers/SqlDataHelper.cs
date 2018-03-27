@@ -35,7 +35,7 @@ namespace ngScaffolding.Helpers
             _connectionStringsService = connectionStringsService;
         }
         public async Task<SqlDataResults> RunCommand(SqlDataSource command,
-            ICollection<InputDetail> inputs = null,
+            ICollection<ExpandoObject> inputs = null,
             ICollection<ExpandoObject> rows = null,
             int pageNumber = 0,
             int pageSize = 0, string sort = null, string sortDirection = null)
@@ -102,12 +102,13 @@ namespace ngScaffolding.Helpers
                 // 2. String Replacement from Inputs
                 if (inputs != null)
                 {
-                    foreach (var inputDetail in inputs)
+                    IDictionary<string, object> propertyValues = (IDictionary<string, object>)inputs;
+                    foreach (var property in propertyValues)
                     {
-                        var searchKey = string.Format("@@{0}", inputDetail.name);
+                        var searchKey = string.Format("@@{0}", property.Key);
                         if (commandString.Contains(searchKey))
                         {
-                            commandString = commandString.Replace(searchKey, inputDetail.defaultValue);
+                            commandString = commandString.Replace(searchKey, property.Value.ToString());
                         }
                     }
                 }
@@ -169,17 +170,18 @@ namespace ngScaffolding.Helpers
                 // 4. Parameters from Inputs
                 if (inputs != null)
                 {
-                    foreach (var inputDetail in inputs)
+                    IDictionary<string, object> propertyValues = (IDictionary<string, object>)inputs;
+                    foreach (var property in propertyValues)
                     {
                         if (command.Parameters != null)
                         {
                             var thisParam =
-                                command.Parameters.FirstOrDefault(p => p.Name.ToUpper() == inputDetail.name.ToUpper());
+                                command.Parameters.FirstOrDefault(p => p.Name.ToUpper() == property.Key.ToUpper());
 
                             if (thisParam == null)
                             {
                                 thisParam = new ParameterDetailModel();
-                                thisParam.Name = inputDetail.name;
+                                thisParam.Name = property.Key;
                                 command.Parameters.Add(thisParam);
                             }
 
@@ -189,7 +191,7 @@ namespace ngScaffolding.Helpers
                             //        ? inputDetail.sqltype
                             //        : "NVARCHAR(MAX)";
                             //}
-                            thisParam.Value = inputDetail.defaultValue;
+                            thisParam.Value = property.Value;
                         }
                     }
                 }
@@ -206,136 +208,136 @@ namespace ngScaffolding.Helpers
                 
                 if (commandString.ToUpper().Contains("WHERE 1=1") && command.IsPagedData)
                 {
-                    #region "Dynamic SQL Here - Not needed for updates etc"
+                    //#region "Dynamic SQL Here - Not needed for updates etc"
 
-                    foreach (var inputDetail in inputs)
-                    {
-                        if (string.IsNullOrEmpty(inputDetail.defaultValue))// || alreadyProcessed.Contains(inputDetail.name))
-                            continue;
+                    //foreach (var inputDetail in inputs)
+                    //{
+                    //    if (string.IsNullOrEmpty(inputDetail.defaultValue))// || alreadyProcessed.Contains(inputDetail.name))
+                    //        continue;
 
-                        switch (inputDetail.type.ToUpper())
-                        {
-                            //textbox, email, textarea, select, multiselect, date, datetime
-                            case "TEXTBOX":
-                            case "EMAIL":
-                            case "TEXTAREA":
-                            case "SELECT":
-                                {
-                                    switch (inputDetail.comparison)
-                                    {
-                                        case null:
-                                        case "":
-                                        case "=":
-                                            {
-                                                commandString = string.Format("{0} AND {1} = @{1}", commandString,
-                                                    inputDetail.name);
-                                                break;
-                                            }
-                                        case "!=":
-                                            {
-                                                commandString = string.Format("{0} AND NOT {1} = @{1}", commandString,
-                                                    inputDetail.name);
-                                                break;
-                                            }
-                                        case "starts":
-                                            {
-                                                commandString = string.Format("{0} AND {1} LIKE @{1}", commandString,
-                                                    inputDetail.name);
-                                                break;
-                                            }
-                                        case "contains":
-                                            {
-                                                commandString = string.Format("{0} AND {1} LIKE @{1}", commandString,
-                                                    inputDetail.name);
-                                                break;
-                                            }
-                                        case "lt":
-                                            {
-                                                commandString = string.Format("{0} AND {1} < @{1}", commandString,
-                                                    inputDetail.name);
-                                                break;
-                                            }
-                                        case "gt":
-                                            {
-                                                commandString = string.Format("{0} AND {1} < @{1}", commandString,
-                                                    inputDetail.name);
-                                                break;
-                                            }
-                                    }
-                                    break;
-                                }
-                            case "MULTISELECT":
-                                {
-                                    commandString = string.Format("{0} AND {1} IN ('{2}')", commandString, inputDetail.name,
-                                        inputDetail.defaultValue);
-                                    break;
-                                }
-                            case "DATE":
-                                {
-                                    break;
-                                }
-                            case "DATETIME":
-                                {
-                                    break;
-                                }
-                        }
+                    //    switch (inputDetail.type.ToUpper())
+                    //    {
+                    //        //textbox, email, textarea, select, multiselect, date, datetime
+                    //        case "TEXTBOX":
+                    //        case "EMAIL":
+                    //        case "TEXTAREA":
+                    //        case "SELECT":
+                    //            {
+                    //                switch (inputDetail.comparison)
+                    //                {
+                    //                    case null:
+                    //                    case "":
+                    //                    case "=":
+                    //                        {
+                    //                            commandString = string.Format("{0} AND {1} = @{1}", commandString,
+                    //                                inputDetail.name);
+                    //                            break;
+                    //                        }
+                    //                    case "!=":
+                    //                        {
+                    //                            commandString = string.Format("{0} AND NOT {1} = @{1}", commandString,
+                    //                                inputDetail.name);
+                    //                            break;
+                    //                        }
+                    //                    case "starts":
+                    //                        {
+                    //                            commandString = string.Format("{0} AND {1} LIKE @{1}", commandString,
+                    //                                inputDetail.name);
+                    //                            break;
+                    //                        }
+                    //                    case "contains":
+                    //                        {
+                    //                            commandString = string.Format("{0} AND {1} LIKE @{1}", commandString,
+                    //                                inputDetail.name);
+                    //                            break;
+                    //                        }
+                    //                    case "lt":
+                    //                        {
+                    //                            commandString = string.Format("{0} AND {1} < @{1}", commandString,
+                    //                                inputDetail.name);
+                    //                            break;
+                    //                        }
+                    //                    case "gt":
+                    //                        {
+                    //                            commandString = string.Format("{0} AND {1} < @{1}", commandString,
+                    //                                inputDetail.name);
+                    //                            break;
+                    //                        }
+                    //                }
+                    //                break;
+                    //            }
+                    //        case "MULTISELECT":
+                    //            {
+                    //                commandString = string.Format("{0} AND {1} IN ('{2}')", commandString, inputDetail.name,
+                    //                    inputDetail.defaultValue);
+                    //                break;
+                    //            }
+                    //        case "DATE":
+                    //            {
+                    //                break;
+                    //            }
+                    //        case "DATETIME":
+                    //            {
+                    //                break;
+                    //            }
+                    //    }
 
-                        //alreadyProcessed.Add(inputDetail.name);
-                    }
-                    #endregion
-                    try
-                    {
-                        //Now Add Paging Details
+                    //    //alreadyProcessed.Add(inputDetail.name);
+                    //}
+                    //#endregion
+                    //try
+                    //{
+                    //    //Now Add Paging Details
 
-                        if (!command.IsStoredProc && command.IsPagedData)
-                        {
-                            commandString = commandString.ReplaceInsensitive("SELECT ",
-                                "SELECT [RowCount] = COUNT(*) OVER(), ");
+                    //    if (!command.IsStoredProc && command.IsPagedData)
+                    //    {
+                    //        commandString = commandString.ReplaceInsensitive("SELECT ",
+                    //            "SELECT [RowCount] = COUNT(*) OVER(), ");
 
-                            if (!string.IsNullOrEmpty(sort))
-                            {
-                                commandString = commandString + " ORDER BY [" + sort + "]";
+                    //        if (!string.IsNullOrEmpty(sort))
+                    //        {
+                    //            commandString = commandString + " ORDER BY [" + sort + "]";
 
-                                if (!string.IsNullOrEmpty(sortDirection) && sortDirection.ToUpper() == "DESC")
-                                {
-                                    commandString = commandString + " DESC ";
-                                }
-                            }
+                    //            if (!string.IsNullOrEmpty(sortDirection) && sortDirection.ToUpper() == "DESC")
+                    //            {
+                    //                commandString = commandString + " DESC ";
+                    //            }
+                    //        }
 
-                            commandString = commandString +
-                                            " OFFSET ((@pageNumber - 1) * @pageSize) ROWS FETCH NEXT @pageSize ROWS ONLY ";
-                        }
+                    //        commandString = commandString +
+                    //                        " OFFSET ((@pageNumber - 1) * @pageSize) ROWS FETCH NEXT @pageSize ROWS ONLY ";
+                    //    }
 
-                        commandString = BookEndCommand(commandString, paramList);
-                        var comm = new SqlCommand(commandString, conn) { CommandTimeout = 240 };
+                    //    commandString = BookEndCommand(commandString, paramList);
+                    //    var comm = new SqlCommand(commandString, conn) { CommandTimeout = 240 };
 
-                        var reader = await comm.ExecuteReaderAsync();
+                    //    var reader = await comm.ExecuteReaderAsync();
 
-                        retVal.Results = PopulateResults(reader);
-                        retVal.RowCount = retVal.Results.Count;
+                    //    retVal.Results = PopulateResults(reader);
+                    //    retVal.RowCount = retVal.Results.Count;
 
-                        //var adapter = new SqlDataAdapter(comm);
-                        //retVal.Data = new DataTable();
-                        //adapter.Fill(retVal.Data);
+                    //    //var adapter = new SqlDataAdapter(comm);
+                    //    //retVal.Data = new DataTable();
+                    //    //adapter.Fill(retVal.Data);
 
-                        //retVal.ActionResults.Add(new ActionResult() { success = true });
-                        //if (retVal.Data.Rows.Count > 0)
-                        //{
-                        //    //Now get RowCount and remove column
-                        //    if (retVal.Data.Columns.Contains("RowCount"))
-                        //    {
-                        //        int rowCount;
-                        //        int.TryParse(retVal.Data.Rows[0]["RowCount"].ToString(), out rowCount);
-                        //        retVal.Data.Columns.Remove(retVal.Data.Columns["RowCount"]);
-                        //        retVal.RowCount = rowCount;
-                        //    }
-                        //}
-                        return retVal;
-                    }
-                    catch (Exception ex)
-                    {
-                        retVal.ActionResults.Add(new ActionResult() { success = false, message = ex.Message });
-                    }
+                    //    //retVal.ActionResults.Add(new ActionResult() { success = true });
+                    //    //if (retVal.Data.Rows.Count > 0)
+                    //    //{
+                    //    //    //Now get RowCount and remove column
+                    //    //    if (retVal.Data.Columns.Contains("RowCount"))
+                    //    //    {
+                    //    //        int rowCount;
+                    //    //        int.TryParse(retVal.Data.Rows[0]["RowCount"].ToString(), out rowCount);
+                    //    //        retVal.Data.Columns.Remove(retVal.Data.Columns["RowCount"]);
+                    //    //        retVal.RowCount = rowCount;
+                    //    //    }
+                    //    //}
+                    //    return retVal;
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    retVal.ActionResults.Add(new ActionResult() { success = false, message = ex.Message });
+                    //}
                 }
                 else
                 {

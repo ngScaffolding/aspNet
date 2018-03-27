@@ -13,6 +13,8 @@ using ngScaffolding.Models.DataSourceModels;
 using ngScaffolding.Services;
 using Newtonsoft.Json;
 using ngScaffolding.database.Models;
+using System.Dynamic;
+using Newtonsoft.Json.Converters;
 
 namespace ngScaffolding.Controllers
 {
@@ -28,6 +30,7 @@ namespace ngScaffolding.Controllers
         {
             public int Id { get; set; }
             public string Seed { get; set; }
+            public string FilterValues { get; set; }
             public string RowData { get; set; }
             public string InputData { get; set; }
             public int? PageNumber { get; set; }
@@ -61,11 +64,20 @@ namespace ngScaffolding.Controllers
 
                 if (dataSource != null)
                 {
+                    dynamic filterValues = null;
+
+                    // Work out Filter Values
+                    if (!string.IsNullOrEmpty(dataSourceRequest.FilterValues))
+                    {
+                        var converter = new ExpandoObjectConverter();
+                        filterValues = JsonConvert.DeserializeObject<ExpandoObject>(dataSourceRequest.FilterValues, converter);
+                    }
+
                     var sqlHelper = new SqlDataHelper(_connectionStringsService);
                     var sqlDatasource = JsonConvert.DeserializeObject<SqlDataSource>(dataSource.JsonContent);
                     if (sqlDatasource != null)
                     {
-                        var sqlResults = await sqlHelper.RunCommand(sqlDatasource);
+                        var sqlResults = await sqlHelper.RunCommand(sqlDatasource, filterValues);
 
                         var retVal = new DataResults()
                         {
