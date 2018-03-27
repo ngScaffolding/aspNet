@@ -84,7 +84,7 @@ namespace ngScacffolding.demoApp.Data
             var gridView2 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Roles = "User",
-                Icon = "grid",
+                Icon = "brush",
                 Name = "Demo.Continents.Admin",
                 Label = "Continents Admin",
                 Type = MenuItem.Type_GridView,
