@@ -8,6 +8,7 @@ using ngScaffolding.Data;
 using ngScaffolding.Models;
 using ngScaffolding.Models.DataSourceModels;
 using Newtonsoft.Json;
+using static ngScaffolding.Models.ActionModel;
 
 namespace ngScacffolding.demoApp.Data
 {
@@ -37,6 +38,18 @@ namespace ngScacffolding.demoApp.Data
                 })
             };
             demoCtx.DataSources.Add(dataSource1);
+
+            var dsAddContinent = new DataSource {
+                Type = DataSource.TypesSql,
+                Name = "Continent.Add.New",
+                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                {
+                    Connection = "demoDatabase",
+                    IsAudit = true,
+                    SqlCommand = "INSERT INTO [Continents] ([Name]) VALUES (''@@Name'')"
+                })
+            };
+            demoCtx.DataSources.Add(dsAddContinent);
             demoCtx.SaveChanges();
 
             var gridView1 = MenuHelper.AddMenu(demoCtx, new MenuItem
@@ -65,6 +78,7 @@ namespace ngScacffolding.demoApp.Data
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
                         }
                     }
+                    
                 })
             });
 
@@ -105,6 +119,17 @@ namespace ngScacffolding.demoApp.Data
                         inputDetails = new List<InputDetail>()
                         {
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
+                        }
+                    },
+                    Actions = new List<ActionModel>
+                    {
+                        new ActionModel
+                        {
+                            title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
+                            inputControls = new List<InputDetail>
+                            {
+                                new InputDetailTextBox{name = "Name", required = true, placeholder="Continent Name"}
+                            }
                         }
                     }
                 })

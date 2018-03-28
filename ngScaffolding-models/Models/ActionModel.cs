@@ -12,53 +12,53 @@ namespace ngScaffolding.Models
             public const string RestApi = "RESTAPI";
             public const string Url = "URL";
             public const string Detail = "DETAIL";
-            public const string AngularController = "ANGULARCONTROLLER";
+            public const string AngularComponent = "ANGULARCOMPONENT";
         }
-        public string Type { get; set; }
-        public string Title { get; set; }
-        public string Icon { get; set; }
-        public string Colour { get; set; }
+        public string type { get; set; }
+        public string title { get; set; }
+        public string icon { get; set; }
+        public string color { get; set; }
 
         // Does this Action appear in a Grid column?
-        public bool ColumnButton { get; set; }
+        public bool columnButton { get; set; }
 
         // Do we need to have atleast one Soure selected?
-        public bool SelectionRequired { get; set; }
+        public bool selectionRequired { get; set; }
 
         // After Action completes, remove these DataSources from cache
-        public string FlushDataSource { get; set; }
+        public string flushDataSource { get; set; }
 
         // Does the action work on multiple rows?
-        public bool MultipleTarget { get; set; }
+        public bool multipleTarget { get; set; }
 
         // Message to show on Confirmation of Action
-        public string ConfirmationMessage { get; set; }
+        public string confirmationMessage { get; set; }
 
-        public string IdField { get; set; }
-        public string IdValue { get; set; }
-        public string EntityType { get; set; }
-        public string AdditionalProperties { get; set; }
-        public ICollection<InputDetail> InputControls { get; set; }
-        public bool Refresh { get; set; }
+        public string idField { get; set; }
+        public string idValue { get; set; }
+        public string entityType { get; set; }
+        public string additionalProperties { get; set; }
+        public ICollection<InputDetail> inputControls { get; set; }
+        public bool refresh { get; set; }
 
-        public bool IsAudit { get; set; }
+        public bool isAudit { get; set; }
 
         // Done message
-        public string Success { get; set; }
+        public string success { get; set; }
         // Not done
-        public string Error { get; set; }
+        public string error { get; set; }
 
         // For SQL this contains the SQL Command ID
-        public string ActionDefinition { get; set; }
+        public int? dataSourceId { get; set; }
 
         //Angular Controller content
         //Todo: Not sure if we need this - Maybe just a route?
-        public string Controller { get; set; }
-        public string TemplateUrl { get; set; }
+        public string controller { get; set; }
+        public string templateUrl { get; set; }
 
         //Standard Url
-        public string Url { get; set; }
-        public string Target { get; set; }
+        public string url { get; set; }
+        public string target { get; set; }
 
         //_blank - URL is loaded into a new window.This is default
         //_parent - URL is loaded into the parent frame
