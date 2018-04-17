@@ -30,6 +30,7 @@ namespace ngScacffolding.demoApp.Data
             var dataSource1 = new DataSource()
             {
                 Type = DataSource.TypesSql,
+                Name="Countries.Select",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     Connection = "demoDatabase",
@@ -41,7 +42,7 @@ namespace ngScacffolding.demoApp.Data
 
             var dsAddContinent = new DataSource {
                 Type = DataSource.TypesSql,
-                Name = "Continent.Add.New",
+                Name = "Continents.Add.New",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     Connection = "demoDatabase",
@@ -85,6 +86,7 @@ namespace ngScacffolding.demoApp.Data
             var dataSource2 = new DataSource()
             {
                 Type = DataSource.TypesSql,
+                Name = "Continents.Select",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     Connection = "demoDatabase",
