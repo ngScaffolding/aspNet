@@ -133,13 +133,21 @@ namespace ngScacffolding.demoApp.Data
                                 title = "New Continent Details",
                                 okButtonText = "Save Continent",
                                 orientation = "horizontal",
-                                horizontalColumnCount = 2,
+                                horizontalColumnCount = 3,
                                 inputDetails = new List<InputDetail>
                             {
-                                new InputDetailTextBox{name = "Name", required = true,label="Continent Name" , placeholder="Continent Name"},
-                                new InputDetailTextBox{name = "Name2", required = true,label="Continent Name2" , placeholder="Continent Name2"}
+                                new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Continent Name" , placeholder="Continent Name"},
+                                new InputDetailTextBox{name = "Name2", validateRequired = "Name2 is Required" ,label="Continent Name2" , placeholder="Continent Name2"},
+                                new InputDetailTextBox{name = "Name3", validateRequired = "Name3 is Required" ,label="Continent Name3" , placeholder="Continent Name3"}
                             }
                             }
+                        },
+                         new ActionModel
+                        {
+                            title = "Delete Continent", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
+                            multipleTarget = true,
+                            selectionRequired = true,
+                            confirmationMessage = "Delete Continent, Are you sure?"
                         }
                     }
                 })
