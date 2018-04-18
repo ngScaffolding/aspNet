@@ -26,11 +26,11 @@ namespace ngScacffolding.demoApp.Data
                 Type = MenuItem.Type_Folder
             });
 
-            
+
             var dataSource1 = new DataSource()
             {
                 Type = DataSource.TypesSql,
-                Name="Countries.Select",
+                Name = "Countries.Select",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     Connection = "demoDatabase",
@@ -40,7 +40,8 @@ namespace ngScacffolding.demoApp.Data
             };
             demoCtx.DataSources.Add(dataSource1);
 
-            var dsAddContinent = new DataSource {
+            var dsAddContinent = new DataSource
+            {
                 Type = DataSource.TypesSql,
                 Name = "Continents.Add.New",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
@@ -62,7 +63,7 @@ namespace ngScacffolding.demoApp.Data
                 Type = MenuItem.Type_GridView,
                 RouterLink = "datagrid,Demo.Countries.Admin",
                 ParentMenuItemId = demoFolder.Id,
-                JsonSerialized = JsonConvert.SerializeObject( new GridViewDetailModel()
+                JsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
                     Title = "Countries Administration",
                     Columns = new List<ColumnModel>()
@@ -79,7 +80,7 @@ namespace ngScacffolding.demoApp.Data
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
                         }
                     }
-                    
+
                 })
             });
 
@@ -106,7 +107,7 @@ namespace ngScacffolding.demoApp.Data
                 Type = MenuItem.Type_GridView,
                 RouterLink = "datagrid,Demo.Continents.Admin",
                 ParentMenuItemId = demoFolder.Id,
-                JsonSerialized = JsonConvert.SerializeObject( new GridViewDetailModel()
+                JsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
                     Title = "Continents Administration",
                     Columns = new List<ColumnModel>()
@@ -128,9 +129,12 @@ namespace ngScacffolding.demoApp.Data
                         new ActionModel
                         {
                             title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
-                            inputControls = new List<InputDetail>
+                            inputBuilderDefinition = new InputBuilderDefinition(){
+                                okButtonText = "Save Continent",
+                                inputDetails = new List<InputDetail>
                             {
                                 new InputDetailTextBox{name = "Name", required = true, placeholder="Continent Name"}
+                            }
                             }
                         }
                     }

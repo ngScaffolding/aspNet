@@ -38,7 +38,7 @@ namespace ngScaffolding.Models
         public string idValue { get; set; }
         public string entityType { get; set; }
         public string additionalProperties { get; set; }
-        public ICollection<InputDetail> inputControls { get; set; }
+        public InputBuilderDefinition inputBuilderDefinition{ get; set; }
         public bool refresh { get; set; }
 
         public bool isAudit { get; set; }
