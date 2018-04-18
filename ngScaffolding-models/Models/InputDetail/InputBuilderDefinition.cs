@@ -6,6 +6,7 @@ namespace ngScaffolding.database.Models
 {
     public class InputBuilderDefinition
     {
+        public string title { get; set; }
         public string orientation { get; set; }
         public int horizontalColumnCount { get; set; }
 

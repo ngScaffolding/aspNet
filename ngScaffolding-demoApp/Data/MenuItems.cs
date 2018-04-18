@@ -130,10 +130,14 @@ namespace ngScacffolding.demoApp.Data
                         {
                             title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
                             inputBuilderDefinition = new InputBuilderDefinition(){
+                                title = "New Continent Details",
                                 okButtonText = "Save Continent",
+                                orientation = "horizontal",
+                                horizontalColumnCount = 2,
                                 inputDetails = new List<InputDetail>
                             {
-                                new InputDetailTextBox{name = "Name", required = true, placeholder="Continent Name"}
+                                new InputDetailTextBox{name = "Name", required = true,label="Continent Name" , placeholder="Continent Name"},
+                                new InputDetailTextBox{name = "Name2", required = true,label="Continent Name2" , placeholder="Continent Name2"}
                             }
                             }
                         }
