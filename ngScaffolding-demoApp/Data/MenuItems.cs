@@ -110,6 +110,7 @@ namespace ngScacffolding.demoApp.Data
                 JsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
                     Title = "Continents Administration",
+                    
                     Columns = new List<ColumnModel>()
                     {
                         new ColumnModel() { Field = "Id" },

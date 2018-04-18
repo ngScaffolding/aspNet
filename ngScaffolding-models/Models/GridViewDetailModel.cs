@@ -10,6 +10,7 @@ namespace ngScaffolding.Models
     {
         public string Title { get; set; }
         public bool WaitForInput { get; set; }
+        public bool DisableCheckboxSelection { get; set; }
 
         public int? PageSize { get; set; }
         public bool InfiniteScroll { get; set; }
