@@ -9,7 +9,7 @@ namespace ngScaffolding.Data
     public interface IRepository<T> where T : BaseEntity
     {
         IEnumerable<T> GetAll();
-        T Get(long id);
+        T Get(int id);
         T GetByName(string name);
         void Insert(T entity);
         void Update(T entity);
@@ -30,7 +30,7 @@ namespace ngScaffolding.Data
         {
             return entities.AsEnumerable();
         }
-        public T Get(long id)
+        public T Get(int id)
         {
             return entities.SingleOrDefault(s => s.Id == id);
         }
