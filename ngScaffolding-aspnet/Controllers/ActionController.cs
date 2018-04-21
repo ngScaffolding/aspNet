@@ -22,6 +22,12 @@ namespace ngScaffolding_aspnet.Controllers
         public string rows { get; set; }
     }
 
+    public class ActionResult
+    {
+        public bool success { get; set; }
+        public string message { get; set; } 
+    }
+
 
     [Produces("application/json")]
     [Route("api/action")]
@@ -101,7 +107,7 @@ namespace ngScaffolding_aspnet.Controllers
                         break;
                     }
             }
-            return Ok();
+            return Ok(new ActionResult() { success = true, message = "Yay, Done" });
         }
 
         // PUT: api/Action/5
