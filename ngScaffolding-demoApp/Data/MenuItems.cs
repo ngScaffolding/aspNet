@@ -110,7 +110,7 @@ namespace ngScacffolding.demoApp.Data
                 JsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
                     Title = "Continents Administration",
-                    
+
                     Columns = new List<ColumnModel>()
                     {
                         new ColumnModel() { Field = "Id" },
@@ -136,11 +136,9 @@ namespace ngScacffolding.demoApp.Data
                                 orientation = "horizontal",
                                 horizontalColumnCount = 3,
                                 inputDetails = new List<InputDetail>
-                            {
-                                new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Continent Name" , placeholder="Continent Name"},
-                                new InputDetailTextBox{name = "Name2", validateRequired = "Name2 is Required" ,label="Continent Name2" , placeholder="Continent Name2"},
-                                new InputDetailTextBox{name = "Name3", validateRequired = "Name3 is Required" ,label="Continent Name3" , placeholder="Continent Name3"}
-                            }
+                                {
+                                    new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Continent Name" , placeholder="Continent Name"}
+                                }
                             }
                         },
                          new ActionModel
