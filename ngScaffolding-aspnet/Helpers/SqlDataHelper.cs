@@ -365,7 +365,7 @@ namespace ngScaffolding.Helpers
                         //        retVal.RowCount = rowCount;
                         //    }
                         //}
-                        return retVal;
+                        //return retVal;
                     }
                     catch (Exception ex)
                     {

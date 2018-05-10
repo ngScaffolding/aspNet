@@ -52,6 +52,18 @@ namespace ngScacffolding.demoApp.Data
                 })
             };
             demoCtx.DataSources.Add(dsAddContinent);
+            var dsDelContinent = new DataSource
+            {
+                Type = DataSource.TypesSql,
+                Name = "Continents.Delete",
+                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                {
+                    Connection = "demoDatabase",
+                    IsAudit = true,
+                    SqlCommand = "DELETE FROM [Continents] WHERE [Id] = ''@@Id''"
+                })
+            };
+            demoCtx.DataSources.Add(dsDelContinent);
             demoCtx.SaveChanges();
 
             var gridView1 = MenuHelper.AddMenu(demoCtx, new MenuItem
@@ -144,7 +156,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                          new ActionModel
                         {
-                            title = "Delete Continent", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
+                            title = "Delete Continent", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsDelContinent.Id,
                             errorMessage = "Continent not saved. Try Again Later.",
                             multipleTarget = true,
                             selectionRequired = true,
