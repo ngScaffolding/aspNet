@@ -130,6 +130,7 @@ namespace ngScacffolding.demoApp.Data
                         new ActionModel
                         {
                             title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
+                            successMessage = "Continent Saved", errorMessage = "Continent not saved. Try Again Later.",
                             inputBuilderDefinition = new InputBuilderDefinition(){
                                 title = "New Continent Details",
                                 okButtonText = "Save Continent",
@@ -144,6 +145,7 @@ namespace ngScacffolding.demoApp.Data
                          new ActionModel
                         {
                             title = "Delete Continent", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
+                            errorMessage = "Continent not saved. Try Again Later.",
                             multipleTarget = true,
                             selectionRequired = true,
                             confirmationMessage = "Delete Continent, Are you sure?"

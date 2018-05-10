@@ -44,9 +44,9 @@ namespace ngScaffolding.Models
         public bool isAudit { get; set; }
 
         // Done message
-        public string success { get; set; }
+        public string successMessage { get; set; }
         // Not done
-        public string error { get; set; }
+        public string errorMessage { get; set; }
 
         // For SQL this contains the SQL Command ID
         public int? dataSourceId { get; set; }
