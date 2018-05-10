@@ -45,8 +45,10 @@ namespace ngScaffolding.Models
 
         // Done message
         public string successMessage { get; set; }
+        public bool? successToast { get; set; }
         // Not done
         public string errorMessage { get; set; }
+        public bool? errorToast { get; set; }
 
         // For SQL this contains the SQL Command ID
         public int? dataSourceId { get; set; }
