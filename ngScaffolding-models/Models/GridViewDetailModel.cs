@@ -27,6 +27,9 @@ namespace ngScaffolding.Models
         public ICollection<ColumnModel> Columns { get; set; }
         public ICollection<ColumnModel> ConfiguredColumns { get; set; }
 
+        // this is used to send the row Id to the Action buttons
+        public string IdField { get; set; }
+
         public string FiltersLocation { get; set; }
 
         public InputBuilderDefinition Filters { get; set; }

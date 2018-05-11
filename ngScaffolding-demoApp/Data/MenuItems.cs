@@ -64,6 +64,21 @@ namespace ngScacffolding.demoApp.Data
                 })
             };
             demoCtx.DataSources.Add(dsDelContinent);
+
+            var dsUpdContinent = new DataSource
+            {
+                Type = DataSource.TypesSql,
+                Name = "Continents.Update",
+                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                {
+                    Connection = "demoDatabase",
+                    IsAudit = true,
+                    SqlCommand = "UPDATE FROM [Continents] Set [Name] = ''@@Name'' WHERE [Id] = @@Id"
+                })
+            };
+            demoCtx.DataSources.Add(dsUpdContinent);
+
+
             demoCtx.SaveChanges();
 
             var gridView1 = MenuHelper.AddMenu(demoCtx, new MenuItem
@@ -141,6 +156,25 @@ namespace ngScacffolding.demoApp.Data
                     {
                         new ActionModel
                         {
+                            columnButton = true,
+                            title="Edit Continent",
+                            icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsUpdContinent.Id,
+                            successMessage = "Continent Updated",
+                            successToast = true,
+                            errorMessage = "Continent not updated. Try Again Later.",
+                            inputBuilderDefinition = new InputBuilderDefinition(){
+                                title = "Continent Details",
+                                okButtonText = "Update Continent",
+                                orientation = "horizontal",
+                                horizontalColumnCount = 1,
+                                inputDetails = new List<InputDetail>
+                                {
+                                    new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Continent Name" , placeholder="Continent Name"}
+                                }
+                            }
+                        },
+                        new ActionModel
+                        {
                             title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
                             successMessage = "Continent Saved",
                             successToast = true,
@@ -149,7 +183,7 @@ namespace ngScacffolding.demoApp.Data
                                 title = "New Continent Details",
                                 okButtonText = "Save Continent",
                                 orientation = "horizontal",
-                                horizontalColumnCount = 3,
+                                horizontalColumnCount = 1,
                                 inputDetails = new List<InputDetail>
                                 {
                                     new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Continent Name" , placeholder="Continent Name"}
