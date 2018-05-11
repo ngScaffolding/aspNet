@@ -8,44 +8,46 @@ namespace ngScaffolding.Models
 {
     public class GridViewDetailModel : MenuItemDetail
     {
-        public string Title { get; set; }
-        public bool WaitForInput { get; set; }
-        public bool DisableCheckboxSelection { get; set; }
+        public string title { get; set; }
+        public bool waitForInput { get; set; }
+        public bool disableCheckboxSelection { get; set; }
 
-        public int? PageSize { get; set; }
-        public bool InfiniteScroll { get; set; }
+        public int? pageSize { get; set; }
+        public bool infiniteScroll { get; set; }
 
-        public string DetailUrl { get; set; }
-        public string DetailTarget { get; set; }
+        public string detailUrl { get; set; }
+        public string detailTarget { get; set; }
 
-        public bool ServerPagination { get; set; }
-        public bool ServerSorting { get; set; }
-        public bool ServerGrouping { get; set; }
+        public bool serverPagination { get; set; }
+        public bool serverSorting { get; set; }
+        public bool serverGrouping { get; set; }
 
-        public string DefaultSort { get; set; }
+        public string defaultSort { get; set; }
 
-        public ICollection<ColumnModel> Columns { get; set; }
-        public ICollection<ColumnModel> ConfiguredColumns { get; set; }
+        public ICollection<ColumnModel> columns { get; set; }
+        public ICollection<ColumnModel> configuredColumns { get; set; }
 
         // this is used to send the row Id to the Action buttons
-        public string IdField { get; set; }
+        public string idField { get; set; }
 
-        public string FiltersLocation { get; set; }
+        public bool isActionColumnSplitButton { get; set; }
 
-        public InputBuilderDefinition Filters { get; set; }
+        public string filtersLocation { get; set; }
+
+        public InputBuilderDefinition filters { get; set; }
 
         // Select DataSource
-        public int? SelectDataSourceId { get; set; }
+        public int? selectDataSourceId { get; set; }
 
         // Delete Datasource
-        public int? DeleteDataSourceId { get; set; }
+        public int? deleteDataSourceId { get; set; }
 
         // Update DataSource
-        public int? UpdateDataSourceId { get; set; }
+        public int? updateDataSourceId { get; set; }
 
         // Insert DataSource
-        public int? InsertDataSourceId { get; set; }
+        public int? insertDataSourceId { get; set; }
 
-        public ICollection<ActionModel> Actions { get; set; }
+        public ICollection<ActionModel> actions { get; set; }
     }
 }

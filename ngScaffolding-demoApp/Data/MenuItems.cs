@@ -92,15 +92,15 @@ namespace ngScacffolding.demoApp.Data
                 ParentMenuItemId = demoFolder.Id,
                 JsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
-                    Title = "Countries Administration",
-                    Columns = new List<ColumnModel>()
+                    title = "Countries Administration",
+                    columns = new List<ColumnModel>()
                     {
                         new ColumnModel() { Field = "Id" },
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    SelectDataSourceId = dataSource1.Id,
-                    Filters = new InputBuilderDefinition()
+                    selectDataSourceId = dataSource1.Id,
+                    filters = new InputBuilderDefinition()
                     {
                         inputDetails = new List<InputDetail>()
                         {
@@ -136,23 +136,24 @@ namespace ngScacffolding.demoApp.Data
                 ParentMenuItemId = demoFolder.Id,
                 JsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
-                    Title = "Continents Administration",
+                    title = "Continents Administration",
 
-                    Columns = new List<ColumnModel>()
+                    columns = new List<ColumnModel>()
                     {
                         new ColumnModel() { Field = "Id" },
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    SelectDataSourceId = dataSource2.Id,
-                    Filters = new InputBuilderDefinition()
+                    selectDataSourceId = dataSource2.Id,
+                    filters = new InputBuilderDefinition()
                     {
                         inputDetails = new List<InputDetail>()
                         {
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
                         }
                     },
-                    Actions = new List<ActionModel>
+                    isActionColumnSplitButton = true,
+                    actions = new List<ActionModel>
                     {
                         new ActionModel
                         {
