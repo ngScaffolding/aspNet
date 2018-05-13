@@ -73,7 +73,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "UPDATE FROM [Continents] Set [Name] = ''@@Name'' WHERE [Id] = @@Id"
+                    SqlCommand = "UPDATE [Continents] Set [Name] = ''@@Name'' WHERE [Id] = @@Id"
                 })
             };
             demoCtx.DataSources.Add(dsUpdContinent);
@@ -152,7 +152,7 @@ namespace ngScacffolding.demoApp.Data
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
                         }
                     },
-                    isActionColumnSplitButton = true,
+                    isActionColumnSplitButton = false,
                     actions = new List<ActionModel>
                     {
                         new ActionModel
