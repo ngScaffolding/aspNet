@@ -152,7 +152,7 @@ namespace ngScacffolding.demoApp.Data
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
                         }
                     },
-                    isActionColumnSplitButton = true,
+                    isActionColumnSplitButton = false,
                     actions = new List<ActionModel>
                     {
                         new ActionModel
