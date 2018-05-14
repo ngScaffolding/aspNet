@@ -64,7 +64,7 @@ namespace ngScaffolding_oauth
                     AllowOfflineAccess = true,
                     AlwaysIncludeUserClaimsInIdToken = true,
                     AlwaysSendClientClaims = true,
-
+                    AccessTokenLifetime = 86400, // 24 Hours
                     RefreshTokenUsage = TokenUsage.ReUse,
                     UpdateAccessTokenClaimsOnRefresh = true,
 
