@@ -32,14 +32,14 @@ namespace ngScaffolding.Controllers
 
         private void AddMenuItem(ICollection<MenuItem> menuItems, MenuItem newMenuItem)
         {
-            if (!newMenuItem.ParentMenuItemId.HasValue)
+            if (!newMenuItem.parentMenuItemId.HasValue)
             {
                 menuItems.Add(newMenuItem);
                 return;
             }
             foreach (var loopMenu in menuItems)
             {
-                if (loopMenu.Id == newMenuItem.ParentMenuItemId)
+                if (loopMenu.Id == newMenuItem.parentMenuItemId)
                 {
                     loopMenu.Items.Add(newMenuItem);
                     return;
@@ -57,7 +57,7 @@ namespace ngScaffolding.Controllers
         {
             var returnMenuItems = new List<MenuItem>();
 
-            var menuItems = _menuItemRepository.GetAll().OrderBy(o => o.ItemOrder);
+            var menuItems = _menuItemRepository.GetAll().OrderBy(o => o.itemOrder);
 
             var user = await _userService.GetUser();
 

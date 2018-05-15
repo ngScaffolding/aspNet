@@ -19,11 +19,11 @@ namespace ngScacffolding.demoApp.Data
             // Demo Folder
             var demoFolder = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                Icon = "folder",
+                icon = "folder",
                 Name = "Demo.Folder",
-                Label = "Demo Folder",
+                label = "Demo Folder",
                 Roles = "User",
-                Type = MenuItem.Type_Folder
+                type = MenuItem.Type_Folder
             });
 
 
@@ -78,19 +78,18 @@ namespace ngScacffolding.demoApp.Data
             };
             demoCtx.DataSources.Add(dsUpdContinent);
 
-
             demoCtx.SaveChanges();
 
             var gridView1 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Roles = "User",
-                Icon = "grid",
+                icon = "grid",
                 Name = "Demo.Countries.Admin",
-                Label = "Countries Admin",
-                Type = MenuItem.Type_GridView,
-                RouterLink = "datagrid,Demo.Countries.Admin",
-                ParentMenuItemId = demoFolder.Id,
-                JsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
+                label = "Countries Admin",
+                type = MenuItem.Type_GridView,
+                routerLink = "datagrid,Demo.Countries.Admin",
+                parentMenuItemId = demoFolder.Id,
+                jsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
                     title = "Countries Administration",
                     columns = new List<ColumnModel>()
@@ -128,13 +127,13 @@ namespace ngScacffolding.demoApp.Data
             var gridView2 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Roles = "User",
-                Icon = "brush",
+                icon = "brush",
                 Name = "Demo.Continents.Admin",
-                Label = "Continents Admin",
-                Type = MenuItem.Type_GridView,
-                RouterLink = "datagrid,Demo.Continents.Admin",
-                ParentMenuItemId = demoFolder.Id,
-                JsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
+                label = "Continents Admin",
+                type = MenuItem.Type_GridView,
+                routerLink = "datagrid,Demo.Continents.Admin",
+                parentMenuItemId = demoFolder.Id,
+                jsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
                     title = "Continents Administration",
 
@@ -201,6 +200,33 @@ namespace ngScacffolding.demoApp.Data
                             selectionRequired = true,
                             confirmationMessage = "Delete Continent, Are you sure?"
                         }
+                    }
+                })
+            });
+
+            var chart1 = MenuHelper.AddMenu(demoCtx, new MenuItem
+            {
+                Roles = "User",
+                icon = "brush",
+                Name = "Demo.Continents.PieGraph",
+                label = "Continents Graph",
+                type = MenuItem.Type_GridView,
+                routerLink = "chart,Demo.Continents.PieGraph",
+                parentMenuItemId = demoFolder.Id,
+                jsonSerialized = JsonConvert.SerializeObject(new ChartDetailModel()
+                {
+                    title = "Countries by Continent",
+                    chartOptions = new Highsoft.Web.Mvc.Charts.Chart { },
+                    dataSources = new List<DataSource> {
+                        new DataSource   {
+                           Type = DataSource.TypesSql,
+                            JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                            {
+                                Connection = "demoDatabase",
+                                IsAudit = true,
+                                SqlCommand = "SELECT ContinentName, Count(*) as [Total] FROM[dbo].[Countries] group by ContinentName"
+                            })
+                        }   
                     }
                 })
             });

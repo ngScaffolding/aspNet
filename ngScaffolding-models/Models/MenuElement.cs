@@ -10,31 +10,31 @@ namespace ngScaffolding.database.Models
         // Following are copied from PrimeNG MenuItem
 
         [StringLength(200)]
-        public string Label { get; set; }
+        public string label { get; set; }
         [StringLength(200)]
-        public string Icon { get; set; }
+        public string icon { get; set; }
         [StringLength(200)]
         public string Description { get; set; }
         [StringLength(200)]
-        public string Command { get; set; }
+        public string command { get; set; }
         [StringLength(200)]
         public string Url { get; set; }
         [StringLength(500)]
-        public string RouterLink { get; set; }
+        public string routerLink { get; set; }
 
         [StringLength(200)]
-        public string Target { get; set; }
+        public string target { get; set; }
         [StringLength(500)]
-        public string RouterLinkActiveOptions { get; set; }
-        public bool Separator { get; set; }
+        public string routerLinkActiveOptions { get; set; }
+        public bool separator { get; set; }
         [StringLength(200)]
-        public string Badge { get; set; }
+        public string badge { get; set; }
         [StringLength(200)]
-        public string BadgeStyleClass { get; set; }
+        public string badgeStyleClass { get; set; }
         [StringLength(200)]
-        public string Style { get; set; }
+        public string style { get; set; }
         [StringLength(200)]
-        public string StyleClass { get; set; }
+        public string styleClass { get; set; }
 
     }
 }

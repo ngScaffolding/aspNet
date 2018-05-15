@@ -23,28 +23,28 @@ namespace ngScaffolding.ConfigHelpers
                 context.MenuItems.Add(newMenu);
             }
 
-            newMenu.ParentMenuItemId = menu.ParentMenuItemId;
-            newMenu.ItemOrder = menu.ItemOrder;
-            newMenu.JsonSerialized = menu.JsonSerialized;
-            newMenu.Command = menu.Command;
-            newMenu.RouterLink = menu.RouterLink;
-            newMenu.RouterLinkActiveOptions = menu.RouterLinkActiveOptions;
-            newMenu.Target = menu.Target;
-            newMenu.Separator = menu.Separator;
-            newMenu.Badge = menu.Badge;
-            newMenu.BadgeStyleClass = menu.BadgeStyleClass;
-            newMenu.Style = menu.Style;
-            newMenu.StyleClass = menu.StyleClass;
-            newMenu.Label = menu.Label;
-            newMenu.Icon = menu.Icon;
+            newMenu.parentMenuItemId = menu.parentMenuItemId;
+            newMenu.itemOrder = menu.itemOrder;
+            newMenu.jsonSerialized = menu.jsonSerialized;
+            newMenu.command = menu.command;
+            newMenu.routerLink = menu.routerLink;
+            newMenu.routerLinkActiveOptions = menu.routerLinkActiveOptions;
+            newMenu.target = menu.target;
+            newMenu.separator = menu.separator;
+            newMenu.badge = menu.badge;
+            newMenu.badgeStyleClass = menu.badgeStyleClass;
+            newMenu.style = menu.style;
+            newMenu.styleClass = menu.styleClass;
+            newMenu.label = menu.label;
+            newMenu.icon = menu.icon;
             newMenu.Description = menu.Description;
             newMenu.Url = menu.Url;
-            newMenu.Separator = menu.Separator;
+            newMenu.separator = menu.separator;
             
             newMenu.Name = menu.Name;
             newMenu.Roles = menu.Roles;
-            newMenu.ItemOrder = menu.ItemOrder;
-            newMenu.Type = menu.Type;
+            newMenu.itemOrder = menu.itemOrder;
+            newMenu.type = menu.type;
 
             context.SaveChanges();
 

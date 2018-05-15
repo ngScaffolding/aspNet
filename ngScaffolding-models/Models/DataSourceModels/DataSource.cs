@@ -16,6 +16,7 @@ namespace ngScaffolding.Models
 
         public const string TypesSql = "SQL";
         public const string TypesRestApi = "RestAPI";
+        public const string TypesMongoDB = "MongoDB";
 
         [StringLength(200)]
         public string Type { get; set; }
