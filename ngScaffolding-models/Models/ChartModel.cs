@@ -12,6 +12,6 @@ namespace ngScaffolding.Models
 
         public Highsoft.Web.Mvc.Charts.Chart chartOptions { get; set; }
 
-        public IEnumerable<DataSource> dataSources { get; set; }
+        public int dataSourceId { get; set; }
     }
 }

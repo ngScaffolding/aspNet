@@ -52,6 +52,21 @@ namespace ngScacffolding.demoApp.Data
                 })
             };
             demoCtx.DataSources.Add(dsAddContinent);
+
+            var dsPieChart = new DataSource
+            {
+                Type = DataSource.TypesSql,
+                Name = "Countries.Pie.Chart",
+                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                {
+                    Connection = "demoDatabase",
+                    IsAudit = true,
+                    SqlCommand = "SELECT ContinentName, Count(*) as [Total] FROM[dbo].[Countries] group by ContinentName"
+                })
+
+            };
+            demoCtx.DataSources.Add(dsPieChart);
+
             var dsDelContinent = new DataSource
             {
                 Type = DataSource.TypesSql,
@@ -217,17 +232,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     title = "Countries by Continent",
                     chartOptions = new Highsoft.Web.Mvc.Charts.Chart { },
-                    dataSources = new List<DataSource> {
-                        new DataSource   {
-                           Type = DataSource.TypesSql,
-                            JsonContent = JsonConvert.SerializeObject(new SqlDataSource
-                            {
-                                Connection = "demoDatabase",
-                                IsAudit = true,
-                                SqlCommand = "SELECT ContinentName, Count(*) as [Total] FROM[dbo].[Countries] group by ContinentName"
-                            })
-                        }   
-                    }
+                    dataSourceId = dsPieChart.Id
                 })
             });
         }
