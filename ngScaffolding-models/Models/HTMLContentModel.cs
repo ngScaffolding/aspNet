@@ -6,6 +6,6 @@ namespace ngScaffolding.Models
 {
     public class HTMLContentModel
     {
-        public string Content { get; set; }
+        public string content { get; set; }
     }
 }

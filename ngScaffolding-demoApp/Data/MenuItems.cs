@@ -235,7 +235,8 @@ namespace ngScacffolding.demoApp.Data
                 })
             });
 
-            var dashboard1 = MenuHelper.AddMenu(demoCtx, new MenuItem {
+            var dashboard1 = MenuHelper.AddMenu(demoCtx, new MenuItem
+            {
                 Roles = "User",
                 icon = "brush",
                 Name = "Demo.Continents.Dashboard",
@@ -247,7 +248,8 @@ namespace ngScacffolding.demoApp.Data
                 {
                     title = "Countries by Continent",
                     widgets = new List<WidgetModel> {
-                        new WidgetModel{ }
+                        new WidgetModel{cols= 2, rows= 1, y= 0, x= 0 ,title="Widget One" },
+                        new WidgetModel{cols= 4, rows= 6, y= 0, x= 4, title="Widget Big" }
                     }
                 })
             });
