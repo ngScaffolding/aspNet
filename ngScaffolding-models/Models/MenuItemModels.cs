@@ -22,25 +22,25 @@ namespace ngScaffolding.database.Models
             Items = new List<MenuItem>();
         }
 
-        public MenuItem(MenuItem menu) : base()
-        {
-            label = menu.label;
-            parentMenuItemId = menu.parentMenuItemId;
-            itemOrder = menu.itemOrder;
-            jsonSerialized = menu.jsonSerialized;
-            command = menu.command;
-            routerLink = menu.routerLink;
-            routerLinkActiveOptions = menu.routerLinkActiveOptions;
-            target = menu.target;
-            separator = menu.separator;
-            badge = menu.badge;
-            icon = menu.icon;
-            badgeStyleClass = menu.badgeStyleClass;
-            style = menu.style;
-            styleClass = menu.styleClass;
+    //    public MenuItem(MenuItem menu) : base()
+    //    {
+    //        label = menu.label;
+    //        parentMenuItemId = menu.parentMenuItemId;
+    //        itemOrder = menu.itemOrder;
+    //        jsonSerialized = menu.jsonSerialized;
+    //        command = menu.command;
+    //        routerLink = menu.routerLink;
+    //        routerLinkActiveOptions = menu.routerLinkActiveOptions;
+    //        target = menu.target;
+    //        separator = menu.separator;
+    //        badge = menu.badge;
+    //        icon = menu.icon;
+    //        badgeStyleClass = menu.badgeStyleClass;
+    //        style = menu.style;
+    //        styleClass = menu.styleClass;
 
         
-    }
+    //}
     // Following are copied from PrimeNG MenuItem
 
     public bool? expanded { get; set; }

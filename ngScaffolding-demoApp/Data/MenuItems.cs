@@ -121,7 +121,6 @@ namespace ngScacffolding.demoApp.Data
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
                         }
                     }
-
                 })
             });
 
@@ -233,6 +232,23 @@ namespace ngScacffolding.demoApp.Data
                     title = "Countries by Continent",
                     chartOptions = new Highsoft.Web.Mvc.Charts.Chart { },
                     dataSourceId = dsPieChart.Id
+                })
+            });
+
+            var dashboard1 = MenuHelper.AddMenu(demoCtx, new MenuItem {
+                Roles = "User",
+                icon = "brush",
+                Name = "Demo.Continents.Dashboard",
+                label = "Continents Dashboard",
+                type = MenuItem.Type_Dashboard,
+                routerLink = "dashboard,Demo.Continents.Dashboard",
+                parentMenuItemId = demoFolder.Id,
+                jsonSerialized = JsonConvert.SerializeObject(new DashboardModel()
+                {
+                    title = "Countries by Continent",
+                    widgets = new List<WidgetModel> {
+                        new WidgetModel{ }
+                    }
                 })
             });
         }
