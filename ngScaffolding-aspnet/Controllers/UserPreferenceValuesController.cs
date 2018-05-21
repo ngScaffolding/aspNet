@@ -47,6 +47,25 @@ namespace ngScaffolding.Controllers
                 .Where(d => d.UserId.ToLower() == user.Id.ToLower());
         }
 
+        [HttpDelete("{name}")]
+        [Authorize]
+        [TypeFilter(typeof(AuditAttribute))]
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string name)
+        {
+            var user = await _userService.GetUser();
+
+            var savePreference = _userPreferenceRepository.GetAll().FirstOrDefault(p => p.UserId == user.Id && p.Name == name);
+
+            if(savePreference != null)
+            {
+                _userPreferenceRepository.Delete(savePreference);
+            }
+
+            return Ok();
+        }
+
         [HttpPost]
         [Authorize]
         [TypeFilter(typeof(AuditAttribute))]
