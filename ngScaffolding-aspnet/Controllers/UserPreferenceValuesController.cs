@@ -20,7 +20,7 @@ namespace ngScaffolding.Controllers
 
     [Produces("application/json")]
     [Route("api/UserPreferenceValues")]
-    public class UserPreferenceValuesController: ngScaffoldingController
+    public class UserPreferenceValuesController : ngScaffoldingController
     {
         private readonly IRepository<UserPreferenceValue> _userPreferenceRepository;
         private readonly IRepository<UserPreferenceDefinition> _userPreferenceDefinitionRepository;
@@ -56,40 +56,33 @@ namespace ngScaffolding.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             var user = await _userService.GetUser();
 
             var savePreference = _userPreferenceRepository.GetAll().FirstOrDefault(p => p.UserId == user.Id && p.Name == preferenceValue.Name);
             var definition = _userPreferenceDefinitionRepository.GetAll().FirstOrDefault(p => p.Name == preferenceValue.Name);
 
-            if (definition != null)
+            if (savePreference == null)
             {
-                if (savePreference == null)
+                // New Value Here
+                var newPreference = new UserPreferenceValue()
                 {
-                    // New Value Here
-                    var newPreference = new UserPreferenceValue()
-                    {
-                        Name = preferenceValue.Name,
-                        UserId = user.Id,
-                        Value = preferenceValue.Value,
-                        UserPreferenceDefinitionId = definition.Id
-                    };
+                    Name = preferenceValue.Name,
+                    UserId = user.Id,
+                    Value = preferenceValue.Value,
+                    UserPreferenceDefinitionId = definition?.Id
+                };
 
-                    _userPreferenceRepository.Insert(newPreference);
-                }
-                else
-                {
-                    // Update Existing
-                    savePreference.Value = preferenceValue.Value;
-                    _userPreferenceRepository.Update(savePreference);
-                }
-
-                return Ok(savePreference);
+                _userPreferenceRepository.Insert(newPreference);
             }
             else
             {
-                return NotFound();
+                // Update Existing
+                savePreference.Value = preferenceValue.Value;
+                _userPreferenceRepository.Update(savePreference);
             }
+
+            return Ok(savePreference);
         }
 
     }
