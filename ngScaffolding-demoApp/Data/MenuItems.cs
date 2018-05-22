@@ -35,12 +35,12 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = @"IF ''@@Continent'' = ''''
-                            SELECT Countries.Id, Countries.Name, Continents.Name as ContinentName FROM Countries 
+                    SqlCommand = @"IF ''@@ContinentId'' Like ''@@%''
+                            SELECT Countries.Id, Countries.Name,Countries.ContinentId, Continents.Name as ContinentName FROM Countries 
 								INNER JOIN Continents on Continents.Id = Countries.ContinentId ORDER by ContinentName, Countries.Name
                                 ELSE
-                            SELECT Countries.Id, Countries.Name, Continents.Name as ContinentName FROM Countries 
-								INNER JOIN Continents on Continents.Id = Countries.ContinentId where Continents.Name Like ''%@@Continent%''  ORDER by ContinentName, Countries.Name"
+                            SELECT Countries.Id, Countries.Name,Countries.ContinentId, Continents.Name as ContinentName FROM Countries 
+								INNER JOIN Continents on Continents.Id = Countries.ContinentId where Continents.Id = ''@@ContinentId''  ORDER by ContinentName, Countries.Name"
                 })
             };
             demoCtx.DataSources.Add(dsSelectCountries);
@@ -98,6 +98,19 @@ namespace ngScacffolding.demoApp.Data
             };
             demoCtx.DataSources.Add(dsDelContinent);
 
+            var dsUpdCountry = new DataSource
+                {
+                    Type = DataSource.TypesSql,
+                    Name = "Countries.Update",
+                    JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                    {
+                        Connection = "demoDatabase",
+                        IsAudit = true,
+                        SqlCommand = "UPDATE Countries Set Name = ''@@Name'', ContinentId = @@ContinentId WHERE Id = @@Id"
+                    })
+                };
+            demoCtx.DataSources.Add(dsUpdCountry);
+
             var dsUpdContinent = new DataSource
             {
                 Type = DataSource.TypesSql,
@@ -136,7 +149,7 @@ namespace ngScacffolding.demoApp.Data
                     {
                         inputDetails = new List<InputDetail>()
                         {
-                            new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
+                            new InputDetailDropdown(){name = "ContinentId", label = "Continent", referenceValueName = "Continents"}
                         }
                     },
                     actions = new List<ActionModel>
@@ -145,7 +158,8 @@ namespace ngScacffolding.demoApp.Data
                         {
                             columnButton = true,
                             title="Edit Country",
-                            icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsUpdContinent.Id,
+                            icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand,
+                            dataSourceId = dsUpdCountry.Id,
                             successMessage = "Country Updated",
                             successToast = true,
                             errorMessage = "Country not updated. Try Again Later.",
@@ -156,7 +170,8 @@ namespace ngScacffolding.demoApp.Data
                                 horizontalColumnCount = 1,
                                 inputDetails = new List<InputDetail>
                                 {
-                                    new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Country Name" , placeholder="Country Name"}
+                                    new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Country Name" , placeholder="Country Name"},
+                                    new InputDetailDropdown{name = "ContinentId", validateRequired = "Continent is required", label = "Continent", referenceValueName = "Continents"}
                                 }
                             }
                         },

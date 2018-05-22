@@ -43,7 +43,6 @@ namespace ngScaffolding.database.Models
         public const string Type_Datetime = "datetime";
         public const string Type_Date = "date";
         public const string Type_Time = "time";
-        public const string Type_Select = "select";
         public const string Type_Switch = "switch";
         public const string Type_Editor = "editor";
         public const string Type_Listbox = "listbox";
@@ -79,7 +78,7 @@ namespace ngScaffolding.database.Models
     {
         public InputDetailSelect(): base()
         {
-            this.type = InputDetail.Type_Select;
+            this.type = InputDetail.Type_Dropdown;
         }
     }
     public class InputDetailDropdown : InputDetailReferenceValues
