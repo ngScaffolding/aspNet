@@ -188,7 +188,8 @@ namespace ngScacffolding.demoApp.Data
                                 horizontalColumnCount = 1,
                                 inputDetails = new List<InputDetail>
                                 {
-                                    new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Country Name" , placeholder="Country Name"}
+                                    new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Country Name" , placeholder="Country Name"},
+                                    new InputDetailDropdown{name = "ContinentId", validateRequired = "Continent is required", label = "Continent", referenceValueName = "Continents"}
                                 }
                             }
                         },
