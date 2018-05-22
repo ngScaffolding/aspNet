@@ -27,7 +27,7 @@ namespace ngScacffolding.demoApp.Data
             });
 
 
-            var dataSource1 = new DataSource()
+            var dsSelectCountries = new DataSource()
             {
                 Type = DataSource.TypesSql,
                 Name = "Countries.Select",
@@ -35,10 +35,28 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "SELECT [Id], [Name], [ContinentName] FROM [dbo].[Countries] where ContinentName Like ''%@@Continent%''  ORDER by ContinentName, Name"
+                    SqlCommand = @"IF ''@@Continent'' = ''''
+                            SELECT Countries.Id, Countries.Name, Continents.Name as ContinentName FROM Countries 
+								INNER JOIN Continents on Continents.Id = Countries.ContinentId ORDER by ContinentName, Countries.Name
+                                ELSE
+                            SELECT Countries.Id, Countries.Name, Continents.Name as ContinentName FROM Countries 
+								INNER JOIN Continents on Continents.Id = Countries.ContinentId where Continents.Name Like ''%@@Continent%''  ORDER by ContinentName, Countries.Name"
                 })
             };
-            demoCtx.DataSources.Add(dataSource1);
+            demoCtx.DataSources.Add(dsSelectCountries);
+
+            var dsAddCountry = new DataSource
+            {
+                Type = DataSource.TypesSql,
+                Name = "Countries.Add.New",
+                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                {
+                    Connection = "demoDatabase",
+                    IsAudit = true,
+                    SqlCommand = "INSERT INTO Countries (Name, ContinentId) VALUES (''@@Name'',@@ContinentId)"
+                })
+            };
+            demoCtx.DataSources.Add(dsAddCountry);
 
             var dsAddContinent = new DataSource
             {
@@ -48,7 +66,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "INSERT INTO [Continents] ([Name]) VALUES (''@@Name'')"
+                    SqlCommand = "INSERT INTO Continents (Name) VALUES (''@@Name'')"
                 })
             };
             demoCtx.DataSources.Add(dsAddContinent);
@@ -61,7 +79,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "SELECT ContinentName, Count(*) as [Total] FROM[dbo].[Countries] group by ContinentName"
+                    SqlCommand = "SELECT Continents.ContinentName, Count(*) as Total FROM Countries INNER JOIN Continents on Continents.Id = Countries.ContinentId group by Continents.ContinentName"
                 })
 
             };
@@ -75,7 +93,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "DELETE FROM [Continents] WHERE [Id] = ''@@Id''"
+                    SqlCommand = "DELETE FROM Continents WHERE Id = ''@@Id''"
                 })
             };
             demoCtx.DataSources.Add(dsDelContinent);
@@ -88,14 +106,14 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "UPDATE [Continents] Set [Name] = ''@@Name'' WHERE [Id] = @@Id"
+                    SqlCommand = "UPDATE Continents Set Name = ''@@Name'' WHERE Id = @@Id"
                 })
             };
             demoCtx.DataSources.Add(dsUpdContinent);
 
             demoCtx.SaveChanges();
 
-            var gridView1 = MenuHelper.AddMenu(demoCtx, new MenuItem
+            var gridCountries = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Roles = "User",
                 icon = "grid",
@@ -113,12 +131,61 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    selectDataSourceId = dataSource1.Id,
+                    selectDataSourceId = dsSelectCountries.Id,
                     filters = new InputBuilderDefinition()
                     {
                         inputDetails = new List<InputDetail>()
                         {
                             new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select, referenceValueName = "Continents"}
+                        }
+                    },
+                    actions = new List<ActionModel>
+                    {
+                        new ActionModel
+                        {
+                            columnButton = true,
+                            title="Edit Country",
+                            icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsUpdContinent.Id,
+                            successMessage = "Country Updated",
+                            successToast = true,
+                            errorMessage = "Country not updated. Try Again Later.",
+                            inputBuilderDefinition = new InputBuilderDefinition(){
+                                title = "Country Details",
+                                okButtonText = "Update Country",
+                                orientation = "horizontal",
+                                horizontalColumnCount = 1,
+                                inputDetails = new List<InputDetail>
+                                {
+                                    new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Country Name" , placeholder="Country Name"}
+                                }
+                            }
+                        },
+                        new ActionModel
+                        {
+                            title = "Add Country", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddCountry.Id,
+                            successMessage = "Country Saved",
+                            successToast = true,
+                            errorMessage = "Country not saved. Try Again Later.",
+                            inputBuilderDefinition = new InputBuilderDefinition(){
+                                title = "New Country Details",
+                                okButtonText = "Save Country",
+                                orientation = "horizontal",
+                                horizontalColumnCount = 1,
+                                inputDetails = new List<InputDetail>
+                                {
+                                    new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Country Name" , placeholder="Country Name"}
+                                }
+                            }
+                        },
+                         new ActionModel
+                        {
+                            title = "Delete Country", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsDelContinent.Id,
+                            successMessage = "Country Deleted",
+                            successToast = true,
+                            errorMessage = "Country not saved. Try Again Later.",
+                            multipleTarget = true,
+                            selectionRequired = true,
+                            confirmationMessage = "Delete Country, Are you sure?"
                         }
                     }
                 })
@@ -132,7 +199,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     Connection = "demoDatabase",
                     IsAudit = true,
-                    SqlCommand = "SELECT [Id], [Name] FROM [dbo].[Continents] ORDER by Name"
+                    SqlCommand = "SELECT Id, Name FROM Continents ORDER by Name"
                 })
             };
             demoCtx.DataSources.Add(dataSource2);
@@ -158,13 +225,7 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "Name"}
                     },
                     selectDataSourceId = dataSource2.Id,
-                    filters = new InputBuilderDefinition()
-                    {
-                        inputDetails = new List<InputDetail>()
-                        {
-                            new InputDetailDropdown(){name = "Continent", label = "Continent", type = InputDetail.Type_Select,referenceValueName = "Continents"}
-                        }
-                    },
+                    
                     isActionColumnSplitButton = false,
                     actions = new List<ActionModel>
                     {
