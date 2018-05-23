@@ -19,7 +19,7 @@ namespace ngScacffolding.demoApp.Data
             // Demo Folder
             var demoFolder = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                icon = "ui-icon-folder",
+                icon = "folder",
                 Name = "Demo.Folder",
                 label = "Demo Folder",
                 Roles = "User",
