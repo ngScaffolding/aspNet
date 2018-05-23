@@ -19,7 +19,7 @@ namespace ngScacffolding.demoApp.Data
             // Demo Folder
             var demoFolder = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                icon = "folder",
+                icon = "ui-icon-folder",
                 Name = "Demo.Folder",
                 label = "Demo Folder",
                 Roles = "User",
@@ -129,7 +129,7 @@ namespace ngScacffolding.demoApp.Data
             var gridCountries = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Roles = "User",
-                icon = "grid",
+                icon = "flag",
                 Name = "Demo.Countries.Admin",
                 label = "Countries Admin",
                 type = MenuItem.Type_GridView,
@@ -298,7 +298,7 @@ namespace ngScacffolding.demoApp.Data
             var chart1 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Roles = "User",
-                icon = "brush",
+                icon = "show-chart",
                 Name = "Demo.Continents.PieGraph",
                 label = "Continents Graph",
                 type = MenuItem.Type_GridView,
@@ -315,7 +315,7 @@ namespace ngScacffolding.demoApp.Data
             var dashboard1 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 Roles = "User",
-                icon = "brush",
+                icon = "dashboard",
                 Name = "Demo.Continents.Dashboard",
                 label = "Continents Dashboard",
                 type = MenuItem.Type_Dashboard,
