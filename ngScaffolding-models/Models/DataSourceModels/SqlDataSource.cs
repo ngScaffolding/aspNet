@@ -5,13 +5,18 @@ using ngScaffolding.database.Models;
 
 namespace ngScaffolding.Models.DataSourceModels
 {
-    public class SqlDataSource: BaseDataSource
+    public class SqlDataSource : BaseDataSource
     {
         public string TestCommand { get; set; }
 
-        // do we need this?
-        public bool IsStoredProc { get; set; }
+        public string connection { get; set; }
+        public string sqlCommand { get; set; }
 
-        public ICollection<InputDetail> InputControls { get; set; }
+        public bool isStoredProcedure { get; set; }
+
+        public SqlDataSource()
+        {
+            base.type = BaseDataSource.TypesSql;
+        }
     }
 }

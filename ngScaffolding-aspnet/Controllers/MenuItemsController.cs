@@ -39,7 +39,7 @@ namespace ngScaffolding.Controllers
             }
             foreach (var loopMenu in menuItems)
             {
-                if (loopMenu.Id == newMenuItem.parentMenuItemId)
+                if (loopMenu.id == newMenuItem.parentMenuItemId)
                 {
                     loopMenu.Items.Add(newMenuItem);
                     return;
@@ -63,11 +63,11 @@ namespace ngScaffolding.Controllers
 
             foreach (var menuItem in menuItems)
             {
-                if (string.IsNullOrEmpty(menuItem.Roles))
+                if (string.IsNullOrEmpty(menuItem.roles))
                 {
                     AddMenuItem(returnMenuItems, menuItem);
                 }
-                else if(user.IsInRoles(menuItem.Roles))
+                else if(user.IsInRoles(menuItem.roles))
                 {
                     AddMenuItem(returnMenuItems, menuItem);
                 }
@@ -85,7 +85,7 @@ namespace ngScaffolding.Controllers
                 return BadRequest(ModelState);
             }
 
-            var menuItem = await _context.MenuItems.SingleOrDefaultAsync(m => m.Name == name);
+            var menuItem = await _context.MenuItems.SingleOrDefaultAsync(m => m.name == name);
 
             if (menuItem == null)
             {
@@ -104,7 +104,7 @@ namespace ngScaffolding.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (name != menuItem.Name)
+            if (name != menuItem.name)
             {
                 return BadRequest();
             }
@@ -142,7 +142,7 @@ namespace ngScaffolding.Controllers
             _context.MenuItems.Add(menuItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMenuItem", new { id = menuItem.Id }, menuItem);
+            return CreatedAtAction("GetMenuItem", new { id = menuItem.id }, menuItem);
         }
 
         // DELETE: api/MenuItems/5
@@ -154,7 +154,7 @@ namespace ngScaffolding.Controllers
                 return BadRequest(ModelState);
             }
 
-            var menuItem = await _context.MenuItems.SingleOrDefaultAsync(m => m.Name == name);
+            var menuItem = await _context.MenuItems.SingleOrDefaultAsync(m => m.name == name);
             if (menuItem == null)
             {
                 return NotFound();
@@ -168,7 +168,7 @@ namespace ngScaffolding.Controllers
 
         private bool MenuItemExists(string name)
         {
-            return _context.MenuItems.Any(e => e.Name == name);
+            return _context.MenuItems.Any(e => e.name == name);
         }
     }
 }

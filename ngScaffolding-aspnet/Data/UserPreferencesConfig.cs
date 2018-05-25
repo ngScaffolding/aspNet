@@ -19,7 +19,7 @@ namespace ngScaffolding.Data
             // Menu Orientation
             scaffoldingContext.ReferenceValues.Add(new ReferenceValue
             {
-                Name = "UserPrefs_MenuOrientation",
+                name = "UserPrefs_MenuOrientation",
                 Type = ReferenceValue.Types_List,
                 GroupName = "UserPrefs",
                 ReferenceValueItems = new List<ReferenceValueItem>() {
@@ -33,7 +33,7 @@ namespace ngScaffolding.Data
             // Themes
             scaffoldingContext.ReferenceValues.Add(new ReferenceValue
             {
-                Name = "UserPrefs_Themes",
+                name = "UserPrefs_Themes",
                 Type = ReferenceValue.Types_List,
                 GroupName = "UserPrefs",
                 ReferenceValueItems = new List<ReferenceValueItem>() {
@@ -55,7 +55,7 @@ namespace ngScaffolding.Data
             // Profile Modes
             scaffoldingContext.ReferenceValues.Add(new ReferenceValue
             {
-                Name = "UserPrefs_ProfileMode",
+                name = "UserPrefs_ProfileMode",
                 Type = ReferenceValue.Types_List,
                 GroupName = "UserPrefs",
                 ReferenceValueItems = new List<ReferenceValueItem>() {
@@ -67,7 +67,7 @@ namespace ngScaffolding.Data
             // Themes
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
-                Name = "Theme",
+                name = "Theme",
                 InputDetails = JsonConvert.SerializeObject(new InputDetailSelect()
                 {
                     name = "Theme",
@@ -79,7 +79,7 @@ namespace ngScaffolding.Data
 
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
-                Name = "MenuOrientation",
+                name = "MenuOrientation",
                 InputDetails = JsonConvert.SerializeObject(new InputDetailSelect()
                 {
                     name = "MenuOrientation",
@@ -93,7 +93,7 @@ namespace ngScaffolding.Data
             // Profile Mode
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
-                Name = "ProfileMode",
+                name = "ProfileMode",
                 InputDetails = JsonConvert.SerializeObject(new InputDetailSelect()
                 {
                     name = "ProfileMode",
@@ -107,7 +107,7 @@ namespace ngScaffolding.Data
             // Compact Mode
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
-                Name = "CompactMode",
+                name = "CompactMode",
                 InputDetails = JsonConvert.SerializeObject(new InputDetailSwitch()
                 {
                     name = "CompactMode",
@@ -119,7 +119,7 @@ namespace ngScaffolding.Data
             // Dark Menu
             scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
             {
-                Name = "DarkMenu",
+                name = "DarkMenu",
                 InputDetails = JsonConvert.SerializeObject(new InputDetailSwitch()
                 {
                     name = "DarkMenu",

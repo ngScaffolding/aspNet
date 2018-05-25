@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ngScaffolding.database.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,20 +7,22 @@ namespace ngScaffolding.Models.DataSourceModels
 {
     public class BaseDataSource
     {
-        public string Title { get; set; }
+        public const string TypesSql = "SQL";
+        public const string TypesRestApi = "RestAPI";
+        public const string TypesMongoDB = "MongoDB";
+        public const string TypesMySQL = "MySQL";
 
-        public string Connection { get; set; }
-        public string SqlCommand { get; set; }
+        public string type { get; set; }
+        public string title { get; set; }
 
-        public bool IsStoredProcedure { get; set; }
-
-        public bool IsPagedData { get; set; }
-        public bool IsAudit { get; set; }
+        public bool isPagedData { get; set; }
+        public bool isAudit { get; set; }
 
         // Name Of DataSource to flush on completed
-        public string FlushDataSource { get; set; }
+        public string flushDataSource { get; set; }
 
-        public ICollection<ParameterDetailModel> Parameters { get; set; }
+        public ICollection<ParameterDetailModel> parameters { get; set; }
 
+        public ICollection<InputDetail> inputControls { get; set; }
     }
 }

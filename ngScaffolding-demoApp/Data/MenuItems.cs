@@ -20,22 +20,21 @@ namespace ngScacffolding.demoApp.Data
             var demoFolder = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 icon = "folder",
-                Name = "Demo.Folder",
+                name = "Demo.Folder",
                 label = "Demo Folder",
-                Roles = "User",
+                roles = "User",
                 type = MenuItem.Type_Folder
             });
 
 
             var dsSelectCountries = new DataSource()
             {
-                Type = DataSource.TypesSql,
-                Name = "Countries.Select",
+                name = "Countries.Select",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
-                    Connection = "demoDatabase",
-                    IsAudit = true,
-                    SqlCommand = @"IF ''@@ContinentId'' Like ''@@%''
+                    connection = "demoDatabase",
+                    isAudit = true,
+                    sqlCommand = @"IF ''@@ContinentId'' Like ''@@%''
                             SELECT Countries.Id, Countries.Name,Countries.ContinentId, Continents.Name as ContinentName FROM Countries 
 								INNER JOIN Continents on Continents.Id = Countries.ContinentId ORDER by ContinentName, Countries.Name
                                 ELSE
@@ -47,39 +46,36 @@ namespace ngScacffolding.demoApp.Data
 
             var dsAddCountry = new DataSource
             {
-                Type = DataSource.TypesSql,
-                Name = "Countries.Add.New",
+                name = "Countries.Add.New",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
-                    Connection = "demoDatabase",
-                    IsAudit = true,
-                    SqlCommand = "INSERT INTO Countries (Name, ContinentId) VALUES (''@@Name'',@@ContinentId)"
+                    connection = "demoDatabase",
+                    isAudit = true,
+                    sqlCommand = "INSERT INTO Countries (Name, ContinentId) VALUES (''@@Name'',@@ContinentId)"
                 })
             };
             demoCtx.DataSources.Add(dsAddCountry);
 
             var dsAddContinent = new DataSource
             {
-                Type = DataSource.TypesSql,
-                Name = "Continents.Add.New",
+                name = "Continents.Add.New",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
-                    Connection = "demoDatabase",
-                    IsAudit = true,
-                    SqlCommand = "INSERT INTO Continents (Name) VALUES (''@@Name'')"
+                    connection = "demoDatabase",
+                    isAudit = true,
+                    sqlCommand = "INSERT INTO Continents (Name) VALUES (''@@Name'')"
                 })
             };
             demoCtx.DataSources.Add(dsAddContinent);
 
             var dsPieChart = new DataSource
             {
-                Type = DataSource.TypesSql,
-                Name = "Countries.Pie.Chart",
+                name = "Countries.Pie.Chart",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
-                    Connection = "demoDatabase",
-                    IsAudit = true,
-                    SqlCommand = "SELECT Continents.Name as ContinentName, Count(*) as Total FROM Countries INNER JOIN Continents on Continents.Id = Countries.ContinentId group by Continents.Name"
+                    connection = "demoDatabase",
+                    isAudit = true,
+                    sqlCommand = "SELECT Continents.Name as ContinentName, Count(*) as Total FROM Countries INNER JOIN Continents on Continents.Id = Countries.ContinentId group by Continents.Name"
                 })
 
             };
@@ -87,39 +83,36 @@ namespace ngScacffolding.demoApp.Data
 
             var dsDelContinent = new DataSource
             {
-                Type = DataSource.TypesSql,
-                Name = "Continents.Delete",
+                name = "Continents.Delete",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
-                    Connection = "demoDatabase",
-                    IsAudit = true,
-                    SqlCommand = "DELETE FROM Continents WHERE Id = ''@@Id''"
+                    connection = "demoDatabase",
+                    isAudit = true,
+                    sqlCommand = "DELETE FROM Continents WHERE Id = ''@@Id''"
                 })
             };
             demoCtx.DataSources.Add(dsDelContinent);
 
             var dsUpdCountry = new DataSource
                 {
-                    Type = DataSource.TypesSql,
-                    Name = "Countries.Update",
+                    name = "Countries.Update",
                     JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                     {
-                        Connection = "demoDatabase",
-                        IsAudit = true,
-                        SqlCommand = "UPDATE Countries Set Name = ''@@Name'', ContinentId = @@ContinentId WHERE Id = @@Id"
+                        connection = "demoDatabase",
+                        isAudit = true,
+                        sqlCommand = "UPDATE Countries Set Name = ''@@Name'', ContinentId = @@ContinentId WHERE Id = @@Id"
                     })
                 };
             demoCtx.DataSources.Add(dsUpdCountry);
 
             var dsUpdContinent = new DataSource
             {
-                Type = DataSource.TypesSql,
-                Name = "Continents.Update",
+                name = "Continents.Update",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
-                    Connection = "demoDatabase",
-                    IsAudit = true,
-                    SqlCommand = "UPDATE Continents Set Name = ''@@Name'' WHERE Id = @@Id"
+                    connection = "demoDatabase",
+                    isAudit = true,
+                    sqlCommand = "UPDATE Continents Set Name = ''@@Name'' WHERE Id = @@Id"
                 })
             };
             demoCtx.DataSources.Add(dsUpdContinent);
@@ -128,13 +121,13 @@ namespace ngScacffolding.demoApp.Data
 
             var gridCountries = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                Roles = "User",
+                roles = "User",
                 icon = "flag",
-                Name = "Demo.Countries.Admin",
+                name = "Demo.Countries.Admin",
                 label = "Countries Admin",
                 type = MenuItem.Type_GridView,
                 routerLink = "datagrid,Demo.Countries.Admin",
-                parentMenuItemId = demoFolder.Id,
+                parentMenuItemId = demoFolder.id,
                 jsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
                     title = "Countries Administration",
@@ -144,7 +137,7 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    selectDataSourceId = dsSelectCountries.Id,
+                    selectDataSourceId = dsSelectCountries.id,
                     filters = new InputBuilderDefinition()
                     {
                         inputDetails = new List<InputDetail>()
@@ -159,7 +152,7 @@ namespace ngScacffolding.demoApp.Data
                             columnButton = true,
                             title="Edit Country",
                             icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand,
-                            dataSourceId = dsUpdCountry.Id,
+                            dataSourceId = dsUpdCountry.id,
                             successMessage = "Country Updated",
                             successToast = true,
                             errorMessage = "Country not updated. Try Again Later.",
@@ -177,7 +170,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                         new ActionModel
                         {
-                            title = "Add Country", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddCountry.Id,
+                            title = "Add Country", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddCountry.id,
                             successMessage = "Country Saved",
                             successToast = true,
                             errorMessage = "Country not saved. Try Again Later.",
@@ -195,7 +188,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                          new ActionModel
                         {
-                            title = "Delete Country", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsDelContinent.Id,
+                            title = "Delete Country", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsDelContinent.id,
                             successMessage = "Country Deleted",
                             successToast = true,
                             errorMessage = "Country not saved. Try Again Later.",
@@ -209,13 +202,12 @@ namespace ngScacffolding.demoApp.Data
 
             var dataSource2 = new DataSource()
             {
-                Type = DataSource.TypesSql,
-                Name = "Continents.Select",
+                name = "Continents.Select",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
-                    Connection = "demoDatabase",
-                    IsAudit = true,
-                    SqlCommand = "SELECT Id, Name FROM Continents ORDER by Name"
+                    connection = "demoDatabase",
+                    isAudit = true,
+                    sqlCommand = "SELECT Id, Name FROM Continents ORDER by Name"
                 })
             };
             demoCtx.DataSources.Add(dataSource2);
@@ -223,13 +215,13 @@ namespace ngScacffolding.demoApp.Data
 
             var gridView2 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                Roles = "User",
+                roles = "User",
                 icon = "brush",
-                Name = "Demo.Continents.Admin",
+                name = "Demo.Continents.Admin",
                 label = "Continents Admin",
                 type = MenuItem.Type_GridView,
                 routerLink = "datagrid,Demo.Continents.Admin",
-                parentMenuItemId = demoFolder.Id,
+                parentMenuItemId = demoFolder.id,
                 jsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
                     title = "Continents Administration",
@@ -240,7 +232,7 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "Name"}
                     },
-                    selectDataSourceId = dataSource2.Id,
+                    selectDataSourceId = dataSource2.id,
                     
                     isActionColumnSplitButton = false,
                     actions = new List<ActionModel>
@@ -249,7 +241,7 @@ namespace ngScacffolding.demoApp.Data
                         {
                             columnButton = true,
                             title="Edit Continent",
-                            icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsUpdContinent.Id,
+                            icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsUpdContinent.id,
                             successMessage = "Continent Updated",
                             successToast = true,
                             errorMessage = "Continent not updated. Try Again Later.",
@@ -266,7 +258,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                         new ActionModel
                         {
-                            title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.Id,
+                            title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.id,
                             successMessage = "Continent Saved",
                             successToast = true,
                             errorMessage = "Continent not saved. Try Again Later.",
@@ -283,7 +275,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                          new ActionModel
                         {
-                            title = "Delete Continent", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsDelContinent.Id,
+                            title = "Delete Continent", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsDelContinent.id,
                             successMessage = "Continent Deleted",
                             successToast = true,
                             errorMessage = "Continent not saved. Try Again Later.",
@@ -297,30 +289,30 @@ namespace ngScacffolding.demoApp.Data
 
             var chart1 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                Roles = "User",
+                roles = "User",
                 icon = "show-chart",
-                Name = "Demo.Continents.PieGraph",
+                name = "Demo.Continents.PieGraph",
                 label = "Continents Graph",
                 type = MenuItem.Type_GridView,
                 routerLink = "chart,Demo.Continents.PieGraph",
-                parentMenuItemId = demoFolder.Id,
+                parentMenuItemId = demoFolder.id,
                 jsonSerialized = JsonConvert.SerializeObject(new ChartDetailModel()
                 {
                     title = "Countries by Continent",
                     chartOptions = new Highsoft.Web.Mvc.Charts.Chart { },
-                    dataSourceId = dsPieChart.Id
+                    dataSourceId = dsPieChart.id
                 })
             });
 
             var dashboard1 = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
-                Roles = "User",
+                roles = "User",
                 icon = "dashboard",
-                Name = "Demo.Continents.Dashboard",
+                name = "Demo.Continents.Dashboard",
                 label = "Continents Dashboard",
                 type = MenuItem.Type_Dashboard,
                 routerLink = "dashboard,Demo.Continents.Dashboard",
-                parentMenuItemId = demoFolder.Id,
+                parentMenuItemId = demoFolder.id,
                 jsonSerialized = JsonConvert.SerializeObject(new DashboardModel()
                 {
                     title = "Countries by Continent",

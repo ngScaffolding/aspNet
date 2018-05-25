@@ -59,7 +59,7 @@ namespace ngScaffolding.Helpers
                 var paramList = new List<ParameterDetailModel>();
 
                 //Setup SQL connection
-                var connectionString = _connectionStringsService.Get(command.Connection);
+                var connectionString = _connectionStringsService.Get(command.connection);
 
                 //TODO: Commented out until EF Core supports EntityConnectionStringBuilder
                 //if (connectionString.ToUpper().IndexOf("METADATA") > -1)
@@ -70,15 +70,15 @@ namespace ngScaffolding.Helpers
                 SqlConnection conn = new SqlConnection(connectionString);
 
                 conn.Open();
-                var commandString = command.SqlCommand;
+                var commandString = command.sqlCommand;
 
                 if (pageSize > 0)
                 {
                     paramList.Add(new ParameterDetailModel()
                     {
-                        Name = "pageSize",
-                        Sqltype = "int",
-                        Value = string.Format("@pageSize = {0}", pageSize)
+                        name = "pageSize",
+                        sqltype = "int",
+                        value = string.Format("@pageSize = {0}", pageSize)
                     });
 
                     if (pageNumber == 0)
@@ -90,9 +90,9 @@ namespace ngScaffolding.Helpers
                 {
                     paramList.Add(new ParameterDetailModel()
                     {
-                        Name = "pageNumber",
-                        Sqltype = "int",
-                        Value = string.Format("@pageNumber = {0}", pageNumber)
+                        name = "pageNumber",
+                        sqltype = "int",
+                        value = string.Format("@pageNumber = {0}", pageNumber)
                     });
                 }
                 
@@ -150,19 +150,19 @@ namespace ngScaffolding.Helpers
                 {
                     foreach (var keyValuePair in extractedRowDetails)
                     {
-                        if (command.Parameters != null)
+                        if (command.parameters != null)
                         {
                             var thisParam =
-                                command.Parameters.FirstOrDefault(p => p.Name.ToUpper() == keyValuePair.Key.ToUpper());
+                                command.parameters.FirstOrDefault(p => p.name.ToUpper() == keyValuePair.Key.ToUpper());
 
                             if (thisParam == null)
                             {
                                 thisParam = new ParameterDetailModel();
-                                thisParam.Name = keyValuePair.Key;
-                                thisParam.Sqltype = "NVARCHAR(MAX)";
-                                command.Parameters.Add(thisParam);
+                                thisParam.name = keyValuePair.Key;
+                                thisParam.sqltype = "NVARCHAR(MAX)";
+                                command.parameters.Add(thisParam);
                             }
-                            thisParam.Value = keyValuePair.Value;
+                            thisParam.value = keyValuePair.Value;
                         }
                     }
                 }
@@ -173,16 +173,16 @@ namespace ngScaffolding.Helpers
                     IDictionary<string, object> propertyValues = (IDictionary<string, object>)inputs;
                     foreach (var property in propertyValues)
                     {
-                        if (command.Parameters != null)
+                        if (command.parameters != null)
                         {
                             var thisParam =
-                                command.Parameters.FirstOrDefault(p => p.Name.ToUpper() == property.Key.ToUpper());
+                                command.parameters.FirstOrDefault(p => p.name.ToUpper() == property.Key.ToUpper());
 
                             if (thisParam == null)
                             {
                                 thisParam = new ParameterDetailModel();
-                                thisParam.Name = property.Key;
-                                command.Parameters.Add(thisParam);
+                                thisParam.name = property.Key;
+                                command.parameters.Add(thisParam);
                             }
 
                             //if (string.IsNullOrEmpty(thisParam.Sqltype))
@@ -191,22 +191,22 @@ namespace ngScaffolding.Helpers
                             //        ? inputDetail.sqltype
                             //        : "NVARCHAR(MAX)";
                             //}
-                            thisParam.Value = property.Value;
+                            thisParam.value = property.Value;
                         }
                     }
                 }
 
                 
                 //Add Parameters to end of call string from Parameter collection
-                if (command.Parameters != null)
+                if (command.parameters != null)
                 {
-                    foreach (var param in command.Parameters)
+                    foreach (var param in command.parameters)
                     {
                         FormatParameter(param);
                     }
                 }
                 
-                if (commandString.ToUpper().Contains("WHERE 1=1") && command.IsPagedData)
+                if (commandString.ToUpper().Contains("WHERE 1=1") && command.isPagedData)
                 {
                     //#region "Dynamic SQL Here - Not needed for updates etc"
 
@@ -343,7 +343,7 @@ namespace ngScaffolding.Helpers
                 {
                      try
                     {
-                        commandString = BookEndCommand(commandString, command.Parameters);
+                        commandString = BookEndCommand(commandString, command.parameters);
 
                         var comm = new SqlCommand(commandString, conn) { CommandTimeout = 240 };
 
@@ -397,33 +397,33 @@ namespace ngScaffolding.Helpers
 
         private static ParameterDetailModel FormatParameter(ParameterDetailModel param)
         {
-            if (param.Sqltype.ToUpper().Contains("CHAR"))
+            if (param.sqltype.ToUpper().Contains("CHAR"))
             {
-                param.Value = string.Format("@{0} = N'{1}'", param.Name, param.Value != null ? param.Value.ToString().Trim() : null);
+                param.value = string.Format("@{0} = N'{1}'", param.name, param.value != null ? param.value.ToString().Trim() : null);
             }
-            else if (param.Sqltype.ToUpper().Contains("DATE"))
+            else if (param.sqltype.ToUpper().Contains("DATE"))
             {
-                param.Value = string.Format("@{0} = N'{1}'", param.Name, param.Value != null ? param.Value.ToString().Trim() : null);
+                param.value = string.Format("@{0} = N'{1}'", param.name, param.value != null ? param.value.ToString().Trim() : null);
             }
-            else if (param.Sqltype.ToUpper() == "BIT")
+            else if (param.sqltype.ToUpper() == "BIT")
             {
-                var test = param.Value.ToString().ToUpper().Trim();
+                var test = param.value.ToString().ToUpper().Trim();
                 if (string.IsNullOrEmpty(test))  //NULL
                 {
-                    param.Value = string.Format("@{0} = NULL", param.Name);
+                    param.value = string.Format("@{0} = NULL", param.name);
                 }
                 else if (test == "Y" || test == "1" || test == "TRUE" || test == "YES") //Truthy
                 {
-                    param.Value = string.Format("@{0} = 1", param.Name);
+                    param.value = string.Format("@{0} = 1", param.name);
                 }
                 else //FALSE
                 {
-                    param.Value = string.Format("@{0} = 0", param.Name);
+                    param.value = string.Format("@{0} = 0", param.name);
                 }
             }
             else
             {
-                param.Value = string.Format("@{0} = {1}", param.Name, param.Value != null ? param.Value.ToString().Trim() : "NULL");
+                param.value = string.Format("@{0} = {1}", param.name, param.value != null ? param.value.ToString().Trim() : "NULL");
             }
 
             return param;
@@ -437,10 +437,10 @@ namespace ngScaffolding.Helpers
             if (paramList != null && paramList.Any())
             {
                 commandString = string.Format("{0} , N'{1}' ", commandString,
-                    string.Join(",", paramList.Select(p => string.Format("@{0} {1}", p.Name, p.Sqltype))));
+                    string.Join(",", paramList.Select(p => string.Format("@{0} {1}", p.name, p.sqltype))));
 
                 commandString = string.Format("{0} , {1} ", commandString,
-                    string.Join(",", paramList.Select(p => p.Value)));
+                    string.Join(",", paramList.Select(p => p.value)));
             }
 
             return commandString;

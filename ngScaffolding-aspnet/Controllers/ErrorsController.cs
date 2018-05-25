@@ -32,7 +32,7 @@ namespace ngScaffolding.Controllers
             _context.Errors.Add(errorModel);
             await _context.SaveChangesAsync();
 
-            return Ok(new { id = errorModel.Id });
+            return Ok(new { id = errorModel.id });
         }
     }
 }

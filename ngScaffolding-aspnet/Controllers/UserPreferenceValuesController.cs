@@ -56,7 +56,7 @@ namespace ngScaffolding.Controllers
         {
             var user = await _userService.GetUser();
 
-            var savePreference = _userPreferenceRepository.GetAll().FirstOrDefault(p => p.UserId == user.Id && p.Name == name);
+            var savePreference = _userPreferenceRepository.GetAll().FirstOrDefault(p => p.UserId == user.Id && p.name == name);
 
             if(savePreference != null)
             {
@@ -78,18 +78,18 @@ namespace ngScaffolding.Controllers
 
             var user = await _userService.GetUser();
 
-            var savePreference = _userPreferenceRepository.GetAll().FirstOrDefault(p => p.UserId == user.Id && p.Name == preferenceValue.Name);
-            var definition = _userPreferenceDefinitionRepository.GetAll().FirstOrDefault(p => p.Name == preferenceValue.Name);
+            var savePreference = _userPreferenceRepository.GetAll().FirstOrDefault(p => p.UserId == user.Id && p.name == preferenceValue.Name);
+            var definition = _userPreferenceDefinitionRepository.GetAll().FirstOrDefault(p => p.name == preferenceValue.Name);
 
             if (savePreference == null)
             {
                 // New Value Here
                 var newPreference = new UserPreferenceValue()
                 {
-                    Name = preferenceValue.Name,
+                    name = preferenceValue.Name,
                     UserId = user.Id,
                     Value = preferenceValue.Value,
-                    UserPreferenceDefinitionId = definition?.Id
+                    UserPreferenceDefinitionId = definition?.id
                 };
 
                 _userPreferenceRepository.Insert(newPreference);

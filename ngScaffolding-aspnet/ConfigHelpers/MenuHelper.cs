@@ -13,13 +13,13 @@ namespace ngScaffolding.ConfigHelpers
         public static MenuItem AddMenu(ngScaffoldingContext context, MenuItem menu) {
             MenuItem newMenu = null;
 
-            if(context.MenuItems.Any(m => m.Name == menu.Name))
+            if(context.MenuItems.Any(m => m.name == menu.name))
             {
-                newMenu = context.MenuItems.First(m => m.Name == menu.Name);
+                newMenu = context.MenuItems.First(m => m.name == menu.name);
             }
             else
             {
-                newMenu = new MenuItem() { Name = menu.Name };
+                newMenu = new MenuItem() { name = menu.name };
                 context.MenuItems.Add(newMenu);
             }
 
@@ -41,8 +41,8 @@ namespace ngScaffolding.ConfigHelpers
             newMenu.Url = menu.Url;
             newMenu.separator = menu.separator;
             
-            newMenu.Name = menu.Name;
-            newMenu.Roles = menu.Roles;
+            newMenu.name = menu.name;
+            newMenu.roles = menu.roles;
             newMenu.itemOrder = menu.itemOrder;
             newMenu.type = menu.type;
 

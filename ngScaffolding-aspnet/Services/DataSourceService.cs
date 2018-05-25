@@ -24,7 +24,7 @@ namespace ngScaffolding.Services
 
         public DataSource GetDataSource(string name)
         {
-            return _dataSources.GetAll().FirstOrDefault(d => d.Name.ToUpper() == name.ToUpper());
+            return _dataSources.GetAll().FirstOrDefault(d => d.name.ToUpper() == name.ToUpper());
         }
 
         public DataSource GetDataSource(int id)

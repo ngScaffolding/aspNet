@@ -11,20 +11,19 @@ namespace ngScaffolding.ConfigHelpers
     {
         public static DataSource Add(ngScaffoldingContext context, DataSource reference)
         {
-            if (context.DataSources.Any(m => m.Name == reference.Name))
+            if (context.DataSources.Any(m => m.name == reference.name))
             {
-                var existing = context.DataSources.First(m => m.Name == reference.Name);
+                var existing = context.DataSources.First(m => m.name == reference.name);
 
                 context.DataSources.Remove(existing);
 
                 context.SaveChanges();
             }
 
-            var newItem = new DataSource() {Name = reference.Name};
+            var newItem = new DataSource() {name = reference.name};
             context.DataSources.Add(newItem);
 
-            newItem.Name = reference.Name;
-            newItem.Type = reference.Type;
+            newItem.name = reference.name;
             newItem.JsonContent = reference.JsonContent;
 
             context.SaveChanges();

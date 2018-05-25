@@ -11,18 +11,18 @@ namespace ngScaffolding.models.Models
     public class BaseEntity
     {
         [Column("Id", Order = 0)]
-        public int Id { get; set; }
+        public int id { get; set; }
 
         [StringLength(200)]
         [Column("Name", Order = 1)]
-        public string Name { get; set; }
+        public string name { get; set; }
     }
 
     public class BaseRoleEntity : BaseEntity
     {
         [Column("Roles", Order = 2)]
         [StringLength(500)]
-        public string Roles { get; set; }
+        public string roles { get; set; }
 
         public bool IsUserInRoles()
         {

@@ -14,13 +14,6 @@ namespace ngScaffolding.Models
     {
         private BaseDataSource _dataSourceDetails;
 
-        public const string TypesSql = "SQL";
-        public const string TypesRestApi = "RestAPI";
-        public const string TypesMongoDB = "MongoDB";
-
-        [StringLength(200)]
-        public string Type { get; set; }
-
         public string JsonContent { get; set; }
 
         [NotMapped]

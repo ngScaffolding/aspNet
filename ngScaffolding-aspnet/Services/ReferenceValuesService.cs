@@ -57,7 +57,7 @@ namespace ngScaffolding.Services
         public ReferenceValue GetDefinition(string name)
         {
             ReferenceValue retVal = null;
-            retVal = _referenceValues.GetAll().FirstOrDefault(r => r.Name.ToLower() == name.ToLower());
+            retVal = _referenceValues.GetAll().FirstOrDefault(r => r.name.ToLower() == name.ToLower());
 
             return retVal;
         }
@@ -110,11 +110,11 @@ namespace ngScaffolding.Services
 
                         if (string.IsNullOrEmpty(seed))
                         {
-                            referenceValues = _context.ReferenceValueItems.Where(r => r.ReferenceValueId == refValue.Id);
+                            referenceValues = _context.ReferenceValueItems.Where(r => r.ReferenceValueId == refValue.id);
                         }
                         else
                         {
-                            referenceValues = _context.ReferenceValueItems.Where(r => r.ReferenceValueId == refValue.Id)
+                            referenceValues = _context.ReferenceValueItems.Where(r => r.ReferenceValueId == refValue.id)
                                 .Where(r => r.Display.Contains(seed) || r.Value.Contains(seed) || r.SubTitle.Contains(seed) || r.SubTitle2.Contains(seed));
                         }
 

@@ -14,7 +14,7 @@ namespace ngScacffolding.demoApp
         {
             ReferenceValueHelper.Add(ctx, new ngScaffolding.database.Models.ReferenceValue()
             {
-                Name = "Continents",
+                name = "Continents",
                 Type = ReferenceValue.Types_DatabaseQuery,
                 ConnectionName = "demoDatabase",
                 Value = DropDownSourceHelper.IncludeNull("Continents", "Id", "Name", "Name")
@@ -22,7 +22,7 @@ namespace ngScacffolding.demoApp
 
             ReferenceValueHelper.Add(ctx, new ngScaffolding.database.Models.ReferenceValue()
             {
-                Name = "Countries",
+                name = "Countries",
                 Type = ReferenceValue.Types_DatabaseQuery,
                 ConnectionName = "demoDatabase",
                 Value = DropDownSourceHelper.IncludeNull("Countries", "Id", "Name", "Name")
@@ -30,7 +30,7 @@ namespace ngScacffolding.demoApp
 
             ReferenceValueHelper.Add(ctx, new ngScaffolding.database.Models.ReferenceValue()
             {
-                Name = "CountriesForContinent",
+                name = "CountriesForContinent",
                 Type = ReferenceValue.Types_DatabaseQuery,
                 ConnectionName = "demoDatabase",
                 Value = DropDownSourceHelper.IncludeNull("Countries", "Id", "Name", "Name", "ContinentName")

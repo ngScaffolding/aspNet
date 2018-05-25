@@ -11,25 +11,23 @@ namespace ngScacffolding.demoApp
         {
             DataSourceHelper.Add(ctx, new DataSource()
             {
-                Name = "Continents",
-                Type = DataSource.TypesSql,
+                name = "Continents",
                 DataSourceDetails = new SqlDataSource()
                 {
-                    Connection = "demoDatabase",
-                    SqlCommand = DropDownSourceHelper.IncludeNull("Continents", "Name", "Name", "Name"),
-                    IsAudit = true
+                    connection = "demoDatabase",
+                    sqlCommand = DropDownSourceHelper.IncludeNull("Continents", "Name", "Name", "Name"),
+                    isAudit = true
                 }
             });
 
             DataSourceHelper.Add(ctx, new DataSource()
             {
-                Name = "CountriesForContinent",
-                Type = DataSource.TypesSql,
+                name = "CountriesForContinent",
                 DataSourceDetails = new SqlDataSource()
                 {
-                    Connection = "demoDatabase",
-                    SqlCommand = DropDownSourceHelper.IncludeNull("Countries", "Name", "Name", "Name",seedCol: "ContinentName",seedLike: false),
-                    IsAudit = true
+                    connection = "demoDatabase",
+                    sqlCommand = DropDownSourceHelper.IncludeNull("Countries", "Name", "Name", "Name",seedCol: "ContinentName",seedLike: false),
+                    isAudit = true
                 }
             });
 

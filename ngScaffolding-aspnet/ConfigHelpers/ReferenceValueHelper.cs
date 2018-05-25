@@ -14,9 +14,9 @@ namespace ngScaffolding.ConfigHelpers
         {
             //ReferenceValue newReference = null;
 
-            if (context.ReferenceValues.Any(m => m.Name == reference.Name))
+            if (context.ReferenceValues.Any(m => m.name == reference.name))
             {
-                var existing = context.ReferenceValues.First(m => m.Name == reference.Name);
+                var existing = context.ReferenceValues.First(m => m.name == reference.name);
 
                 context.ReferenceValues.Remove(existing);
 
@@ -24,7 +24,7 @@ namespace ngScaffolding.ConfigHelpers
             }
             //else
             //{
-                var newReference = new ReferenceValue() { Name = reference.Name };
+                var newReference = new ReferenceValue() { name = reference.name };
                 context.ReferenceValues.Add(newReference);
 
             //}

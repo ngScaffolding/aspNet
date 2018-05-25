@@ -26,7 +26,7 @@ namespace ngScaffolding.Helpers
                     }
                 case ReferenceValue.Types_List:
                     {
-                        foreach (var referenceValueItem in referenceValuesService.GetValue(referenceValue.Name).ReferenceValueItems.OrderBy(o => o.ItemOrder))
+                        foreach (var referenceValueItem in referenceValuesService.GetValue(referenceValue.name).ReferenceValueItems.OrderBy(o => o.ItemOrder))
                         {
                             if (string.IsNullOrEmpty(referenceValueItem.Display) && !string.IsNullOrEmpty(referenceValueItem.Value))
                             {

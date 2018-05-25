@@ -32,11 +32,11 @@ namespace ngScaffolding.Data
         }
         public T Get(int id)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            return entities.SingleOrDefault(s => s.id == id);
         }
         public T GetByName(string name)
         {
-            return entities.SingleOrDefault(s => s.Name.ToLower() == name.ToLower());
+            return entities.SingleOrDefault(s => s.name.ToLower() == name.ToLower());
         }
         public void Insert(T entity)
         {

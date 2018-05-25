@@ -32,7 +32,7 @@ namespace ngScaffolding.Controllers
         {
             var user = await _userService.GetUser();
 
-            return _userPreferenceRepository.GetAll().Where(d => user.IsInRoles(d.Roles));
+            return _userPreferenceRepository.GetAll().Where(d => user.IsInRoles(d.roles));
         }
     }
 }
