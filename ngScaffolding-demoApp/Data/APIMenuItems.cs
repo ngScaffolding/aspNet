@@ -31,16 +31,12 @@ namespace ngScacffolding.demoApp.Data
             var dsSelectCountries = new DataSource()
             {
                 name = "Countries.API.Select",
-                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                JsonContent = JsonConvert.SerializeObject(new RestApiDataSource
                 {
-                    connection = "demoDatabase",
+                    serverName = "demoDatabase",
+                    verb = "get",
                     isAudit = true,
-                    sqlCommand = @"IF ''@@ContinentId'' Like ''@@%''
-                            SELECT Countries.API.Id, Countries.API.Name,Countries.API.ContinentId, Continents.API.Name as ContinentName FROM Countries 
-								INNER JOIN Continents on Continents.API.Id = Countries.API.ContinentId ORDER by ContinentName, Countries.API.Name
-                                ELSE
-                            SELECT Countries.API.Id, Countries.API.Name,Countries.API.ContinentId, Continents.API.Name as ContinentName FROM Countries 
-								INNER JOIN Continents on Continents.API.Id = Countries.API.ContinentId where Continents.API.Id = ''@@ContinentId''  ORDER by ContinentName, Countries.API.Name"
+                    url= "/countries?continentid=@@continentid"
                 })
             };
             demoCtx.DataSources.Add(dsSelectCountries);
@@ -134,9 +130,9 @@ namespace ngScacffolding.demoApp.Data
                     title = "Countries Administration",
                     columns = new List<ColumnModel>()
                     {
-                        new ColumnModel() { Field = "Id" },
-                        new ColumnModel() {Field = "ContinentName"},
-                        new ColumnModel() {Field = "Name"}
+                        new ColumnModel() { Field = "id", HeaderName="Id" },
+                        new ColumnModel() {Field = "continentName", HeaderName ="Continent Name"},
+                        new ColumnModel() {Field = "name", HeaderName = "Country Name"}
                     },
                     selectDataSourceId = dsSelectCountries.id,
                     filters = new InputBuilderDefinition()

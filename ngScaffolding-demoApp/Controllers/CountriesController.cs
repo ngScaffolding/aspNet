@@ -23,9 +23,16 @@ namespace ngScaffolding_demoApp.Controllers
 
         // GET: api/Countries
         [HttpGet]
-        public IEnumerable<Country> GetCountries()
+        public IEnumerable<Country> GetCountries([FromQuery]int? continentID)
         {
-            return _context.Countries;
+            if (continentID.HasValue)
+            {
+                return _context.Countries.Where(c => c.ContinentId == continentID.Value);
+            }
+            else
+            {
+                return _context.Countries;
+            }
         }
 
         // GET: api/Countries/5

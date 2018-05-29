@@ -108,7 +108,23 @@ namespace ngScaffolding.Controllers
                                 // Get Server details from app.config
                                 var apiSettings = _apiLocationsService.Get(apiDataSource.serverName);
 
-                                var request = (HttpWebRequest)WebRequest.Create(apiSettings.serverUrl + apiDataSource.url);
+                                var url = apiDataSource.url;
+
+                                // Variable replacement
+                                if (filterValues != null)
+                                {
+                                    IDictionary<string, object> propertyValues = (IDictionary<string, object>)filterValues;
+                                    foreach (var property in propertyValues)
+                                    {
+                                        var searchKey = string.Format("@@{0}", property.Key);
+                                        if (url.Contains(searchKey))
+                                        {
+                                            url = url.Replace(searchKey, property.Value.ToString());
+                                        }
+                                    }
+                                }
+
+                                var request = (HttpWebRequest)WebRequest.Create(apiSettings.serverUrl + url);
 
                                 request.Method = "GET";
                                 request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36";
