@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ngScaffolding.ConfigHelpers;
+using ngScaffolding.Data;
+using ngScaffolding.database.Models;
+using ngScaffolding.Models;
+using ngScaffolding.Models.DataSourceModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ngScaffolding.ConfigHelpers;
-using ngScaffolding.database.Models;
-using ngScaffolding.Data;
-using ngScaffolding.Models;
-using ngScaffolding.Models.DataSourceModels;
-using Newtonsoft.Json;
 using static ngScaffolding.Models.ActionModel;
 
 namespace ngScacffolding.demoApp.Data
 {
-    public class MenuItems
+
+    public class APIMenuItems
     {
         public static void Setup(ngScaffoldingContext demoCtx)
         {
@@ -20,8 +21,8 @@ namespace ngScacffolding.demoApp.Data
             var demoFolder = MenuHelper.AddMenu(demoCtx, new MenuItem
             {
                 icon = "folder",
-                name = "Demo.Folder",
-                label = "Demo Folder",
+                name = "Demo.API.Folder",
+                label = "Demo API Folder",
                 roles = "User",
                 type = MenuItem.Type_Folder
             });
@@ -29,24 +30,24 @@ namespace ngScacffolding.demoApp.Data
 
             var dsSelectCountries = new DataSource()
             {
-                name = "Countries.Select",
+                name = "Countries.API.Select",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
                     isAudit = true,
                     sqlCommand = @"IF ''@@ContinentId'' Like ''@@%''
-                            SELECT Countries.Id, Countries.Name,Countries.ContinentId, Continents.Name as ContinentName FROM Countries 
-								INNER JOIN Continents on Continents.Id = Countries.ContinentId ORDER by ContinentName, Countries.Name
+                            SELECT Countries.API.Id, Countries.API.Name,Countries.API.ContinentId, Continents.API.Name as ContinentName FROM Countries 
+								INNER JOIN Continents on Continents.API.Id = Countries.API.ContinentId ORDER by ContinentName, Countries.API.Name
                                 ELSE
-                            SELECT Countries.Id, Countries.Name,Countries.ContinentId, Continents.Name as ContinentName FROM Countries 
-								INNER JOIN Continents on Continents.Id = Countries.ContinentId where Continents.Id = ''@@ContinentId''  ORDER by ContinentName, Countries.Name"
+                            SELECT Countries.API.Id, Countries.API.Name,Countries.API.ContinentId, Continents.API.Name as ContinentName FROM Countries 
+								INNER JOIN Continents on Continents.API.Id = Countries.API.ContinentId where Continents.API.Id = ''@@ContinentId''  ORDER by ContinentName, Countries.API.Name"
                 })
             };
             demoCtx.DataSources.Add(dsSelectCountries);
 
             var dsAddCountry = new DataSource
             {
-                name = "Countries.Add.New",
+                name = "Countries.API.Add.New",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
@@ -58,7 +59,7 @@ namespace ngScacffolding.demoApp.Data
 
             var dsAddContinent = new DataSource
             {
-                name = "Continents.Add.New",
+                name = "Continents.API.Add.New",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
@@ -70,12 +71,12 @@ namespace ngScacffolding.demoApp.Data
 
             var dsPieChart = new DataSource
             {
-                name = "Countries.Pie.Chart",
+                name = "Countries.API.Pie.Chart",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
                     isAudit = true,
-                    sqlCommand = "SELECT Continents.Name as ContinentName, Count(*) as Total FROM Countries INNER JOIN Continents on Continents.Id = Countries.ContinentId group by Continents.Name"
+                    sqlCommand = "SELECT Continents.API.Name as ContinentName, Count(*) as Total FROM Countries INNER JOIN Continents on Continents.API.Id = Countries.API.ContinentId group by Continents.API.Name"
                 })
 
             };
@@ -83,7 +84,7 @@ namespace ngScacffolding.demoApp.Data
 
             var dsDelContinent = new DataSource
             {
-                name = "Continents.Delete",
+                name = "Continents.API.Delete",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
@@ -95,7 +96,7 @@ namespace ngScacffolding.demoApp.Data
 
             var dsUpdCountry = new DataSource
             {
-                name = "Countries.Update",
+                name = "Countries.API.Update",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
@@ -107,7 +108,7 @@ namespace ngScacffolding.demoApp.Data
 
             var dsUpdContinent = new DataSource
             {
-                name = "Continents.Update",
+                name = "Continents.API.Update",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
@@ -123,10 +124,10 @@ namespace ngScacffolding.demoApp.Data
             {
                 roles = "User",
                 icon = "flag",
-                name = "Demo.Countries.Admin",
+                name = "Demo.Countries.API.Admin",
                 label = "Countries Admin",
                 type = MenuItem.Type_GridView,
-                routerLink = "datagrid,Demo.Countries.Admin",
+                routerLink = "datagrid,Demo.Countries.API.Admin",
                 parentMenuItemId = demoFolder.id,
                 jsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
@@ -216,7 +217,7 @@ namespace ngScacffolding.demoApp.Data
 
             var dataSource2 = new DataSource()
             {
-                name = "Continents.Select",
+                name = "Continents.API.Select",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
@@ -231,10 +232,10 @@ namespace ngScacffolding.demoApp.Data
             {
                 roles = "User",
                 icon = "brush",
-                name = "Demo.Continents.Admin",
+                name = "Demo.Continents.API.Admin",
                 label = "Continents Admin",
                 type = MenuItem.Type_GridView,
-                routerLink = "datagrid,Demo.Continents.Admin",
+                routerLink = "datagrid,Demo.Continents.API.Admin",
                 parentMenuItemId = demoFolder.id,
                 jsonSerialized = JsonConvert.SerializeObject(new GridViewDetailModel()
                 {
@@ -305,10 +306,10 @@ namespace ngScacffolding.demoApp.Data
             {
                 roles = "User",
                 icon = "show-chart",
-                name = "Demo.Continents.PieGraph",
+                name = "Demo.Continents.API.PieGraph",
                 label = "Continents Graph",
                 type = MenuItem.Type_GridView,
-                routerLink = "chart,Demo.Continents.PieGraph",
+                routerLink = "chart,Demo.Continents.API.PieGraph",
                 parentMenuItemId = demoFolder.id,
                 jsonSerialized = JsonConvert.SerializeObject(new ChartDetailModel()
                 {
@@ -322,10 +323,10 @@ namespace ngScacffolding.demoApp.Data
             {
                 roles = "User",
                 icon = "dashboard",
-                name = "Demo.Continents.Dashboard",
+                name = "Demo.Continents.API.Dashboard",
                 label = "Continents Dashboard",
                 type = MenuItem.Type_Dashboard,
-                routerLink = "dashboard,Demo.Continents.Dashboard",
+                routerLink = "dashboard,Demo.Continents.API.Dashboard",
                 parentMenuItemId = demoFolder.id,
                 jsonSerialized = JsonConvert.SerializeObject(new DashboardModel()
                 {

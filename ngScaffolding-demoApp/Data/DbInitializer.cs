@@ -17,6 +17,7 @@ namespace ngScacffolding.demoApp.Data
             DataSourceSetup.Setup(scaffoldingContext);
             ReferenceValuesSetup.Setup(scaffoldingContext);
             MenuItems.Setup(scaffoldingContext);
+            APIMenuItems.Setup(scaffoldingContext);
         }
     }
 }

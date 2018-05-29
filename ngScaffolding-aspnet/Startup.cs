@@ -26,6 +26,7 @@ namespace ngScaffolding_aspnet
     {
         private readonly IConfiguration _configuration;
         private readonly ConnectionStringsService _connectionStringsService;
+        private readonly APILocationsService _apiLocationService;
 
         public Startup(IHostingEnvironment env, IConfiguration configuration)
         {
@@ -41,6 +42,17 @@ namespace ngScaffolding_aspnet
             foreach (var configurationSection in _configuration.GetSection("ConnectionStrings").GetChildren())
             {
                 _connectionStringsService.Add(configurationSection.Key, configurationSection.Value);
+            }
+
+            _apiLocationService = new APILocationsService();
+
+            foreach (var apiSection in _configuration.GetSection("APILocations").GetChildren())
+            {
+                _apiLocationService.Add(apiSection.Key, new APILocation()
+                {
+                    serverUrl = apiSection.GetValue<string>("serverUrl"),
+                    jwtSupport = apiSection.GetValue<bool>("jwtSupport"),
+                });
             }
         }
 
@@ -99,8 +111,9 @@ namespace ngScaffolding_aspnet
             // Configuration Object
             services.AddSingleton<IConfiguration>(provider => _configuration);
             services.AddSingleton<IConnectionStringsService>(provider => _connectionStringsService);
+            services.AddSingleton<IAPILocationsService>(provider => _apiLocationService);
             services.AddSingleton<IAppSettingsService>(provider => appSettings);
-            
+
             //Repository Pattern Here
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
