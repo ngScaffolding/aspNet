@@ -17,6 +17,7 @@ using System.Dynamic;
 using Newtonsoft.Json.Converters;
 using System.Net;
 using System.IO;
+using System.Text;
 
 namespace ngScaffolding.Controllers
 {
@@ -125,10 +126,22 @@ namespace ngScaffolding.Controllers
                                 }
 
                                 var request = (HttpWebRequest)WebRequest.Create(apiSettings.serverUrl + url);
+                                if (!string.IsNullOrEmpty(dataSourceRequest.InputData))
+                                {
+                                    byte[] bytes = Encoding.ASCII.GetBytes(dataSourceRequest.InputData);
+
+                                    // Set the content length of the string being posted.
+                                    request.ContentLength = bytes.Length;
+
+                                    Stream newStream = request.GetRequestStream();
+                                                                       
+                                    newStream.Write(bytes, 0, bytes.Length);
+                                }
 
                                 request.Method = "GET";
                                 request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36";
                                 request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+
 
                                 var response = (HttpWebResponse)request.GetResponse();
 

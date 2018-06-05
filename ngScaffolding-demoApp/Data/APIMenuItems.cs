@@ -56,38 +56,27 @@ namespace ngScacffolding.demoApp.Data
             var dsAddContinent = new DataSource
             {
                 name = "Continents.API.Add.New",
-                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                JsonContent = JsonConvert.SerializeObject(new RestApiDataSource
                 {
-                    connection = "demoDatabase",
+                    serverName = "demoDatabase",
+                    verb = "post",
                     isAudit = true,
-                    sqlCommand = "INSERT INTO Continents (Name) VALUES (''@@Name'')"
+                    url = "/continents"
                 })
             };
             demoCtx.DataSources.Add(dsAddContinent);
 
-            var dsPieChart = new DataSource
-            {
-                name = "Countries.API.Pie.Chart",
-                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
-                {
-                    connection = "demoDatabase",
-                    isAudit = true,
-                    sqlCommand = "SELECT Continents.API.Name as ContinentName, Count(*) as Total FROM Countries INNER JOIN Continents on Continents.API.Id = Countries.API.ContinentId group by Continents.API.Name"
-                })
-
-            };
-            demoCtx.DataSources.Add(dsPieChart);
-
-            var dsDelContinent = new DataSource
+           var dsDelContinent = new DataSource
             {
                 name = "Continents.API.Delete",
-                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
-                {
-                    connection = "demoDatabase",
-                    isAudit = true,
-                    sqlCommand = "DELETE FROM Continents WHERE Id = ''@@Id''"
-                })
-            };
+               JsonContent = JsonConvert.SerializeObject(new RestApiDataSource
+               {
+                   serverName = "demoDatabase",
+                   verb = "delete",
+                   isAudit = true,
+                   url = "/continents/@@continentid"
+               })
+           };
             demoCtx.DataSources.Add(dsDelContinent);
 
             var dsUpdCountry = new DataSource
@@ -105,11 +94,12 @@ namespace ngScacffolding.demoApp.Data
             var dsUpdContinent = new DataSource
             {
                 name = "Continents.API.Update",
-                JsonContent = JsonConvert.SerializeObject(new SqlDataSource
+                JsonContent = JsonConvert.SerializeObject(new RestApiDataSource
                 {
-                    connection = "demoDatabase",
+                    serverName = "demoDatabase",
+                    verb = "put",
                     isAudit = true,
-                    sqlCommand = "UPDATE Continents Set Name = ''@@Name'' WHERE Id = @@Id"
+                    url = "/continents/@@continentid"
                 })
             };
             demoCtx.DataSources.Add(dsUpdContinent);
@@ -298,41 +288,6 @@ namespace ngScacffolding.demoApp.Data
                 })
             });
 
-            var chart1 = MenuHelper.AddMenu(demoCtx, new MenuItem
-            {
-                roles = "User",
-                icon = "show-chart",
-                name = "Demo.Continents.API.PieGraph",
-                label = "Continents Graph",
-                type = MenuItem.Type_GridView,
-                routerLink = "chart,Demo.Continents.API.PieGraph",
-                parentMenuItemId = demoFolder.id,
-                jsonSerialized = JsonConvert.SerializeObject(new ChartDetailModel()
-                {
-                    title = "Countries by Continent",
-                    chartOptions = new Highsoft.Web.Mvc.Charts.Chart { },
-                    dataSourceId = dsPieChart.id
-                })
-            });
-
-            var dashboard1 = MenuHelper.AddMenu(demoCtx, new MenuItem
-            {
-                roles = "User",
-                icon = "dashboard",
-                name = "Demo.Continents.API.Dashboard",
-                label = "Continents Dashboard",
-                type = MenuItem.Type_Dashboard,
-                routerLink = "dashboard,Demo.Continents.API.Dashboard",
-                parentMenuItemId = demoFolder.id,
-                jsonSerialized = JsonConvert.SerializeObject(new DashboardModel()
-                {
-                    title = "Countries by Continent",
-                    widgets = new List<WidgetModel> {
-                        new WidgetModel{cols= 2, rows= 1, y= 0, x= 0 ,title="Widget One" },
-                        new WidgetModel{cols= 4, rows= 6, y= 0, x= 4, title="Widget Big" }
-                    }
-                })
-            });
         }
     }
 }
