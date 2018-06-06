@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ngScaffolding.database.Models;
+using ngScaffolding.models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,8 @@ namespace ngScaffolding.Data
                 }
             });
 
+            
+
             // Profile Modes
             scaffoldingContext.ReferenceValues.Add(new ReferenceValue
             {
@@ -77,7 +80,25 @@ namespace ngScaffolding.Data
                 })
             });
 
-            scaffoldingContext.UserPreferencesDefinitions.Add(new models.Models.UserPreferenceDefinition()
+            // Profile Input Values
+            scaffoldingContext.UserPreferencesDefinitions.Add(new UserPreferenceDefinition
+            {
+                name = "UserPrefs_Profile",
+                 InputDetails = JsonConvert.SerializeObject(new InputBuilderDefinition()
+                {
+                    title = "User Profile Details",
+
+                    inputDetails = new List<InputDetail> {
+                    new InputDetailTextBox{ label="First Name", name="FirstName" },
+                    new InputDetailTextBox{ label="Middle Initial", name="MiddleInitial" },
+                    new InputDetailTextBox{ label="Last Name", name="LastName" }
+                },
+                    okButtonText = "Save Profile",
+                    cancelButtonText = "Cancel"
+                })
+            });
+
+            scaffoldingContext.UserPreferencesDefinitions.Add(new UserPreferenceDefinition()
             {
                 name = "MenuOrientation",
                 InputDetails = JsonConvert.SerializeObject(new InputDetailSelect()
