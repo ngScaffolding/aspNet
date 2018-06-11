@@ -7,7 +7,7 @@ namespace ngScaffolding.database.Models
 
         //Shared
         public string name { get; set; }
-        public string type { get; set; } //textbox, email, textarea, select, multiselect, date, datetime
+        public string type { get; set; } //textbox, email, textarea, select, multiselect, date, datetime, json
         public string label { get; set; }
         public string placeholder { get; set; }
         public string help { get; set; }
@@ -59,6 +59,7 @@ namespace ngScaffolding.database.Models
         public const string Type_Autocomplete = "autocomplete";
         public const string Type_Multiselect = "multiselect";
         public const string Type_Chips = "chips";
+        public const string Type_Json = "json";
     }
     public class InputDetailTextBox : InputDetail
     {

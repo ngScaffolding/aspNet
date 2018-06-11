@@ -10,7 +10,7 @@ namespace ngScaffolding.Models
         public string title { get; set; }
         public InputBuilderDefinition filters { get; set; }
 
-        public bool? firstColumnXAxis { get; set; }
+        public string xAxisName { get; set; }
         public string[] seriesNames { get; set; }
         public string chartOptions { get; set; }
 
