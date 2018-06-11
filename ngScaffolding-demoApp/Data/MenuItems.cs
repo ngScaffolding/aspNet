@@ -68,18 +68,19 @@ namespace ngScacffolding.demoApp.Data
             };
             demoCtx.DataSources.Add(dsAddContinent);
 
-            var dsPieChart = new DataSource
+            var dsCountires = new DataSource
             {
                 name = "Countries.Pie.Chart",
                 JsonContent = JsonConvert.SerializeObject(new SqlDataSource
                 {
                     connection = "demoDatabase",
                     isAudit = true,
-                    sqlCommand = "SELECT Continents.Name as ContinentName, Count(*) as Total FROM Countries INNER JOIN Continents on Continents.Id = Countries.ContinentId group by Continents.Name"
+                    sqlCommand = @"SELECT Continents.Name, COUNT(Countries.Id) as Countries, LEN(Continents.Name) * 2 as Characters
+                                    FROM Continents INNER JOIN Countries ON Continents.Id = Countries.ContinentId GROUP by Continents.Name"
                 })
 
             };
-            demoCtx.DataSources.Add(dsPieChart);
+            demoCtx.DataSources.Add(dsCountires);
 
             var dsDelContinent = new DataSource
             {
@@ -313,8 +314,28 @@ namespace ngScacffolding.demoApp.Data
                 jsonSerialized = JsonConvert.SerializeObject(new ChartDetailModel()
                 {
                     title = "Countries by Continent",
-                    chartOptions = new Highsoft.Web.Mvc.Charts.Chart { },
-                    dataSourceId = dsPieChart.id
+                    xAxisName = "Name",
+                    seriesNames = new string[] { "Countries", "Characters" },
+                    chartOptions = @"{
+	                                    ""chart"": {
+		                                    ""type"": ""bar""
+	                                    },
+	                                    ""title"": {
+		                                    ""text"": ""Basic drilldown Man""
+	                                    },
+	                                    ""legend"": {
+		                                    ""enabled"": false
+	                                    },
+
+	                                    ""plotOptions"": {
+		                                    ""series"": {
+			                                    ""dataLabels"": {
+				                                    ""enabled"": true
+			                                    }
+		                                    }
+	                                    }
+                                    }",
+                    dataSourceId = dsCountires.id
                 })
             });
 

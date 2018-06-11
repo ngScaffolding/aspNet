@@ -7,11 +7,13 @@ namespace ngScaffolding.Models
 {
     public class ChartDetailModel
     {
-        public String title { get; set; }
+        public string title { get; set; }
         public InputBuilderDefinition filters { get; set; }
 
-        public Highsoft.Web.Mvc.Charts.Chart chartOptions { get; set; }
+        public bool? firstColumnXAxis { get; set; }
+        public string[] seriesNames { get; set; }
+        public string chartOptions { get; set; }
 
-        public int dataSourceId { get; set; }
+        public int? dataSourceId { get; set; }
     }
 }
