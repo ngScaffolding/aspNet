@@ -352,8 +352,40 @@ namespace ngScacffolding.demoApp.Data
                 {
                     title = "Countries by Continent",
                     widgets = new List<WidgetModel> {
-                        new WidgetModel{cols= 2, rows= 1, y= 0, x= 0 ,title="Widget One" },
-                        new WidgetModel{cols= 4, rows= 6, y= 0, x= 4, title="Widget Big" }
+                        new WidgetModel{cols= 3, rows= 4, y= 0, x= 0 ,chartDetail = new ChartDetailModel{ title = "Countries by Continent",
+                    xAxisName = "Name",
+                    seriesNames = new string[] { "Countries", "Characters" },
+                    chartOptions = @"{
+	                                    ""chart"": {
+		                                    ""type"": ""bar""
+	                                    },
+	                                    ""title"": {
+		                                    ""text"": ""Basic drilldown Man""
+	                                    },
+	                                    ""legend"": {
+		                                    ""enabled"": false
+	                                    },
+
+	                                    ""plotOptions"": {
+		                                    ""series"": {
+			                                    ""dataLabels"": {
+				                                    ""enabled"": true
+			                                    }
+		                                    }
+	                                    }
+                                    }",
+                    dataSourceId = dsCountires.id }
+                        },
+                        new WidgetModel{cols= 4, rows= 6, y= 0, x= 4, gridViewDetail = new GridViewDetailModel
+                {
+                    title = "Continents Administration",
+
+                    columns = new List<ColumnModel>()
+                    {
+                        new ColumnModel() {Field = "name", HeaderName= "Continent Name"}
+                    },
+                    selectDataSourceId = apiContinentsSource.id}
+                        }
                     }
                 })
             });
