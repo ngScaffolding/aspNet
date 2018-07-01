@@ -32,13 +32,13 @@ namespace ngScaffolding.Controllers
 
         public class DataSourceRequest
         {
-            public int Id { get; set; }
-            public string Seed { get; set; }
-            public string FilterValues { get; set; }
-            public string RowData { get; set; }
-            public string InputData { get; set; }
-            public int? PageNumber { get; set; }
-            public int? PageSize { get; set; }
+            public int id { get; set; }
+            public string seed { get; set; }
+            public string filterValues { get; set; }
+            public string rowData { get; set; }
+            public string inputData { get; set; }
+            public int? pageNumber { get; set; }
+            public int? pageSize { get; set; }
         }
 
         public class DataResults
@@ -66,7 +66,7 @@ namespace ngScaffolding.Controllers
         {
             if (dataSourceRequest != null)
             {
-                var dataSource = _dataSourceRepository.Get(dataSourceRequest.Id);
+                var dataSource = _dataSourceRepository.Get(dataSourceRequest.id);
 
                 var baseDataSource = JsonConvert.DeserializeObject<BaseDataSource>(dataSource.JsonContent);
 
@@ -75,10 +75,10 @@ namespace ngScaffolding.Controllers
                     dynamic filterValues = null;
 
                     // Work out Filter Values
-                    if (!string.IsNullOrEmpty(dataSourceRequest.FilterValues))
+                    if (!string.IsNullOrEmpty(dataSourceRequest.filterValues))
                     {
                         var converter = new ExpandoObjectConverter();
-                        filterValues = JsonConvert.DeserializeObject<ExpandoObject>(dataSourceRequest.FilterValues, converter);
+                        filterValues = JsonConvert.DeserializeObject<ExpandoObject>(dataSourceRequest.filterValues, converter);
                     }
 
                     switch (baseDataSource.type)
@@ -126,9 +126,9 @@ namespace ngScaffolding.Controllers
                                 }
 
                                 var request = (HttpWebRequest)WebRequest.Create(apiSettings.serverUrl + url);
-                                if (!string.IsNullOrEmpty(dataSourceRequest.InputData))
+                                if (!string.IsNullOrEmpty(dataSourceRequest.inputData))
                                 {
-                                    byte[] bytes = Encoding.ASCII.GetBytes(dataSourceRequest.InputData);
+                                    byte[] bytes = Encoding.ASCII.GetBytes(dataSourceRequest.inputData);
 
                                     // Set the content length of the string being posted.
                                     request.ContentLength = bytes.Length;

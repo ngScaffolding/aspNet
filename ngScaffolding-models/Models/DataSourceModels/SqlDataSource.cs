@@ -7,7 +7,7 @@ namespace ngScaffolding.Models.DataSourceModels
 {
     public class SqlDataSource : BaseDataSource
     {
-        public string TestCommand { get; set; }
+        public string testCommand { get; set; }
 
         public string connection { get; set; }
         public string sqlCommand { get; set; }
