@@ -13,7 +13,7 @@ namespace ngScaffolding.Models.DataSourceModels
         public const string TypesMySQL = "MySQL";
 
         public string type { get; set; }
-        public string title { get; set; }
+        public string name { get; set; }
 
         public bool isPagedData { get; set; }
         public bool isAudit { get; set; }
