@@ -10,7 +10,7 @@ using ngScaffolding.database.Models;
 
 namespace ngScaffolding.Controllers
 {
-    [Route("api/ReferenceValues")]
+    [Route("api/v1/ReferenceValues")]
     public class ReferenceValuesController : ngScaffoldingController
     {
         private readonly IReferenceValuesService _referenceValuesService;

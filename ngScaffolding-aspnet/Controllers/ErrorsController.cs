@@ -10,7 +10,7 @@ using ngScaffolding.Data;
 namespace ngScaffolding.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class ErrorsController : Controller
     {
         private readonly ngScaffoldingContext _context;

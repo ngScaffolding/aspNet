@@ -30,7 +30,7 @@ namespace ngScaffolding_aspnet.Controllers
 
 
     [Produces("application/json")]
-    [Route("api/action")]
+    [Route("api/v1/action")]
     public class ActionController : Controller
     {
         private readonly IRepository<DataSource> _dataSourceRepository;

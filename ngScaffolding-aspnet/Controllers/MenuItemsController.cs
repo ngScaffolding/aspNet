@@ -15,7 +15,7 @@ namespace ngScaffolding.Controllers
 {
     [Authorize]
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class MenuItemsController : ngScaffoldingController
     {
         private readonly ngScaffoldingContext _context;

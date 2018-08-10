@@ -19,7 +19,7 @@ namespace ngScaffolding.Controllers
     }
 
     [Produces("application/json")]
-    [Route("api/UserPreferenceValues")]
+    [Route("api/v1/UserPreferenceValues")]
     public class UserPreferenceValuesController : ngScaffoldingController
     {
         private readonly IRepository<UserPreferenceValue> _userPreferenceRepository;

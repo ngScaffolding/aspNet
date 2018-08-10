@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ngScaffolding.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class AuthController : ngScaffoldingController
     {
     }

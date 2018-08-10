@@ -21,7 +21,7 @@ using System.Text;
 
 namespace ngScaffolding.Controllers
 {
-    [Route("api/DataSource")]
+    [Route("api/v1/DataSource")]
     public class DataSourceController : ngScaffoldingController
     {
         private readonly IConnectionStringsService _connectionStringsService;
