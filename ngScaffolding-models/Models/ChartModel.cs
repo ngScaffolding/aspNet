@@ -14,6 +14,6 @@ namespace ngScaffolding.Models
         public string[] seriesNames { get; set; }
         public string chartOptions { get; set; }
 
-        public int? dataSourceId { get; set; }
+        public string dataSourceName { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace ngScaffolding.Controllers
 
         public class DataSourceRequest
         {
-            public int id { get; set; }
+            public string name { get; set; }
             public string seed { get; set; }
             public string filterValues { get; set; }
             public string rowData { get; set; }
@@ -66,7 +66,7 @@ namespace ngScaffolding.Controllers
         {
             if (dataSourceRequest != null)
             {
-                var dataSource = _dataSourceRepository.Get(dataSourceRequest.id);
+                var dataSource = _dataSourceRepository.GetByName(dataSourceRequest.name);
 
                 var baseDataSource = JsonConvert.DeserializeObject<BaseDataSource>(dataSource.JsonContent);
 

@@ -84,11 +84,11 @@ namespace ngScaffolding_aspnet.Controllers
                 case "SQLCOMMAND":
                     {
                         // Get datasource which hold the SQL we want to run
-                        if (!actionRequest.action.dataSourceId.HasValue)
+                        if (string.IsNullOrEmpty(actionRequest.action.dataSourceName))
                         {
-                            return BadRequest("No dataSourceId provided");
+                            return BadRequest("No dataSource Name provided");
                         }
-                        var dataSource = _dataSourceRepository.Get(actionRequest.action.dataSourceId.Value);
+                        var dataSource = _dataSourceRepository.GetByName(actionRequest.action.dataSourceName);
                         var sqlCommand = JsonConvert.DeserializeObject<SqlDataSource>(dataSource.JsonContent);
 
                         var sqlHelper = new SqlDataHelper(_connectionStringsService);

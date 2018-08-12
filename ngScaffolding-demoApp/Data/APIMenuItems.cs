@@ -124,7 +124,7 @@ namespace ngScacffolding.demoApp.Data
                         new ColumnModel() {Field = "continentName", HeaderName ="Continent Name"},
                         new ColumnModel() {Field = "name", HeaderName = "Country Name"}
                     },
-                    selectDataSourceId = dsSelectCountries.id,
+                    selectDataSourceName = dsSelectCountries.name,
                     filters = new InputBuilderDefinition()
                     {
                         inputDetails = new List<InputDetail>()
@@ -139,7 +139,7 @@ namespace ngScacffolding.demoApp.Data
                             columnButton = true,
                             title="Edit Country",
                             icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand,
-                            dataSourceId = dsUpdCountry.id,
+                            dataSourceName = dsUpdCountry.name,
                             successMessage = "Country Updated",
                             successToast = true,
                             errorMessage = "Country not updated. Try Again Later.",
@@ -157,7 +157,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                         new ActionModel
                         {
-                            title = "Add Country", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddCountry.id,
+                            title = "Add Country", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceName = dsAddCountry.name,
                             successMessage = "Country Saved",
                             successToast = true,
                             errorMessage = "Country not saved. Try Again Later.",
@@ -175,7 +175,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                          new ActionModel
                         {
-                            title = "Delete Country", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsDelContinent.id,
+                            title = "Delete Country", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceName = dsDelContinent.name,
                             successMessage = "Country Deleted",
                             successToast = true,
                             errorMessage = "Country not saved. Try Again Later.",
@@ -233,7 +233,7 @@ namespace ngScacffolding.demoApp.Data
                         //new ColumnModel() {Field = "ContinentName"},
                         new ColumnModel() {Field = "name", HeaderName= "Continent Name"}
                     },
-                    selectDataSourceId = apiContinentsSource.id,
+                    selectDataSourceName = apiContinentsSource.name,
 
                     isActionColumnSplitButton = false,
                     actions = new List<ActionModel>
@@ -242,7 +242,7 @@ namespace ngScacffolding.demoApp.Data
                         {
                             columnButton = true,
                             title="Edit Continent",
-                            icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsUpdContinent.id,
+                            icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceName = dsUpdContinent.name,
                             successMessage = "Continent Updated",
                             successToast = true,
                             errorMessage = "Continent not updated. Try Again Later.",
@@ -259,7 +259,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                         new ActionModel
                         {
-                            title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceId = dsAddContinent.id,
+                            title = "Add Continent", icon="ui-icon-add", color="green", type = ActionTypes.SqlCommand, dataSourceName = dsAddContinent.name,
                             successMessage = "Continent Saved",
                             successToast = true,
                             errorMessage = "Continent not saved. Try Again Later.",
@@ -276,7 +276,7 @@ namespace ngScacffolding.demoApp.Data
                         },
                          new ActionModel
                         {
-                            title = "Delete Continent", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceId = dsDelContinent.id,
+                            title = "Delete Continent", icon="ui-icon-minus", color="red", type = ActionTypes.SqlCommand, dataSourceName = dsDelContinent.name,
                             successMessage = "Continent Deleted",
                             successToast = true,
                             errorMessage = "Continent not saved. Try Again Later.",

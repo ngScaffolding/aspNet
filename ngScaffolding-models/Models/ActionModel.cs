@@ -51,7 +51,7 @@ namespace ngScaffolding.Models
         public bool? errorToast { get; set; }
 
         // For SQL this contains the SQL Command ID
-        public int? dataSourceId { get; set; }
+        public string dataSourceName { get; set; }
 
         //Angular Controller content
         //Todo: Not sure if we need this - Maybe just a route?

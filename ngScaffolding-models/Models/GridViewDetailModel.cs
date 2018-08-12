@@ -37,16 +37,16 @@ namespace ngScaffolding.Models
         public InputBuilderDefinition filters { get; set; }
 
         // Select DataSource
-        public int? selectDataSourceId { get; set; }
+        public string selectDataSourceName { get; set; }
 
         // Delete Datasource
-        public int? deleteDataSourceId { get; set; }
+        public string deleteDataSourceName { get; set; }
 
         // Update DataSource
-        public int? updateDataSourceId { get; set; }
+        public string updateDataSourceName { get; set; }
 
         // Insert DataSource
-        public int? insertDataSourceId { get; set; }
+        public string insertDataSourceName { get; set; }
 
         public ICollection<ActionModel> actions { get; set; }
     }
