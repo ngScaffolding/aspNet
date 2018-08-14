@@ -39,15 +39,6 @@ namespace ngScaffolding.Models
         // Select DataSource
         public string selectDataSourceName { get; set; }
 
-        // Delete Datasource
-        public string deleteDataSourceName { get; set; }
-
-        // Update DataSource
-        public string updateDataSourceName { get; set; }
-
-        // Insert DataSource
-        public string insertDataSourceName { get; set; }
-
         public ICollection<ActionModel> actions { get; set; }
     }
 }
