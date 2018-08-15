@@ -19,7 +19,7 @@ namespace ngScaffolding.Models.DataSourceModels
         public bool isAudit { get; set; }
 
         // Name Of DataSource to flush on completed
-        public string flushDataSource { get; set; }
+        public string flushReferenceValues { get; set; }
 
         public ICollection<ParameterDetailModel> parameters { get; set; }
 

@@ -26,7 +26,7 @@ namespace ngScaffolding.Models
         public bool selectionRequired { get; set; }
 
         // After Action completes, remove these DataSources from cache
-        public string flushDataSource { get; set; }
+        public string flushReferenceValues { get; set; }
 
         // Does the action work on multiple rows?
         public bool multipleTarget { get; set; }
