@@ -13,13 +13,13 @@ using Microsoft.AspNetCore.Authorization;
 namespace ngScaffolding.Controllers
 {
     [Produces("application/json")]
-    [Route("api/v1/UserPreferenceDefinitions")]
-    public class UserPreferenceDefinitionsController : ngScaffoldingController
+    [Route("api/v1/UserPreferenceDefinition")]
+    public class UserPreferenceDefinitionController : ngScaffoldingController
     {
         private readonly IRepository<UserPreferenceDefinition> _userPreferenceRepository;
         private readonly IUserService _userService;
 
-        public UserPreferenceDefinitionsController(IRepository<UserPreferenceDefinition> userPreferenceRepository, IUserService userService)
+        public UserPreferenceDefinitionController(IRepository<UserPreferenceDefinition> userPreferenceRepository, IUserService userService)
         {
             _userPreferenceRepository = userPreferenceRepository;
             _userService = userService;
