@@ -147,7 +147,7 @@ namespace ngScacffolding.demoApp.Data
                                 title = "Country Details",
                                 okButtonText = "Update Country",
                                 orientation = "horizontal",
-                                horizontalColumnCount = 1,
+                                columnCount = 1,
                                 inputDetails = new List<InputDetail>
                                 {
                                     new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Country Name" , placeholder="Country Name"},
@@ -165,7 +165,7 @@ namespace ngScacffolding.demoApp.Data
                                 title = "New Country Details",
                                 okButtonText = "Save Country",
                                 orientation = "horizontal",
-                                horizontalColumnCount = 1,
+                                columnCount = 1,
                                 inputDetails = new List<InputDetail>
                                 {
                                     new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Country Name" , placeholder="Country Name"},
@@ -250,7 +250,7 @@ namespace ngScacffolding.demoApp.Data
                                 title = "Continent Details",
                                 okButtonText = "Update Continent",
                                 orientation = "horizontal",
-                                horizontalColumnCount = 1,
+                                columnCount = 1,
                                 inputDetails = new List<InputDetail>
                                 {
                                     new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Continent Name" , placeholder="Continent Name"}
@@ -267,7 +267,7 @@ namespace ngScacffolding.demoApp.Data
                                 title = "New Continent Details",
                                 okButtonText = "Save Continent",
                                 orientation = "horizontal",
-                                horizontalColumnCount = 1,
+                                columnCount = 1,
                                 inputDetails = new List<InputDetail>
                                 {
                                     new InputDetailTextBox{name = "Name", validateRequired = "Name is required",label="Continent Name" , placeholder="Continent Name"}

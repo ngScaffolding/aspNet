@@ -8,7 +8,7 @@ namespace ngScaffolding.database.Models
     {
         public string title { get; set; }
         public string orientation { get; set; }
-        public int horizontalColumnCount { get; set; }
+        public int columnCount { get; set; }
 
         public string okButtonText { get; set; }
         public string okButtonIcon { get; set; }
