@@ -30,11 +30,11 @@ namespace ngScaffolding.ConfigHelpers
             {
                 if (seedLike)
                 {
-                    whereClause = $"WHERE [{seedCol}] LIKE ''%@@SEED%''";
+                    whereClause = $"WHERE [{seedCol}] LIKE ''%@@SEED@@%''";
                 }
                 else
                 {
-                    whereClause = $"WHERE [{seedCol}] = ''@@SEED''";
+                    whereClause = $"WHERE [{seedCol}] = ''@@SEED@@''";
                 }
             }
 

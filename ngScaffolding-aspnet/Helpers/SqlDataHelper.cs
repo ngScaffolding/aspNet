@@ -105,7 +105,7 @@ namespace ngScaffolding.Helpers
                     IDictionary<string, object> propertyValues = (IDictionary<string, object>)inputs;
                     foreach (var property in propertyValues)
                     {
-                        var searchKey = string.Format("@@{0}", property.Key);
+                        var searchKey = string.Format("@@{0}@@", property.Key);
                         if (commandString.Contains(searchKey))
                         {
                             commandString = commandString.Replace(searchKey, property.Value.ToString());
@@ -128,7 +128,7 @@ namespace ngScaffolding.Helpers
                             extractedRowDetails.Add(new KeyValuePair<string, string>(property.Key, string.Empty));
                         }
 
-                        var searchKey = string.Format("@@{0}", property.Key);
+                        var searchKey = string.Format("@@{0}@@", property.Key);
                         if (commandString.Contains(searchKey))
                         {
                             if (property.Value == null)

@@ -117,7 +117,7 @@ namespace ngScaffolding.Controllers
                                     IDictionary<string, object> propertyValues = (IDictionary<string, object>)filterValues;
                                     foreach (var property in propertyValues)
                                     {
-                                        var searchKey = string.Format("@@{0}", property.Key);
+                                        var searchKey = string.Format("@@{0}@@", property.Key);
                                         if (url.Contains(searchKey))
                                         {
                                             url = url.Replace(searchKey, property.Value.ToString());

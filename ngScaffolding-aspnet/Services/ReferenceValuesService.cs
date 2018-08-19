@@ -149,11 +149,11 @@ namespace ngScaffolding.Services
 
                         if (!string.IsNullOrEmpty(seed))
                         {
-                            command = command.Replace("@@Seed", seed,StringComparison.InvariantCultureIgnoreCase);
+                            command = command.Replace("@@Seed@@", seed,StringComparison.InvariantCultureIgnoreCase);
                         }
                         else
                         {
-                            command = command.Replace("@@Seed", "NULL", StringComparison.InvariantCultureIgnoreCase);
+                            command = command.Replace("@@Seed@@", "NULL", StringComparison.InvariantCultureIgnoreCase);
                         }
 
                         // Clear DB Script from Results

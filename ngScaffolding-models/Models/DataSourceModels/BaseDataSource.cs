@@ -11,6 +11,7 @@ namespace ngScaffolding.Models.DataSourceModels
         public const string TypesRestApi = "RestAPI";
         public const string TypesMongoDB = "MongoDB";
         public const string TypesMySQL = "MySQL";
+        public const string TypesKumulos = "Kumulos";
 
         public string type { get; set; }
         public string name { get; set; }

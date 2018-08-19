@@ -36,7 +36,7 @@ namespace ngScacffolding.demoApp.Data
                     serverName = "demoDatabase",
                     verb = "get",
                     isAudit = true,
-                    url= "/countries?continentid=@@continentid"
+                    url= "/countries?continentid=@@continentid@@"
                 })
             };
             demoCtx.DataSources.Add(dsSelectCountries);
@@ -48,7 +48,7 @@ namespace ngScacffolding.demoApp.Data
                 {
                     connection = "demoDatabase",
                     isAudit = true,
-                    sqlCommand = "INSERT INTO Countries (Name, ContinentId) VALUES (''@@Name'',@@ContinentId)"
+                    sqlCommand = "INSERT INTO Countries (Name, ContinentId) VALUES (''@@Name@@'',@@ContinentId)"
                 })
             };
             demoCtx.DataSources.Add(dsAddCountry);

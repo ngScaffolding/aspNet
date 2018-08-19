@@ -14,6 +14,7 @@ namespace ngScaffolding.Models.DataSourceModels
         public string responseType { get; set; }
 
         public IEnumerable<string> headerValues { get; set; }
+        public IEnumerable<string> bodyValues { get; set; }
 
         public RestApiDataSource()
         {

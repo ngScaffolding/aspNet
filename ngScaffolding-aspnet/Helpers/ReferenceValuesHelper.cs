@@ -48,11 +48,11 @@ namespace ngScaffolding.Helpers
 
                         if (!string.IsNullOrEmpty(seed))
                         {
-                            command = command.Replace("@@Seed", seed);
+                            command = command.Replace("@@Seed@@", seed);
                         }
                         else
                         {
-                            command = command.Replace("@@Seed", "NULL");
+                            command = command.Replace("@@Seed@@", "NULL");
                         }
 
                         var comm = new SqlCommand(command, conn) { CommandTimeout = 30 };
