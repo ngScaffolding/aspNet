@@ -60,8 +60,6 @@ namespace ngScaffolding_aspnet.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]ActionRequest actionRequest)
         {
-            var success = false;
-
             //Decode input Model
             dynamic inputs = JsonConvert.DeserializeObject<ExpandoObject>(actionRequest.inputDetails);
 
@@ -93,17 +91,14 @@ namespace ngScaffolding_aspnet.Controllers
 
                         var sqlHelper = new SqlDataHelper(_connectionStringsService);
                         var results = await sqlHelper.RunCommand(sqlCommand, inputs, rowsObjects);
-                        success = true;
                         break;
                     }
                 case "Url":
                     {
-                        success = true;
                         break;
                     }
                 case "AngularController":
                     {
-                        success = true;
                         break;
                     }
             }
