@@ -12,6 +12,7 @@ namespace ngScacffolding.demoApp.Data
         public static void Initialize(DemoContext context, ngScaffoldingContext scaffoldingContext)
         {
             context.Database.EnsureCreated();
+            scaffoldingContext.Database.EnsureCreated();
 
             SetupGeography.Setup(context);
             DataSourceSetup.Setup(scaffoldingContext);
